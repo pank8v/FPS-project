@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyData", menuName = "Scriptable Objects/EnemyData")]
 public class EnemyData : ScriptableObject
 {
-    [SerializeField] private float health;
+    [SerializeField] private int health;
     [SerializeField] private float damage;
     [SerializeField] private float range;
     [SerializeField] private float attackDistance;
@@ -11,4 +11,5 @@ public class EnemyData : ScriptableObject
 
     public float AttackDistance => attackDistance;
     public float DetectionDistance => detectionDistance;
+    public int Health => health;
 }

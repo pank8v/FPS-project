@@ -1,20 +1,19 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MeleeEnemy : Enemy
 {
-
+    [Header("Patrol")]
     [SerializeField] protected Transform[] patrolPoints;
     [SerializeField] protected float waitingTime = 5f;
-
-    private float waitingTimer = 0;
-    private int currentPatrolPoint = 0;
-    private bool isWaiting = false;    
+    protected int currentPatrolPoint = 0;
+    protected float waitingTimer = 0;
+    protected bool isWaiting = false;    
     
     
     
     
     protected override void Patrol() {
+        agent.isStopped = false;
         if (patrolPoints.Length == 0) return;
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance) {
             if (!isWaiting) {
@@ -24,29 +23,31 @@ public class MeleeEnemy : Enemy
         }
         if (isWaiting) {
             waitingTimer -= Time.deltaTime;
-            Debug.Log(waitingTimer);
             if (waitingTimer <= 0) {
                 currentPatrolPoint = (currentPatrolPoint + 1) % patrolPoints.Length;
                 agent.SetDestination(patrolPoints[currentPatrolPoint].position);
                 isWaiting = false;
             }
         }
+        Debug.Log("Patrol");
     }
 
+    
+    
     protected override void Chase() {
-        distance = Vector3.Distance(transform.position, target.position);
-        if (distance < attackDistance) {
-            agent.isStopped = true;
-        }
-        else {
-            agent.isStopped = false;
-            agent.SetDestination(target.position);
-        }
+        agent.isStopped = false;
+        agent.SetDestination(target.position);
         Debug.Log("Chase");
     }
 
     protected override void Attack() {
+        agent.isStopped = true;
         Debug.Log("attack");
     }
+
+    public void SetPatrolPoints(Transform[] points) {
+        patrolPoints = points;
+    }
+    
     
 }

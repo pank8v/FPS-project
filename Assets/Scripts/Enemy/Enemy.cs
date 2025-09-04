@@ -23,7 +23,7 @@ public abstract class Enemy : MonoBehaviour
       detectionDistance = enemyData.DetectionDistance;
    }
    protected virtual void Update() {
-      if(target != null)
+      if(target != null) 
          distance = Vector3.Distance(transform.position, target.position);
 
       switch (currentState) {
@@ -46,12 +46,11 @@ public abstract class Enemy : MonoBehaviour
                currentState = EnemyState.Patrol;
             break;
       }
-      
-      
-      
    }
    
-   
+   public void SetTarget(GameObject playerTransform) {
+      target = playerTransform.transform;
+   }
    protected abstract void Chase();
    protected abstract void Patrol();
    protected abstract void Attack();
