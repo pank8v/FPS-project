@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponName: Mac-10
   fireRate: 10
-  damage: 5
+  damage: 20
+  range: 100
   maxAmmo: 30

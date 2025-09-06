@@ -4,10 +4,6 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerInputHandler playerInputHandler;
     [SerializeField] private CharacterController characterController;
-
-
-    [SerializeField] private Weapon currentWeapon;
-    
     
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float speedMultiplier = 1.8f;
@@ -20,7 +16,6 @@ public class PlayerController : MonoBehaviour
     
     private void Update() {
         HandleMovement();
-        HandleShooting();
     }
 
     
@@ -30,13 +25,7 @@ public class PlayerController : MonoBehaviour
         Vector3 worldMoveDirection = transform.TransformDirection(moveDirection);
         characterController.Move(worldMoveDirection * currentSpeed * Time.deltaTime);
     }
-
-
-    private void HandleShooting() {
-        if (playerInputHandler.isAttacking) {
-            currentWeapon.Fire();
-        }
-    }
+    
     
     
 }
