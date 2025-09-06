@@ -5,9 +5,16 @@ public abstract class Enemy : MonoBehaviour
    [SerializeField] protected EnemyData enemyData;
    [SerializeField] protected NavMeshAgent agent;
    [SerializeField] protected Transform target;
-   protected float attackDistance;
+
+   protected float attackDistance => enemyData.AttackDistance;
+   protected float detectionDistance => enemyData.DetectionDistance;
+   protected int damage => enemyData.Damage;
+   protected float patrolSpeed => enemyData.PatrolSpeed;
+   protected float chaseSpeed => enemyData.ChaseSpeed;
+
    protected float distance;
-   protected float detectionDistance;
+   
+   
 
    protected enum EnemyState
    {
@@ -17,15 +24,14 @@ public abstract class Enemy : MonoBehaviour
    }
 
    protected EnemyState currentState = EnemyState.Patrol;
-
-   protected void Awake() {
-      attackDistance = enemyData.AttackDistance;
-      detectionDistance = enemyData.DetectionDistance;
-   }
+   
    protected virtual void Update() {
-      if(target != null) 
-         distance = Vector3.Distance(transform.position, target.position);
+      if (target == null) {
+         return;
+      }
 
+      distance = Vector3.Distance(transform.position, target.position);
+      
       switch (currentState) {
          case EnemyState.Patrol:
             Patrol();
@@ -48,8 +54,8 @@ public abstract class Enemy : MonoBehaviour
       }
    }
    
-   public void SetTarget(GameObject playerTransform) {
-      target = playerTransform.transform;
+   public void SetTarget(Transform playerTransform) {
+      target = playerTransform;
    }
    protected abstract void Chase();
    protected abstract void Patrol();

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   health: 100
   damage: 20
-  range: 0
   attackDistance: 2
   detectionDistance: 10
+  patrolSpeed: 4
+  chaseSpeed: 8

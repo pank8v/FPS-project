@@ -13,8 +13,9 @@ public class MeleeEnemy : Enemy
     
     
     protected override void Patrol() {
-        agent.isStopped = false;
         if (patrolPoints.Length == 0) return;
+        agent.isStopped = false;
+        agent.speed = patrolSpeed;
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance) {
             if (!isWaiting) {
                 isWaiting = true;
@@ -36,11 +37,14 @@ public class MeleeEnemy : Enemy
     
     protected override void Chase() {
         agent.isStopped = false;
+        agent.speed = chaseSpeed;
         agent.SetDestination(target.position);
         Debug.Log("Chase");
     }
 
     protected override void Attack() {
+        Health health = target.GetComponent<Health>();
+        health.ApplyDamage(damage);
         agent.isStopped = true;
         Debug.Log("attack");
     }
