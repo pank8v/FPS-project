@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
@@ -9,8 +10,11 @@ public class PlayerInputHandler : MonoBehaviour
     public Vector2 lookDirection { get; private set; }
     public bool isSprinting { get; private set; }
     public bool isAttacking { get; private set; }
+    public bool isReloading { get; private set; }
     public bool isSliding { get; private set; }
     public bool isJumping { get; private set; }
+
+    public event Action OnReloadPressed;
 
     private void Awake() {
         inputSystem = new InputSystem_Actions();
@@ -27,6 +31,7 @@ public class PlayerInputHandler : MonoBehaviour
         inputSystem.Player.Slide.canceled += OnSlideCanceled;
         inputSystem.Player.Jump.performed += OnJumpPerformed;
         inputSystem.Player.Jump.canceled += onJumpCanceled;
+        inputSystem.Player.Reload.performed += OnReloadPerformed;
 
     }
 
@@ -79,4 +84,9 @@ public class PlayerInputHandler : MonoBehaviour
     private void onJumpCanceled(InputAction.CallbackContext context) {
         isJumping = false;
     }
+
+    private void OnReloadPerformed(InputAction.CallbackContext context) {
+        OnReloadPressed?.Invoke();
+    }
+ 
 }

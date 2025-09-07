@@ -5,16 +5,25 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerInputHandler playerInputHandler;
     [SerializeField] private CharacterController characterController;
+    [SerializeField] private Transform cameraHolder;
     
     [SerializeField] private float moveSpeed = 10f;
-    [SerializeField] private float speedMultiplier = 1.8f;
-    private float currentSpeed;
-
-
+    [SerializeField] private float sprintMultiplier = 1.6f;
+    [SerializeField] private float slideMultiplier = 2f;
+    
     [SerializeField] private float jumpHeight = 4f;
     [SerializeField] private float gravity = -20f;
+
+    private Vector3 originalCenter = new Vector3(0, 0f, 0);
+    private Vector3 slideCenter = new Vector3(0, 1f, 0);
+    private float originalHeight = 2f;
+    private float slideHeight = 1f;
+   
+    private float currentSpeed;
+   
     private float verticalVelocity;
     private bool isGrounded;
+    private bool isSliding;
     
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
@@ -22,6 +31,7 @@ public class PlayerController : MonoBehaviour
     
     private void Update() {
         HandleMovement();
+        HandleSlide();
     }
 
     
@@ -31,7 +41,7 @@ public class PlayerController : MonoBehaviour
             verticalVelocity = -2f;
         }
         
-        currentSpeed = playerInputHandler.isSprinting ? moveSpeed * speedMultiplier : moveSpeed;
+        currentSpeed = playerInputHandler.isSprinting ? moveSpeed * sprintMultiplier : playerInputHandler.isSliding ? moveSpeed * slideMultiplier  : moveSpeed;
         Vector3 moveDirection = new Vector3(playerInputHandler.moveDirection.x, 0f, playerInputHandler.moveDirection.y).normalized;
         Vector3 horizontalMoveDirection = transform.TransformDirection(moveDirection) * currentSpeed;
         
@@ -46,6 +56,18 @@ public class PlayerController : MonoBehaviour
 
     }
 
+
+    private void HandleSlide() {
+        if (playerInputHandler.isSliding && isGrounded && characterController.velocity.magnitude > 0.01f) {
+            characterController.height -= 0.4f;
+            characterController.center = new Vector3(0, 0.8f, 0);
+            Debug.Log("sliding");
+        }
+        else {
+            characterController.height = originalHeight;
+            characterController.center = originalCenter;
+        }
+    }
   
     
 }

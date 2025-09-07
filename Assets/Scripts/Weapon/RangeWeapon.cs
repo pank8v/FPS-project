@@ -1,8 +1,19 @@
 using UnityEngine;
+using System;
 
-public class RangeWeapon : Weapon
+public class RangeWeapon : Weapon, IReloadable
 {
-    protected override void Shoot() { 
+    public event Action OnReload;
+    private int currentAmmo;
+
+
+    protected void Awake() {
+        currentAmmo = weaponData.MaxAmmo;
+    }
+    
+    
+    protected override void Shoot() {
+        currentAmmo--;
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         if (Physics.Raycast(ray, out RaycastHit hit, range)) {
             Debug.Log(hit.collider.name);
@@ -13,10 +24,14 @@ public class RangeWeapon : Weapon
                 enemy.OnPlayerDetected();
             }
         }
-        Debug.Log("shoot");
     }
 
-    protected override void Reload() {
-        Debug.Log("Reload");
+    protected override bool CanFire() {
+        return currentAmmo > 0;
+    }
+    
+    public void Reload() {
+        currentAmmo = maxAmmo;
+        OnReload?.Invoke();
     }
 }

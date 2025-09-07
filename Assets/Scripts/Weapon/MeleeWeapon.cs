@@ -6,7 +6,5 @@ public class MeleeWeapon : Weapon
       Debug.Log("bum");
    }
 
-   protected override void Reload() {
-      Debug.Log("reload??");
-   }
+   
 }
