@@ -9,6 +9,8 @@ public class PlayerInputHandler : MonoBehaviour
     public Vector2 lookDirection { get; private set; }
     public bool isSprinting { get; private set; }
     public bool isAttacking { get; private set; }
+    public bool isSliding { get; private set; }
+    public bool isJumping { get; private set; }
 
     private void Awake() {
         inputSystem = new InputSystem_Actions();
@@ -21,6 +23,10 @@ public class PlayerInputHandler : MonoBehaviour
         inputSystem.Player.Sprint.canceled += OnSprintCanceled;
         inputSystem.Player.Attack.performed += OnAttackPerformed;
         inputSystem.Player.Attack.canceled += OnAttackCanceled;
+        inputSystem.Player.Slide.performed += onSlidePerformed;
+        inputSystem.Player.Slide.canceled += OnSlideCanceled;
+        inputSystem.Player.Jump.performed += OnJumpPerformed;
+        inputSystem.Player.Jump.canceled += onJumpCanceled;
 
     }
 
@@ -57,5 +63,20 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnAttackCanceled(InputAction.CallbackContext context) {
         isAttacking = false;
     }
-    
+
+    private void onSlidePerformed(InputAction.CallbackContext context) {
+        isSliding = true;
+    }
+
+    private void OnSlideCanceled(InputAction.CallbackContext context) {
+        isSliding = false;
+    }
+
+    private void OnJumpPerformed(InputAction.CallbackContext context) {
+        isJumping = true;
+    }
+
+    private void onJumpCanceled(InputAction.CallbackContext context) {
+        isJumping = false;
+    }
 }
