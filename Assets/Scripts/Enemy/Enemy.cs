@@ -13,9 +13,9 @@ public abstract class Enemy : MonoBehaviour
    protected float chaseSpeed => enemyData.ChaseSpeed;
 
    protected float distance;
+   protected float viewAngle => enemyData.ViewAngle;
    
    
-
    protected enum EnemyState
    {
       Patrol, 
@@ -23,19 +23,36 @@ public abstract class Enemy : MonoBehaviour
       Attack
    }
 
+   protected bool CanSeePlayer() {
+      Vector3 dirToPlayer = (target.position - transform.position).normalized;
+      float angle = Vector3.Angle(transform.forward, dirToPlayer);
+      if (angle < viewAngle) {
+         if (Physics.Raycast(transform.position + Vector3.up, dirToPlayer, out RaycastHit hit, 100f)) {
+            Debug.DrawLine(transform.position + Vector3.up, hit.point, Color.red);
+            if (hit.collider.CompareTag("Player")) {
+               Debug.Log("zamechen");
+               return true;
+            }
+         }
+      }
+      
+      return false;
+   }
+
+   
    protected EnemyState currentState = EnemyState.Patrol;
    
    protected virtual void Update() {
       if (target == null) {
          return;
       }
-
+      
       distance = Vector3.Distance(transform.position, target.position);
       
       switch (currentState) {
          case EnemyState.Patrol:
             Patrol();
-            if (distance <= detectionDistance)
+            if (CanSeePlayer())
                currentState = EnemyState.Chase;
             break;
          
@@ -43,21 +60,31 @@ public abstract class Enemy : MonoBehaviour
             Chase();
             if(distance <= attackDistance)
             currentState = EnemyState.Attack;
-            else if (distance > detectionDistance)
+            else if (!CanSeePlayer())
                currentState = EnemyState.Patrol;
             break;
          case EnemyState.Attack:
             Attack();
-            if (distance > detectionDistance)
+            if (!CanSeePlayer())
                currentState = EnemyState.Patrol;
+            else if (distance > attackDistance) {
+               currentState = EnemyState.Chase;
+            }
             break;
       }
    }
    
-   public void SetTarget(Transform playerTransform) {
-      target = playerTransform;
-   }
+
    protected abstract void Chase();
    protected abstract void Patrol();
    protected abstract void Attack();
+   
+   
+   public virtual void SetTarget(Transform playerTransform) {
+      target = playerTransform;
+   }
+   
+   public virtual void OnPlayerDetected() {
+      currentState = EnemyState.Chase;
+   }
 }

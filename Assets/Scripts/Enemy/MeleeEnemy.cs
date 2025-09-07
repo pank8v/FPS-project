@@ -30,6 +30,7 @@ public class MeleeEnemy : Enemy
                 isWaiting = false;
             }
         }
+        Debug.Log("patrol");
     }
 
     
@@ -38,12 +39,14 @@ public class MeleeEnemy : Enemy
         agent.isStopped = false;
         agent.speed = chaseSpeed;
         agent.SetDestination(target.position);
+        Debug.Log("chase");
     }
 
     protected override void Attack() {
         Health health = target.GetComponent<Health>();
         health.ApplyDamage(damage);
         agent.isStopped = true;
+        Debug.Log("attack");
     }
 
     public void SetPatrolPoints(Transform[] points) {
