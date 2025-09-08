@@ -4,7 +4,7 @@ using System;
 public class RangeWeapon : Weapon, IReloadable
 {
     public event Action OnReload;
-    private int currentAmmo;
+    public int currentAmmo { get; private set; }
 
 
     protected void Awake() {
@@ -31,7 +31,9 @@ public class RangeWeapon : Weapon, IReloadable
     }
     
     public void Reload() {
-        currentAmmo = maxAmmo;
-        OnReload?.Invoke();
+        if (currentAmmo < maxAmmo) {
+            currentAmmo = maxAmmo;
+            OnReload?.Invoke();
+        }
     }
 }
