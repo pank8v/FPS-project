@@ -16,6 +16,6 @@ MonoBehaviour:
   damage: 20
   attackDistance: 2
   detectionDistance: 14
-  patrolSpeed: 6
-  chaseSpeed: 12
+  patrolSpeed: 10
+  chaseSpeed: 18
   viewAngle: 135
