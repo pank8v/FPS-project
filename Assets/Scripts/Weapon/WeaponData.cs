@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "WeaponData", menuName = "Scriptable Objects/WeaponData")]
 public class WeaponData : ScriptableObject
-{
+{   [Header("Basic data")]
     [SerializeField] private string weaponName; 
     [SerializeField] private float fireRate;
     [SerializeField] private int damage;
@@ -10,6 +10,15 @@ public class WeaponData : ScriptableObject
     [SerializeField] private int maxAmmo;
     [SerializeField] private AudioClip shotSound;
     [SerializeField] private AudioClip reloadSound;
+
+    [Header("Recoil data")]
+    [SerializeField] private float minimumRecoilX;
+    [SerializeField] private float maximumRecoilX;
+    [SerializeField] private float minimumRecoilY;
+    [SerializeField] private float maximumRecoilY;
+    [SerializeField] private float snappiness;
+    [SerializeField] private float returnSpeed;
+
     
     public float FireRate => fireRate;
     public int Damage => damage;
@@ -17,4 +26,12 @@ public class WeaponData : ScriptableObject
     public int MaxAmmo => maxAmmo;
     public AudioClip ShotSound => shotSound;
     public AudioClip ReloadSound => reloadSound;
+    
+    
+    public float MinimumRecoilX => minimumRecoilX;
+    public float MaximumRecoilX => maximumRecoilX;
+    public float MinimumRecoilY => minimumRecoilY;
+    public float MaximumRecoilY => maximumRecoilY;
+    public float Snappiness => snappiness;
+    public float ReturnSpeed => returnSpeed;
 }

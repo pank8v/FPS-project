@@ -41,6 +41,8 @@ public class HUD : MonoBehaviour
 
 
     private void UpdateAmmo() {
-        ammoText.text = $"{rangeWeapon.currentAmmo} / {currentWeapon.WeaponData.MaxAmmo}";
+        int currentAmmo = rangeWeapon.currentAmmo;
+        int maxAmmo = currentWeapon.WeaponData.MaxAmmo;
+        ammoText.text = $"<color=#FF6AFF>{currentAmmo}</color> <color=#6AFFFE>/ {maxAmmo}</color>";
     }
 }

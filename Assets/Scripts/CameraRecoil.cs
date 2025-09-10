@@ -4,10 +4,13 @@ public class CameraRecoil : MonoBehaviour
 {
     [SerializeField] private PlayerInputHandler playerInputHandler;
     [SerializeField] private Weapon weapon;
-   
-    [SerializeField] private float recoilX = -4f;
-    [SerializeField] private float snappiness = 1f;
-    [SerializeField] private float returnSpeed = 12f;
+
+    private float minimumRecoilX => weapon.WeaponData.MinimumRecoilX;
+   private float maximumRecoilX => weapon.WeaponData.MaximumRecoilX;
+   private float minimumRecoilY => weapon.WeaponData.MinimumRecoilY;
+   private float maximumRecoilY => weapon.WeaponData.MaximumRecoilY;
+   private float snappiness => weapon.WeaponData.Snappiness;
+   private float returnSpeed => weapon.WeaponData.ReturnSpeed;
 
 
     private Vector3 currentRotation;
@@ -28,6 +31,6 @@ public class CameraRecoil : MonoBehaviour
   
 
     private void AddRecoil() {
-        targetRotation += new Vector3(recoilX, 0, 0);
+        targetRotation += new Vector3(Random.Range(minimumRecoilX, maximumRecoilX), Random.Range(minimumRecoilY, maximumRecoilY), 0);
     }
 }
