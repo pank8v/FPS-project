@@ -6,9 +6,10 @@ public class RangeWeapon : Weapon, IReloadable
     [SerializeField] private float recoilSmooth = 1.8f;
     public event Action OnReload;
     public int currentAmmo { get; private set; }
-
-    Vector3 recoilOffset = new Vector3(0, 0.002f, 0.015f);
-    Vector3 targetPosition = new Vector3(0.211f, -0.274f, 0.489f);
+    
+    [SerializeField] private float recoilY = 0.002f;
+    [SerializeField] private float recoilZ = 0.015f;
+    Vector3 targetPosition = new Vector3(0.176f, -0.23f, 0.479f);
     
     protected void Awake() {
         currentAmmo = weaponData.MaxAmmo;
@@ -36,7 +37,7 @@ public class RangeWeapon : Weapon, IReloadable
 
 
     protected void Recoil() {
-        transform.localPosition -= recoilOffset;
+        transform.localPosition -= new Vector3(0, recoilY, recoilZ);
     }
     
     
