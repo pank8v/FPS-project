@@ -20,24 +20,27 @@ public class RangeWeapon : Weapon, IReloadable
     
     protected override void Shoot() {
         currentAmmo--;
-        GameObject bullet = Instantiate(bulletPrefab, muzzle.position, Quaternion.identity);
+        
+        Vector3 targetPoint;
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+       
+        if(Physics.Raycast(ray, out RaycastHit hit))
+        {
+            targetPoint = hit.point;
+        }
+        else {
+            targetPoint = ray.GetPoint(100f);
+        }
+        Vector3 direction = (targetPoint - muzzle.position).normalized;
+        
+        GameObject bullet = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-        Vector3 direction = Camera.main.transform.forward;
-        bulletScript.setDamage(weaponData.Damage);
-        if (rb != null) {
+       
+        if (rb != null && bulletScript != null) {
             rb.linearVelocity = direction * bulletSpeed;
+            bulletScript.setDamage(weaponData.Damage);
         }
-        /*    Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        if (Physics.Raycast(ray, out RaycastHit hit, range)) {
-            Debug.Log(hit.collider.name);
-            var enemy = hit.collider.GetComponent<Enemy>();
-            if (enemy != null) {
-                var health = enemy.GetComponent<Health>();
-                health.ApplyDamage(damage);
-                enemy.OnPlayerDetected();
-            }
-        } */
     }
     
     public void Reload() {
