@@ -4,6 +4,7 @@ public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private PlayerInputHandler playerInputHandler;
     [SerializeField] private Weapon currentWeapon;
+    [SerializeField] private WeaponVisual weaponVisual;
 
 
     private void OnEnable() {
@@ -17,6 +18,7 @@ public class PlayerShooting : MonoBehaviour
     private void Update() {
         HandleShooting();
         HandleAiming();
+        HandleSway();
     }
     
     
@@ -34,5 +36,9 @@ public class PlayerShooting : MonoBehaviour
 
     private void HandleAiming() {
        currentWeapon.setIsAiming(playerInputHandler.isAiming);
+    }
+
+    private void HandleSway() {
+        weaponVisual.Sway(playerInputHandler.lookDirection);
     }
 }
