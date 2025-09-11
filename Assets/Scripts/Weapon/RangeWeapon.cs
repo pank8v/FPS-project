@@ -3,9 +3,16 @@ using System;
 
 public class RangeWeapon : Weapon, IReloadable
 {
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform muzzle;
+    public int currentAmmo { get; private set; }
+    protected float bulletSpeed => weaponData.BulletSpeed;
 
     public event Action OnReload;
-    public int currentAmmo { get; private set; }
+    
+    protected override bool CanFire() {
+        return currentAmmo > 0;
+    }
     
     protected void Awake() {
         currentAmmo = weaponData.MaxAmmo;
@@ -13,7 +20,15 @@ public class RangeWeapon : Weapon, IReloadable
     
     protected override void Shoot() {
         currentAmmo--;
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        GameObject bullet = Instantiate(bulletPrefab, muzzle.position, Quaternion.identity);
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        Vector3 direction = Camera.main.transform.forward;
+        bulletScript.setDamage(weaponData.Damage);
+        if (rb != null) {
+            rb.linearVelocity = direction * bulletSpeed;
+        }
+        /*    Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         if (Physics.Raycast(ray, out RaycastHit hit, range)) {
             Debug.Log(hit.collider.name);
             var enemy = hit.collider.GetComponent<Enemy>();
@@ -22,15 +37,8 @@ public class RangeWeapon : Weapon, IReloadable
                 health.ApplyDamage(damage);
                 enemy.OnPlayerDetected();
             }
-        }
+        } */
     }
-
-    
-    
-    protected override bool CanFire() {
-        return currentAmmo > 0;
-    }
-
     
     public void Reload() {
         if (currentAmmo < maxAmmo) {

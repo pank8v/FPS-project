@@ -10,7 +10,6 @@ public class PlayerInputHandler : MonoBehaviour
     public Vector2 lookDirection { get; private set; }
     public bool isSprinting { get; private set; }
     public bool isAttacking { get; private set; }
-    public bool isReloading { get; private set; }
     public bool isAiming { get; private set; }
     public bool isSliding { get; private set; }
     public bool isJumping { get; private set; }

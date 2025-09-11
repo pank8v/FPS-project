@@ -8,6 +8,7 @@ public class WeaponData : ScriptableObject
     [SerializeField] private int damage;
     [SerializeField] private float range;
     [SerializeField] private int maxAmmo;
+    [SerializeField] private float bulletSpeed;
     [SerializeField] private AudioClip shotSound;
     [SerializeField] private AudioClip reloadSound;
 
@@ -24,6 +25,7 @@ public class WeaponData : ScriptableObject
     public int Damage => damage;
     public float Range => range;
     public int MaxAmmo => maxAmmo;
+    public float BulletSpeed => bulletSpeed;
     public AudioClip ShotSound => shotSound;
     public AudioClip ReloadSound => reloadSound;
     

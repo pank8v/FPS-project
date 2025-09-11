@@ -6,10 +6,6 @@ public abstract class Weapon : MonoBehaviour
 
    [SerializeField] protected WeaponData weaponData;
    public WeaponData WeaponData => weaponData;
-
-   public event Action OnShoot;
-   
-   
    protected float nextTimeToFire;
    
    protected int maxAmmo => weaponData.MaxAmmo;
@@ -17,12 +13,13 @@ public abstract class Weapon : MonoBehaviour
    protected int damage => weaponData.Damage;
    protected float range => weaponData.Range;
 
+   public event Action OnShoot;
 
 
    protected virtual bool CanFire() {
       return true;
    }
-
+   
    protected bool isAiming;
    public bool IsAiming => isAiming;
    

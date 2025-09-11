@@ -37,6 +37,7 @@ public class WeaponVisual : MonoBehaviour
       
       targetPosition = rangeWeapon.IsAiming ? aimFirePosition.localPosition : hipFirePosition.localPosition; 
       recoilOffset = Vector3.zero;
+      swayPositionOffset = Vector3.zero;
       transform.localPosition = targetPosition + recoilOffset;
    }
 
@@ -60,11 +61,12 @@ public class WeaponVisual : MonoBehaviour
 
 
    public void Sway(Vector3 lookDirection) {
+      //rotation
       Quaternion targetRotation = Quaternion.Euler(lookDirection.y * rotationSwayY,
          lookDirection.x * rotationSwayX, -lookDirection.x * rotationSwayX);
          transform.localRotation = Quaternion.Slerp(transform.localRotation,initialRotation * targetRotation, Time.deltaTime * rotationSwaySmooth);
          
-         
+      //position
          Vector3 desiredSway = new Vector3(-lookDirection.x * swayAmount, -lookDirection.y * swayAmount, 0);
          desiredSway.x = Mathf.Clamp(swayPositionOffset.x, -maxSwayAmount, maxSwayAmount);
          desiredSway.y = Mathf.Clamp(swayPositionOffset.y, -maxSwayAmount, maxSwayAmount);
