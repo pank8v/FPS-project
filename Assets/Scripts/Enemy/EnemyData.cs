@@ -10,7 +10,7 @@ public class EnemyData : ScriptableObject
     [SerializeField] private float patrolSpeed;
     [SerializeField] private float chaseSpeed;
     [SerializeField] private float viewAngle;
-
+    [SerializeField] private float viewDistance;
     public float AttackDistance => attackDistance;
     public float DetectionDistance => detectionDistance;
     public int Health => health;
@@ -18,4 +18,5 @@ public class EnemyData : ScriptableObject
     public float PatrolSpeed => patrolSpeed;
     public float ChaseSpeed => chaseSpeed;
     public float ViewAngle => viewAngle;
+    public float ViewDistance => viewDistance;
 }

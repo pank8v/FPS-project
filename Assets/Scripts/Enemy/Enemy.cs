@@ -14,6 +14,7 @@ public abstract class Enemy : MonoBehaviour
 
    protected float distance;
    protected float viewAngle => enemyData.ViewAngle;
+   protected float viewDistance => enemyData.ViewDistance;
    
    
    protected enum EnemyState
@@ -27,7 +28,7 @@ public abstract class Enemy : MonoBehaviour
       Vector3 dirToPlayer = (target.position - transform.position).normalized;
       float angle = Vector3.Angle(transform.forward, dirToPlayer);
       if (angle < viewAngle) {
-         if (Physics.Raycast(transform.position + Vector3.up, dirToPlayer, out RaycastHit hit, 100f)) {
+         if (Physics.Raycast(transform.position + Vector3.up, dirToPlayer, out RaycastHit hit, viewDistance)) {
             Debug.DrawLine(transform.position + Vector3.up, hit.point, Color.red);
             if (hit.collider.CompareTag("Player")) {
                Debug.Log("zamechen");

@@ -24,6 +24,7 @@ public abstract class Weapon : MonoBehaviour
    }
 
    protected bool isAiming;
+   public bool IsAiming => isAiming;
    
    protected abstract void Shoot();
 

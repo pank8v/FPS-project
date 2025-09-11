@@ -19,3 +19,4 @@ MonoBehaviour:
   patrolSpeed: 10
   chaseSpeed: 18
   viewAngle: 135
+  viewDistance: 30
