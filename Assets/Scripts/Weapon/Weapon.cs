@@ -3,6 +3,7 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+
    [SerializeField] protected WeaponData weaponData;
    public WeaponData WeaponData => weaponData;
 
@@ -21,6 +22,8 @@ public abstract class Weapon : MonoBehaviour
    protected virtual bool CanFire() {
       return true;
    }
+
+   protected bool isAiming;
    
    protected abstract void Shoot();
 
@@ -32,5 +35,11 @@ public abstract class Weapon : MonoBehaviour
          OnShoot?.Invoke();
       }
    }
-   
+
+   public void setIsAiming(bool isAimingTriggered) {
+      isAiming = isAimingTriggered;
+   }
+
+
+
 }

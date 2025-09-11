@@ -3,13 +3,22 @@ using System;
 
 public class RangeWeapon : Weapon, IReloadable
 {
+    [SerializeField] private Transform hipFirePosition;
+    [SerializeField] private Transform aimFirePosition;
     [SerializeField] private float recoilSmooth = 1.8f;
+    [SerializeField] private float aimSmooth = 0.5f;
     public event Action OnReload;
     public int currentAmmo { get; private set; }
     
     [SerializeField] private float recoilY = 0.002f;
     [SerializeField] private float recoilZ = 0.015f;
-    Vector3 targetPosition = new Vector3(0.176f, -0.23f, 0.479f);
+   
+    Vector3 hipTargetPosition = new Vector3(0.176f, -0.23f, 0.479f);
+    Vector3 aimTargetPosition = new Vector3(0, 0, 0);
+    private Vector3 targetPosition;
+    
+    
+    private Vector3 recoilOffset;
     
     protected void Awake() {
         currentAmmo = weaponData.MaxAmmo;
@@ -17,7 +26,11 @@ public class RangeWeapon : Weapon, IReloadable
 
 
     protected void Update() {
-        transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * recoilSmooth);
+        Vector3 desiredPosition = isAiming ? aimFirePosition.localPosition : hipFirePosition.localPosition; 
+        targetPosition = Vector3.Lerp(targetPosition, desiredPosition, Time.deltaTime * aimSmooth);
+        recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero, recoilSmooth * Time.deltaTime);
+        
+        transform.localPosition = targetPosition + recoilOffset;
     }
     
     protected override void Shoot() {
@@ -37,7 +50,7 @@ public class RangeWeapon : Weapon, IReloadable
 
 
     protected void Recoil() {
-        transform.localPosition -= new Vector3(0, recoilY, recoilZ);
+        recoilOffset -= new Vector3(0, recoilY, recoilZ);
     }
     
     
@@ -45,8 +58,7 @@ public class RangeWeapon : Weapon, IReloadable
     protected override bool CanFire() {
         return currentAmmo > 0;
     }
-    
-    
+
     
     
     public void Reload() {
@@ -55,4 +67,5 @@ public class RangeWeapon : Weapon, IReloadable
             OnReload?.Invoke();
         }
     }
+    
 }

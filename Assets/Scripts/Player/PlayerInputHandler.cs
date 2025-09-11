@@ -11,6 +11,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool isSprinting { get; private set; }
     public bool isAttacking { get; private set; }
     public bool isReloading { get; private set; }
+    public bool isAiming { get; private set; }
     public bool isSliding { get; private set; }
     public bool isJumping { get; private set; }
 
@@ -32,6 +33,8 @@ public class PlayerInputHandler : MonoBehaviour
         inputSystem.Player.Jump.performed += OnJumpPerformed;
         inputSystem.Player.Jump.canceled += onJumpCanceled;
         inputSystem.Player.Reload.performed += OnReloadPerformed;
+        inputSystem.Player.Aim.performed += OnAimPerformed;
+        inputSystem.Player.Aim.canceled += OnAimCanceled;
 
     }
 
@@ -87,6 +90,14 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void OnReloadPerformed(InputAction.CallbackContext context) {
         OnReloadPressed?.Invoke();
+    }
+
+    private void OnAimPerformed(InputAction.CallbackContext context) {
+        isAiming = true;
+    }
+
+    private void OnAimCanceled(InputAction.CallbackContext context) {
+        isAiming = false;
     }
  
 }

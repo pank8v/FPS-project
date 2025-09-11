@@ -16,6 +16,7 @@ public class PlayerShooting : MonoBehaviour
     
     private void Update() {
         HandleShooting();
+        HandleAiming();
     }
     
     
@@ -31,4 +32,7 @@ public class PlayerShooting : MonoBehaviour
             }
     }
 
+    private void HandleAiming() {
+       currentWeapon.setIsAiming(playerInputHandler.isAiming);
+    }
 }
