@@ -14,7 +14,6 @@ public class Bullet : MonoBehaviour
     }
     
     private void OnCollisionEnter(Collision collision) {
-        Debug.Log(damage);
         Debug.Log(collision.gameObject.name);
         var enemy = collision.gameObject.GetComponent<Enemy>();
         if (enemy != null) {

@@ -2,55 +2,12 @@ using UnityEngine;
 
 public class MeleeEnemy : Enemy
 {
-    [Header("Patrol")]
-    [SerializeField] protected Transform[] patrolPoints;
-    [SerializeField] protected float waitingTime = 5f;
-    protected int currentPatrolPoint = 0;
-    protected float waitingTimer = 0;
-    protected bool isWaiting = false;    
     
-    
-    
-    
-    protected override void Patrol() {
-        if (patrolPoints.Length == 0) return;
-        agent.isStopped = false;
-        agent.speed = patrolSpeed;
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance) {
-            if (!isWaiting) {
-                isWaiting = true;
-                waitingTimer = waitingTime;
-            }
-        }
-        if (isWaiting) {
-            waitingTimer -= Time.deltaTime;
-            if (waitingTimer <= 0) {
-                currentPatrolPoint = (currentPatrolPoint + 1) % patrolPoints.Length;
-                agent.SetDestination(patrolPoints[currentPatrolPoint].position);
-                isWaiting = false;
-            }
-        }
-        Debug.Log("patrol");
-    }
-
-    
-    
-    protected override void Chase() {
-        agent.isStopped = false;
-        agent.speed = chaseSpeed;
-        agent.SetDestination(target.position);
-        Debug.Log("chase");
-    }
-
     protected override void Attack() {
         Health health = target.GetComponent<Health>();
         health.ApplyDamage(damage);
         agent.isStopped = true;
         Debug.Log("attack");
-    }
-
-    public void SetPatrolPoints(Transform[] points) {
-        patrolPoints = points;
     }
     
     

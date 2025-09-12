@@ -16,6 +16,7 @@ public class RangeWeapon : Weapon, IReloadable
     
     protected void Awake() {
         currentAmmo = weaponData.MaxAmmo;
+        
     }
     
     protected override void Shoot() {
@@ -36,10 +37,9 @@ public class RangeWeapon : Weapon, IReloadable
         GameObject bullet = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-       
-        if (rb != null && bulletScript != null) {
+        bulletScript.setDamage(weaponData.Damage);
+        if (rb != null) {
             rb.linearVelocity = direction * bulletSpeed;
-            bulletScript.setDamage(weaponData.Damage);
         }
     }
     
