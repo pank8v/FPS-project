@@ -11,7 +11,7 @@ public abstract class Health : MonoBehaviour
     
     protected abstract void Die();
 
-    public void ApplyDamage(int damage) {
+    public virtual void ApplyDamage(int damage) {
         TakeDamage(damage);
     }
 }

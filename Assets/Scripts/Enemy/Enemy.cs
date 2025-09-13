@@ -4,6 +4,7 @@ public abstract class Enemy : MonoBehaviour
 {
    
    [SerializeField] protected EnemyData enemyData;
+   public EnemyData EnemyData => enemyData;
    [SerializeField] protected NavMeshAgent agent;
    [SerializeField] protected Transform target;
 

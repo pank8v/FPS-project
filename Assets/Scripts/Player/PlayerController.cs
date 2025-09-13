@@ -6,10 +6,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerInputHandler playerInputHandler;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Transform cameraHolder;
-    
+
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float sprintMultiplier = 1.6f;
     [SerializeField] private float slideMultiplier = 2f;
+    private float currentSpeed;
+    
+
     
     [SerializeField] private float jumpHeight = 4f;
     [SerializeField] private float gravity = -20f;
@@ -19,12 +22,11 @@ public class PlayerController : MonoBehaviour
     private float originalHeight = 2f;
     private float slideHeight = 1f;
    
-    private float currentSpeed;
    
     private float verticalVelocity;
     private bool isGrounded;
     private bool isSliding;
-    
+
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -37,11 +39,9 @@ public class PlayerController : MonoBehaviour
     
     private void HandleMovement() {
         isGrounded = characterController.isGrounded;
-        if (isGrounded && verticalVelocity < 0) {
-            verticalVelocity = -2f;
-        }
-        
+  
         currentSpeed = playerInputHandler.isSprinting ? moveSpeed * sprintMultiplier : playerInputHandler.isSliding ? moveSpeed * slideMultiplier  : moveSpeed;
+        
         Vector3 moveDirection = new Vector3(playerInputHandler.moveDirection.x, 0f, playerInputHandler.moveDirection.y).normalized;
         Vector3 horizontalMoveDirection = transform.TransformDirection(moveDirection) * currentSpeed;
         

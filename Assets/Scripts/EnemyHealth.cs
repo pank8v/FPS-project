@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class EnemyHealth : Health
 {
-   [SerializeField] private EnemyData enemyData;
+   [SerializeField] private Enemy enemy;
 
    protected void Awake() {
-      if (enemyData != null) {
-         health = enemyData.Health;
-      }
+      health = enemy.EnemyData.Health;
    }
 
    protected override void Die() {
       Destroy(gameObject);
+   }
+
+   public override void ApplyDamage(int damage) {
+      TakeDamage(damage);
+      enemy.OnPlayerDetected();
    }
 }

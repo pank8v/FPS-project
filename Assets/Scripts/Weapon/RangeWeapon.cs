@@ -21,7 +21,6 @@ public class RangeWeapon : Weapon, IReloadable
     
     protected override void Shoot() {
         currentAmmo--;
-        
         Vector3 targetPoint;
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
        
@@ -33,7 +32,6 @@ public class RangeWeapon : Weapon, IReloadable
             targetPoint = ray.GetPoint(100f);
         }
         Vector3 direction = (targetPoint - muzzle.position).normalized;
-        
         GameObject bullet = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         Bullet bulletScript = bullet.GetComponent<Bullet>();

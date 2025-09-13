@@ -20,7 +20,7 @@ public class RangeEnemy : Enemy
 
             Debug.Log("attack");
             bulletScript.setDamage(damage);
-            bulletRb.linearVelocity = direction * 50f;
+            bulletRb.linearVelocity = direction * 7f;
             nextTimeToFire = Time.time + attackRate;
         }
 
