@@ -15,6 +15,8 @@ public class PlayerInputHandler : MonoBehaviour
     public bool isJumping { get; private set; }
 
     public event Action OnReloadPressed;
+    public event Action OnMainWeaponSwitch;
+    public event Action OnAdditionalWeaponSwitch;
 
     private void Awake() {
         inputSystem = new InputSystem_Actions();
@@ -34,6 +36,9 @@ public class PlayerInputHandler : MonoBehaviour
         inputSystem.Player.Reload.performed += OnReloadPerformed;
         inputSystem.Player.Aim.performed += OnAimPerformed;
         inputSystem.Player.Aim.canceled += OnAimCanceled;
+        inputSystem.Player.MainWeaponSwitch.performed += OnMainWeaponSwitchPerformed;
+        inputSystem.Player.AdditionalWeaponSwitch.performed += OnAdditionalWeaponSwitchPerformed;
+
 
     }
 
@@ -98,5 +103,11 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnAimCanceled(InputAction.CallbackContext context) {
         isAiming = false;
     }
- 
+    
+    private void OnMainWeaponSwitchPerformed(InputAction.CallbackContext context) {
+        OnMainWeaponSwitch?.Invoke();
+    }
+    private void OnAdditionalWeaponSwitchPerformed(InputAction.CallbackContext context) {
+        OnAdditionalWeaponSwitch?.Invoke();
+    }
 }

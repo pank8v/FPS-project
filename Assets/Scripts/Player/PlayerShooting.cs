@@ -4,26 +4,35 @@ public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private PlayerInputHandler playerInputHandler;
     [SerializeField] private GameObject weaponHolder;
-    [SerializeField] private WeaponData firstWeapon;
-    [SerializeField] private WeaponData secondWeapon;
+    [SerializeField] private WeaponData[] weapons;
     [SerializeField] private Weapon currentWeapon;
     [SerializeField] private WeaponVisual weaponVisual;
 
 
-
- 
     
+
     private void SetCurrentWeapon() {
-        currentWeapon.Equipd(firstWeapon);
+        currentWeapon.Equipd(weapons[0]);
     }
+
+    private void SwitchCurrentWeapon(int weaponCount) {
+        currentWeapon.Equipd(weapons[weaponCount]);
+    }
+
+
     
     
     private void OnEnable() {
         playerInputHandler.OnReloadPressed += HandleReload;
+        playerInputHandler.OnMainWeaponSwitch += () => SwitchCurrentWeapon(0);
+        playerInputHandler.OnAdditionalWeaponSwitch += () => SwitchCurrentWeapon(1);
+
     }
 
     private void OnDisable() {
         playerInputHandler.OnReloadPressed -= HandleReload;
+        playerInputHandler.OnMainWeaponSwitch += () => SwitchCurrentWeapon(0);
+        playerInputHandler.OnAdditionalWeaponSwitch += () => SwitchCurrentWeapon(1);
     }
     
     private void Awake() {

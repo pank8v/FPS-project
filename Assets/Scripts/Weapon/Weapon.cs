@@ -14,6 +14,9 @@ public abstract class Weapon : MonoBehaviour
    protected float fireRate => weaponData.FireRate;
    protected int damage => weaponData.Damage;
    protected float range => weaponData.Range;
+   public Vector3 HipFirePosition => weaponData.HipFirePosition;
+   public Vector3 AimFirePosition => weaponData.AimFirePosition;
+   
 
    public event Action OnShoot;
 
@@ -24,7 +27,8 @@ public abstract class Weapon : MonoBehaviour
       if (weaponMeshInstance != null) {
          Destroy(weaponMeshInstance);
       }
-      Instantiate(weaponData.WeaponMesh, transform);
+      
+     weaponMeshInstance = Instantiate(weaponData.WeaponMesh, transform);
    }
    
 

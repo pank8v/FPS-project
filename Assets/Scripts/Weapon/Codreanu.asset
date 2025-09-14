@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c6582eaab048434aaec4212df50a793, type: 3}
+  m_Name: Codreanu
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  weaponMesh: {fileID: 8408343962161368004, guid: 27c94885110fd6145ba2ab28c2f83c60, type: 3}
+  weaponName: Codreanu
+  fireRate: 5
+  damage: 40
+  range: 30
+  maxAmmo: 6
+  bulletSpeed: 8
+  shotSound: {fileID: 8300000, guid: 101a910724d21184889f95f6218811d5, type: 3}
+  reloadSound: {fileID: 8300000, guid: da7012d847f7d654e832248f60a2a1e5, type: 3}
+  hipFirePosition: {x: 0.182, y: -0.32, z: 0.638}
+  aimFirePosition: {x: 0, y: -0.185, z: 0.4}
+  minimumRecoilX: -8
+  maximumRecoilX: -12
+  minimumRecoilY: 2
+  maximumRecoilY: -2
+  snappiness: 1
+  returnSpeed: 12

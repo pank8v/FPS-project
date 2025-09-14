@@ -3,10 +3,11 @@ using UnityEngine;
 public class WeaponVisual : MonoBehaviour
 {
    [SerializeField] private RangeWeapon rangeWeapon;
-
+   [SerializeField] private Transform handsTransform;
+   
    [Header("Aim Settings")]
-   [SerializeField] private Transform hipFirePosition;
-   [SerializeField] private Transform aimFirePosition;
+    private Vector3 hipFirePosition => rangeWeapon.WeaponData.HipFirePosition;
+   private Vector3 aimFirePosition => rangeWeapon.WeaponData.AimFirePosition;
    [SerializeField] private float aimSmooth = 0.5f;
    [Header("Recoil Settings")]
    [SerializeField] private float recoilY = 0.002f;
@@ -35,7 +36,7 @@ public class WeaponVisual : MonoBehaviour
    private void OnEnable() {
       rangeWeapon.OnShoot += Recoil;
       
-      targetPosition = rangeWeapon.IsAiming ? aimFirePosition.localPosition : hipFirePosition.localPosition; 
+      targetPosition = rangeWeapon.IsAiming ? aimFirePosition : hipFirePosition; 
       recoilOffset = Vector3.zero;
       swayPositionOffset = Vector3.zero;
       transform.localPosition = targetPosition + recoilOffset;
@@ -49,10 +50,12 @@ public class WeaponVisual : MonoBehaviour
 
    
    private void Update() {
-      Vector3 desiredPosition = rangeWeapon.IsAiming ? aimFirePosition.localPosition : hipFirePosition.localPosition; 
+      Vector3 desiredPosition = rangeWeapon.IsAiming ? aimFirePosition : hipFirePosition; 
       targetPosition = Vector3.Lerp(targetPosition, desiredPosition, Time.deltaTime * aimSmooth);
       recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero, recoilSmooth * Time.deltaTime);
       transform.localPosition = targetPosition + recoilOffset + swayPositionOffset;
+      handsTransform.localPosition = rangeWeapon.WeaponData.HandsPosition;
+      handsTransform.localRotation = rangeWeapon.WeaponData.HandsRotation;
    }
    
    private void Recoil() {
