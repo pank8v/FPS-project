@@ -5,6 +5,7 @@ public class RangeEnemy : Enemy
 {
     [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected Transform enemyMuzzle;
+    [SerializeField] protected float bulletSpeed = 7f;
     private float nextTimeToFire = 0;
     private float rotationSmooth = 20;
 
@@ -23,7 +24,7 @@ public class RangeEnemy : Enemy
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.setDamage(damage);
-            bulletRb.linearVelocity = direction * 7f;
+            bulletRb.linearVelocity = direction * bulletSpeed;
             nextTimeToFire = Time.time + attackRate;
         }
 
