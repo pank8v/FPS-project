@@ -2,7 +2,9 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "WeaponData", menuName = "Scriptable Objects/WeaponData")]
 public class WeaponData : ScriptableObject
-{   [Header("Basic data")]
+{
+    [Header("Basic data")]
+    [SerializeField] private GameObject weaponMesh;
     [SerializeField] private string weaponName; 
     [SerializeField] private float fireRate;
     [SerializeField] private int damage;
@@ -20,7 +22,7 @@ public class WeaponData : ScriptableObject
     [SerializeField] private float snappiness;
     [SerializeField] private float returnSpeed;
 
-    
+    public GameObject WeaponMesh => weaponMesh;
     public float FireRate => fireRate;
     public int Damage => damage;
     public float Range => range;

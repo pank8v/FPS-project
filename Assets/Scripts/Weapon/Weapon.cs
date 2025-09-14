@@ -5,9 +5,11 @@ public abstract class Weapon : MonoBehaviour
 {
 
    [SerializeField] protected WeaponData weaponData;
+   [SerializeField] protected GameObject weaponMeshInstance;
    public WeaponData WeaponData => weaponData;
    protected float nextTimeToFire;
-   
+
+   protected GameObject weaponMesh => weaponData.WeaponMesh;
    protected int maxAmmo => weaponData.MaxAmmo;
    protected float fireRate => weaponData.FireRate;
    protected int damage => weaponData.Damage;
@@ -15,6 +17,16 @@ public abstract class Weapon : MonoBehaviour
 
    public event Action OnShoot;
 
+
+
+   public void Equipd(WeaponData newWeaponData) {
+      weaponData = newWeaponData;
+      if (weaponMeshInstance != null) {
+         Destroy(weaponMeshInstance);
+      }
+      Instantiate(weaponData.WeaponMesh, transform);
+   }
+   
 
    protected virtual bool CanFire() {
       return true;
@@ -38,6 +50,6 @@ public abstract class Weapon : MonoBehaviour
       isAiming = isAimingTriggered;
    }
 
-
+   
 
 }
