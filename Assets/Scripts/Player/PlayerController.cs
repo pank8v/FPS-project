@@ -6,26 +6,32 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerInputHandler playerInputHandler;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Transform cameraHolder;
-
+    [Header("Velocity")]
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float sprintMultiplier = 1.6f;
     [SerializeField] private float slideMultiplier = 2f;
-    private float currentSpeed;
-    
+    [SerializeField] private float speedSmoothTime = 10f;
+    private float currentVelocity;
+    private float targetVelocity;
+    private bool wasSprintingOnJump = false;
+    private float verticalVelocity;
 
     
+    [Header("Jump")]
+    private bool isJumping = false;
     [SerializeField] private float jumpHeight = 4f;
     [SerializeField] private float gravity = -20f;
+    private bool isGrounded;
 
+    
+    [Header("Slide")]
     private Vector3 originalCenter = new Vector3(0, 0f, 0);
     private Vector3 slideCenter = new Vector3(0, 1f, 0);
     private float originalHeight = 2f;
     private float slideHeight = 1f;
-   
-   
-    private float verticalVelocity;
-    private bool isGrounded;
     private bool isSliding;
+
+   
 
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
@@ -37,15 +43,31 @@ public class PlayerController : MonoBehaviour
     }
 
     
+    
+    private void HandleSpeed() {
+        if (playerInputHandler.isJumping) {
+            wasSprintingOnJump = playerInputHandler.isSprinting;
+        }
+        
+        if (isGrounded) {
+            targetVelocity = playerInputHandler.isSprinting ? moveSpeed * sprintMultiplier : moveSpeed; 
+        }
+        else {
+            targetVelocity = wasSprintingOnJump ? moveSpeed * sprintMultiplier : moveSpeed;
+        }
+
+        currentVelocity = Mathf.Lerp(currentVelocity, targetVelocity, speedSmoothTime * Time.deltaTime);
+    }
+    
+
     private void HandleMovement() {
         isGrounded = characterController.isGrounded;
-  
-        currentSpeed = playerInputHandler.isSprinting ? moveSpeed * sprintMultiplier : playerInputHandler.isSliding ? moveSpeed * slideMultiplier  : moveSpeed;
+        HandleSpeed();
         
         Vector3 moveDirection = new Vector3(playerInputHandler.moveDirection.x, 0f, playerInputHandler.moveDirection.y).normalized;
-        Vector3 horizontalMoveDirection = transform.TransformDirection(moveDirection) * currentSpeed;
+        Vector3 horizontalMoveDirection = transform.TransformDirection(moveDirection) * currentVelocity;
         
-        
+        // Jump
         if (playerInputHandler.isJumping && isGrounded) {
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
@@ -68,6 +90,7 @@ public class PlayerController : MonoBehaviour
             characterController.center = originalCenter;
         }
     }
+
   
     
 }
