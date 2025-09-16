@@ -5,23 +5,35 @@ using UnityEngine.PlayerLoop;
 
 public class HUD : MonoBehaviour
 {
-    [SerializeField] private Weapon currentWeapon;
-    [SerializeField] private TextMeshProUGUI ammoText;
+    
+   [SerializeField] private Weapon currentWeapon;
+   [SerializeField] private TextMeshProUGUI ammoText;
     private RangeWeapon rangeWeapon;
 
-    
-    private void OnEnable() {
-        if (rangeWeapon != null) {
-            rangeWeapon.OnShoot += UpdateAmmo;
-            rangeWeapon.OnReload += UpdateAmmo;
-        }
-    }
 
-    private void OnDisable() {
-        if (rangeWeapon != null) {
+
+    public void UpdateHUD(Weapon weapon) {
+        if (rangeWeapon != null)
+        {
             rangeWeapon.OnShoot -= UpdateAmmo;
             rangeWeapon.OnReload -= UpdateAmmo;
         }
+
+        currentWeapon = weapon;
+
+        // Если новое оружие дальнобойное, подписываемся
+        if (weapon is RangeWeapon rw)
+        {
+            rangeWeapon = rw;
+            rangeWeapon.OnShoot += UpdateAmmo;
+            rangeWeapon.OnReload += UpdateAmmo;
+        }
+        else
+        {
+            rangeWeapon = null;
+        }
+
+        UpdateAmmo(); // сразу обновляем HUD
     }
     
     

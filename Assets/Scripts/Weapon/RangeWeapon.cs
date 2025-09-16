@@ -4,8 +4,9 @@ using System;
 public class RangeWeapon : Weapon, IReloadable
 {
     [SerializeField] private GameObject bulletPrefab;
-    
     [SerializeField] private Transform muzzle;
+
+
     public int currentAmmo { get; private set; }
     protected float bulletSpeed => weaponData.BulletSpeed;
 
@@ -15,10 +16,18 @@ public class RangeWeapon : Weapon, IReloadable
         return currentAmmo > 0;
     }
     
-    protected void Awake() {
+    private void Awake() {
         currentAmmo = weaponData.MaxAmmo;
-        
     }
+
+   /* public override void Equipd(WeaponData newWeaponData) {
+        weaponData = newWeaponData;
+        if (weaponMeshInstance != null) {
+            Destroy(weaponMeshInstance);
+        }
+        weaponMeshInstance = Instantiate(weaponData.WeaponMesh, transform);
+    }
+    */
     
     protected override void Shoot() {
         currentAmmo--;

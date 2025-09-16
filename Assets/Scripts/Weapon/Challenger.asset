@@ -23,6 +23,9 @@ MonoBehaviour:
   reloadSound: {fileID: 8300000, guid: da7012d847f7d654e832248f60a2a1e5, type: 3}
   hipFirePosition: {x: 0.14, y: -0.141, z: 0.479}
   aimFirePosition: {x: 0, y: -0.077, z: 0.347}
+  handsHipPosition: {x: 0, y: 0, z: 0}
+  handsAimPosition: {x: -0.1400003, y: 0.06400001, z: -0.1320001}
+  handsRotation: {x: 0, y: 0, z: 0, w: 1}
   minimumRecoilX: -3
   maximumRecoilX: -5
   minimumRecoilY: 0.8

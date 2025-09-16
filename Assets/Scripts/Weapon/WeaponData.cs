@@ -10,6 +10,7 @@ public class WeaponData : ScriptableObject
     [SerializeField] private int damage;
     [SerializeField] private float range;
     [SerializeField] private int maxAmmo;
+    private int currentAmmo;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private AudioClip shotSound;
     [SerializeField] private AudioClip reloadSound;
@@ -17,7 +18,8 @@ public class WeaponData : ScriptableObject
     [Header("Position data")]
     [SerializeField] private Vector3 hipFirePosition;
     [SerializeField] private Vector3 aimFirePosition;
-    [SerializeField] private Vector3 handsPosition;
+    [SerializeField] private Vector3 handsHipPosition;
+    [SerializeField] private Vector3 handsAimPosition;
     [SerializeField] private Quaternion handsRotation;
     
     [Header("Recoil data")]
@@ -32,6 +34,7 @@ public class WeaponData : ScriptableObject
     public float FireRate => fireRate;
     public int Damage => damage;
     public float Range => range;
+    public int CurrentAmmo => currentAmmo;
     public int MaxAmmo => maxAmmo;
     public float BulletSpeed => bulletSpeed;
     public AudioClip ShotSound => shotSound;
@@ -39,7 +42,8 @@ public class WeaponData : ScriptableObject
     
     public Vector3 HipFirePosition => hipFirePosition;
     public Vector3 AimFirePosition => aimFirePosition;
-    public Vector3 HandsPosition => handsPosition;
+    public Vector3 HandsHipPosition => handsHipPosition;
+    public Vector3 HandsAimPosition => handsAimPosition;
     public Quaternion HandsRotation => handsRotation;
     
     public float MinimumRecoilX => minimumRecoilX;

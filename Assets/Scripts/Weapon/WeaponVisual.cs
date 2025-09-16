@@ -7,6 +7,9 @@ public class WeaponVisual : MonoBehaviour
    
    [Header("Aim Settings")]
     private Vector3 hipFirePosition => rangeWeapon.WeaponData.HipFirePosition;
+
+   private Vector3 handsHipPosition => rangeWeapon.WeaponData.HandsHipPosition;
+   private Vector3 handsAimPosition => rangeWeapon.WeaponData.HandsAimPosition;
    private Vector3 aimFirePosition => rangeWeapon.WeaponData.AimFirePosition;
    [SerializeField] private float aimSmooth = 0.5f;
    [Header("Recoil Settings")]
@@ -23,6 +26,7 @@ public class WeaponVisual : MonoBehaviour
    [SerializeField] private float swayAmount = 0.1f;
    [SerializeField] private float positionSwaySmooth = 2f;
    
+   private Vector3 handsTargetPosition;
    private Vector3 targetPosition;
    private Vector3 recoilOffset;
    private Vector3 swayPositionOffset;
@@ -51,10 +55,13 @@ public class WeaponVisual : MonoBehaviour
    
    private void Update() {
       Vector3 desiredPosition = rangeWeapon.IsAiming ? aimFirePosition : hipFirePosition; 
+      Vector3 desiredHandsPosition = rangeWeapon.IsAiming ? handsAimPosition : handsHipPosition; 
+
       targetPosition = Vector3.Lerp(targetPosition, desiredPosition, Time.deltaTime * aimSmooth);
+      handsTargetPosition = Vector3.Lerp(handsTargetPosition, desiredHandsPosition, Time.deltaTime * aimSmooth);
       recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero, recoilSmooth * Time.deltaTime);
       transform.localPosition = targetPosition + recoilOffset + swayPositionOffset;
-      handsTransform.localPosition = rangeWeapon.WeaponData.HandsPosition;
+      handsTransform.localPosition = handsTargetPosition + recoilOffset + swayPositionOffset;
       handsTransform.localRotation = rangeWeapon.WeaponData.HandsRotation;
    }
    

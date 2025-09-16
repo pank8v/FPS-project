@@ -1,14 +1,16 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public abstract class Weapon : MonoBehaviour
 {
-
+   
    [SerializeField] protected WeaponData weaponData;
    [SerializeField] protected GameObject weaponMeshInstance;
    public WeaponData WeaponData => weaponData;
    protected float nextTimeToFire;
-
+   
+   
    protected GameObject weaponMesh => weaponData.WeaponMesh;
    protected int maxAmmo => weaponData.MaxAmmo;
    protected float fireRate => weaponData.FireRate;
@@ -22,15 +24,16 @@ public abstract class Weapon : MonoBehaviour
 
 
 
-   public void Equipd(WeaponData newWeaponData) {
+      /*   public virtual void Equipd(WeaponData newWeaponData) {
       weaponData = newWeaponData;
+       
       if (weaponMeshInstance != null) {
          Destroy(weaponMeshInstance);
       }
+      weaponMeshInstance = Instantiate(weaponData.WeaponMesh, transform);
       
-     weaponMeshInstance = Instantiate(weaponData.WeaponMesh, transform);
    }
-   
+   */
 
    protected virtual bool CanFire() {
       return true;
