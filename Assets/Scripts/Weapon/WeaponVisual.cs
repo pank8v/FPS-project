@@ -31,10 +31,12 @@ public class WeaponVisual : MonoBehaviour
    private Vector3 recoilOffset;
    private Vector3 swayPositionOffset;
    private Quaternion initialRotation;
+   private Quaternion handsInitialRotation;
 
 
    private void Start() {
       initialRotation = transform.localRotation;
+      handsInitialRotation = handsTransform.localRotation;
    }
    
    private void OnEnable() {
@@ -62,7 +64,6 @@ public class WeaponVisual : MonoBehaviour
       recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero, recoilSmooth * Time.deltaTime);
       transform.localPosition = targetPosition + recoilOffset + swayPositionOffset;
       handsTransform.localPosition = handsTargetPosition + recoilOffset + swayPositionOffset;
-      handsTransform.localRotation = rangeWeapon.WeaponData.HandsRotation;
    }
    
    private void Recoil() {
@@ -75,6 +76,7 @@ public class WeaponVisual : MonoBehaviour
       Quaternion targetRotation = Quaternion.Euler(lookDirection.y * rotationSwayY,
          lookDirection.x * rotationSwayX, -lookDirection.x * rotationSwayX);
          transform.localRotation = Quaternion.Slerp(transform.localRotation,initialRotation * targetRotation, Time.deltaTime * rotationSwaySmooth);
+         handsTransform.localRotation = Quaternion.Slerp(transform.localRotation,initialRotation * targetRotation, Time.deltaTime * positionSwaySmooth);
          
       //position
          Vector3 desiredSway = new Vector3(-lookDirection.x * swayAmount, -lookDirection.y * swayAmount, 0);

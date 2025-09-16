@@ -68,8 +68,12 @@ public class PlayerController : MonoBehaviour
         Vector3 horizontalMoveDirection = transform.TransformDirection(moveDirection) * currentVelocity;
         
         // Jump
+        
         if (playerInputHandler.isJumping && isGrounded) {
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+        if (isGrounded && verticalVelocity < 0) {
+            verticalVelocity = -2f;
         }
         verticalVelocity += gravity * Time.deltaTime;
         Vector3 verticalMoveDirection = Vector3.up * verticalVelocity;
