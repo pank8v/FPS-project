@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using System;
 using UnityEngine.InputSystem;
@@ -17,27 +16,29 @@ public class PlayerInputHandler : MonoBehaviour
     public event Action OnReloadPressed;
     public event Action OnMainWeaponSwitch;
     public event Action OnAdditionalWeaponSwitch;
+    public event Action OnInteract;
 
     private void Awake() {
         inputSystem = new InputSystem_Actions();
         inputSystem.Enable();
         inputSystem.Player.Move.performed += OnMovePerformed;
         inputSystem.Player.Move.canceled += OnMoveCanceled;
-        inputSystem.Player.Look.performed += onLookPerformed;
-        inputSystem.Player.Look.canceled += onLookCanceled;
+        inputSystem.Player.Look.performed += OnLookPerformed;
+        inputSystem.Player.Look.canceled += OnLookCanceled;
         inputSystem.Player.Sprint.performed += OnSprintPerformed;
         inputSystem.Player.Sprint.canceled += OnSprintCanceled;
         inputSystem.Player.Attack.performed += OnAttackPerformed;
         inputSystem.Player.Attack.canceled += OnAttackCanceled;
-        inputSystem.Player.Slide.performed += onSlidePerformed;
+        inputSystem.Player.Slide.performed += OnSlidePerformed;
         inputSystem.Player.Slide.canceled += OnSlideCanceled;
         inputSystem.Player.Jump.performed += OnJumpPerformed;
-        inputSystem.Player.Jump.canceled += onJumpCanceled;
+        inputSystem.Player.Jump.canceled += OnJumpCanceled;
         inputSystem.Player.Reload.performed += OnReloadPerformed;
         inputSystem.Player.Aim.performed += OnAimPerformed;
         inputSystem.Player.Aim.canceled += OnAimCanceled;
         inputSystem.Player.MainWeaponSwitch.performed += OnMainWeaponSwitchPerformed;
         inputSystem.Player.AdditionalWeaponSwitch.performed += OnAdditionalWeaponSwitchPerformed;
+        inputSystem.Player.Interact.performed += OnInteractPerformed;
 
 
     }
@@ -52,11 +53,11 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
 
-    private void onLookPerformed(InputAction.CallbackContext context) {
+    private void OnLookPerformed(InputAction.CallbackContext context) {
         lookDirection = context.ReadValue<Vector2>();
     }
 
-    private void onLookCanceled(InputAction.CallbackContext context) {
+    private void OnLookCanceled(InputAction.CallbackContext context) {
         lookDirection = Vector2.zero;
     }
 
@@ -76,7 +77,7 @@ public class PlayerInputHandler : MonoBehaviour
         isAttacking = false;
     }
 
-    private void onSlidePerformed(InputAction.CallbackContext context) {
+    private void OnSlidePerformed(InputAction.CallbackContext context) {
         isSliding = true;
     }
 
@@ -88,7 +89,7 @@ public class PlayerInputHandler : MonoBehaviour
         isJumping = true;
     }
 
-    private void onJumpCanceled(InputAction.CallbackContext context) {
+    private void OnJumpCanceled(InputAction.CallbackContext context) {
         isJumping = false;
     }
 
@@ -109,5 +110,9 @@ public class PlayerInputHandler : MonoBehaviour
     }
     private void OnAdditionalWeaponSwitchPerformed(InputAction.CallbackContext context) {
         OnAdditionalWeaponSwitch?.Invoke();
+    }
+
+    private void OnInteractPerformed(InputAction.CallbackContext context) {
+        OnInteract?.Invoke();
     }
 }
