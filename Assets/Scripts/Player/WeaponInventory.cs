@@ -37,7 +37,11 @@ public class WeaponInventory : MonoBehaviour
         hud.UpdateHUD(weapons[weaponIndex]);
         cameraRecoil.SetCurrentWeapon(weapons[weaponIndex]);
     }
-    
+
+
+    public void SetNewWeapon(WeaponData weapondata) {
+    //    weapons[0].WeaponData = weapondata;
+    }
     
     
 //    private void SwitchCurrentWeapon(int weaponCount) {

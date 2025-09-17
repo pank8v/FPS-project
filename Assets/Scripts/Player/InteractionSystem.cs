@@ -5,6 +5,7 @@ public class InteractionSystem : MonoBehaviour
 {
    [SerializeField] private Camera mainCamera;
    [SerializeField] private PlayerInputHandler playerInputHandler;
+   [SerializeField] private WeaponInventory weaponInventory;
    [SerializeField] private float maxViewAngle = 90f;
    [SerializeField] private float interactionRadius = 2f;
    [SerializeField] private LayerMask interactableLayer;
@@ -53,7 +54,12 @@ public class InteractionSystem : MonoBehaviour
    
    private void Interact() {
       if (currentInteractable != null) {
-         currentInteractable.Interact();
+         if (currentInteractable is IPickUpWeapon weaponPickUp) {
+            weaponPickUp.Interact(weaponInventory);
+         }
+         else {
+            currentInteractable.Interact();
+         }
       }
    }
    
