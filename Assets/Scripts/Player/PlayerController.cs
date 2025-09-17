@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float sprintMultiplier = 1.6f;
     [SerializeField] private float slideMultiplier = 2f;
+    [SerializeField] private float crouchMultiplier = 0.6f;
     [SerializeField] private float speedSmoothTime = 10f;
     private float currentVelocity;
     private float targetVelocity;
@@ -24,12 +25,18 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
 
     
-    [Header("Slide")]
-    private Vector3 originalCenter = new Vector3(0, 0f, 0);
-    private Vector3 slideCenter = new Vector3(0, 1f, 0);
+    [Header("Crouch")]
     private float originalHeight = 2f;
-    private float slideHeight = 1f;
+    private float crouchHeight = 1f;
+    private Vector3 originalControllerCenter = new Vector3(0, 0f, 0);
+    private Vector3 crouchControllerCenter = new Vector3(0, -0.5f, 0);
+    private Vector3 originalCameraPosition = new Vector3(0, 0.544f, 0.12f);
+    private Vector3 crouchCameraPosition = new Vector3(0, 0.272f, 0.12f);
+
+  
+    
     private bool isSliding;
+
 
    
 
@@ -39,7 +46,8 @@ public class PlayerController : MonoBehaviour
     
     private void Update() {
         HandleMovement();
-        HandleSlide();
+        HanldeCrouch(); 
+        // HandleSlide();
     }
 
     
@@ -50,7 +58,7 @@ public class PlayerController : MonoBehaviour
         }
         
         if (isGrounded) {
-            targetVelocity = playerInputHandler.isSprinting ? moveSpeed * sprintMultiplier : moveSpeed; 
+            targetVelocity = playerInputHandler.isSprinting ? moveSpeed * sprintMultiplier : playerInputHandler.isCrouching ? moveSpeed * crouchMultiplier : moveSpeed; 
         }
         else {
             targetVelocity = wasSprintingOnJump ? moveSpeed * sprintMultiplier : moveSpeed;
@@ -83,6 +91,23 @@ public class PlayerController : MonoBehaviour
     }
 
 
+
+    private void HanldeCrouch() {
+        bool isCrouching = playerInputHandler.isCrouching;
+        if (isCrouching) {
+            characterController.height = crouchHeight;
+            characterController.center = crouchControllerCenter;
+            cameraHolder.localPosition = crouchCameraPosition;
+        }
+        else {
+            characterController.height = originalHeight;
+            characterController.center = originalControllerCenter;
+            cameraHolder.localPosition = originalCameraPosition;
+
+        }
+    }
+    
+
     private void HandleSlide() {
         if (playerInputHandler.isSliding && isGrounded && characterController.velocity.magnitude > 0.01f) {
             characterController.height -= 0.4f;
@@ -91,7 +116,6 @@ public class PlayerController : MonoBehaviour
         }
         else {
             characterController.height = originalHeight;
-            characterController.center = originalCenter;
         }
     }
 

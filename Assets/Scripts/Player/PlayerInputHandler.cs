@@ -12,6 +12,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool isAiming { get; private set; }
     public bool isSliding { get; private set; }
     public bool isJumping { get; private set; }
+    public bool isCrouching { get; private set; }
 
     public event Action OnReloadPressed;
     public event Action OnMainWeaponSwitch;
@@ -33,6 +34,8 @@ public class PlayerInputHandler : MonoBehaviour
         inputSystem.Player.Slide.canceled += OnSlideCanceled;
         inputSystem.Player.Jump.performed += OnJumpPerformed;
         inputSystem.Player.Jump.canceled += OnJumpCanceled;
+        inputSystem.Player.Crouch.performed += OnCrouchPerformed;
+        inputSystem.Player.Crouch.canceled += OnCrouchingCanceled;
         inputSystem.Player.Reload.performed += OnReloadPerformed;
         inputSystem.Player.Aim.performed += OnAimPerformed;
         inputSystem.Player.Aim.canceled += OnAimCanceled;
@@ -115,4 +118,13 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnInteractPerformed(InputAction.CallbackContext context) {
         OnInteract?.Invoke();
     }
+    
+    private void OnCrouchPerformed(InputAction.CallbackContext context) {
+        isCrouching = true;
+    }
+
+    private void OnCrouchingCanceled(InputAction.CallbackContext context) {
+        isCrouching = false;
+    }
+
 }
