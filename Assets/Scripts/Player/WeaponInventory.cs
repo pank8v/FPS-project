@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class WeaponInventory : MonoBehaviour
 {
+    [SerializeField] private CameraRecoil cameraRecoil;
     [SerializeField] private HUD hud;
     [SerializeField] private PlayerInputHandler playerInputHandler;
     [SerializeField] private PlayerShooting playerShooting; 
@@ -23,6 +24,8 @@ public class WeaponInventory : MonoBehaviour
     private void Awake() {
         SwitchWeapon(0);
         hud.UpdateHUD(weapons[0]);
+        cameraRecoil.SetCurrentWeapon(weapons[0]);
+
     }
 
     private void SwitchWeapon(int weaponIndex) {
@@ -32,6 +35,7 @@ public class WeaponInventory : MonoBehaviour
         }
         playerShooting.SetCurrentWeapon(weapons[weaponIndex]);
         hud.UpdateHUD(weapons[weaponIndex]);
+        cameraRecoil.SetCurrentWeapon(weapons[weaponIndex]);
     }
     
     

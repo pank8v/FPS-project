@@ -20,8 +20,7 @@ public class HUD : MonoBehaviour
         }
 
         currentWeapon = weapon;
-
-        // Если новое оружие дальнобойное, подписываемся
+        
         if (weapon is RangeWeapon rw)
         {
             rangeWeapon = rw;
@@ -33,7 +32,7 @@ public class HUD : MonoBehaviour
             rangeWeapon = null;
         }
 
-        UpdateAmmo(); // сразу обновляем HUD
+        UpdateAmmo(); 
     }
     
     

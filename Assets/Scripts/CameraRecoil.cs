@@ -3,8 +3,8 @@ using UnityEngine;
 public class CameraRecoil : MonoBehaviour
 {
     [SerializeField] private PlayerInputHandler playerInputHandler;
-    [SerializeField] private Weapon weapon;
-
+        private Weapon weapon;
+    
     private float minimumRecoilX => weapon.WeaponData.MinimumRecoilX;
    private float maximumRecoilX => weapon.WeaponData.MaximumRecoilX;
    private float minimumRecoilY => weapon.WeaponData.MinimumRecoilY;
@@ -27,8 +27,15 @@ public class CameraRecoil : MonoBehaviour
        currentRotation = Vector3.Lerp(currentRotation, targetRotation, Time.fixedDeltaTime * snappiness);
        transform.localRotation = Quaternion.Euler(currentRotation);
     }
-    
-  
+
+
+    public void SetCurrentWeapon(Weapon currentWeapon) {
+        weapon = currentWeapon;
+        if (weapon != null) {
+            weapon.OnShoot -= AddRecoil;
+            weapon.OnShoot += AddRecoil;
+        }
+    }
 
     private void AddRecoil() {
         targetRotation += new Vector3(Random.Range(minimumRecoilX, maximumRecoilX), Random.Range(minimumRecoilY, maximumRecoilY), 0);
