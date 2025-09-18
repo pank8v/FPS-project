@@ -10,7 +10,6 @@ public class PlayerInputHandler : MonoBehaviour
     public bool isSprinting { get; private set; }
     public bool isAttacking { get; private set; }
     public bool isAiming { get; private set; }
-    public bool isSliding { get; private set; }
     public bool isJumping { get; private set; }
     public bool isCrouching { get; private set; }
 
@@ -30,8 +29,6 @@ public class PlayerInputHandler : MonoBehaviour
         inputSystem.Player.Sprint.canceled += OnSprintCanceled;
         inputSystem.Player.Attack.performed += OnAttackPerformed;
         inputSystem.Player.Attack.canceled += OnAttackCanceled;
-        inputSystem.Player.Slide.performed += OnSlidePerformed;
-        inputSystem.Player.Slide.canceled += OnSlideCanceled;
         inputSystem.Player.Jump.performed += OnJumpPerformed;
         inputSystem.Player.Jump.canceled += OnJumpCanceled;
         inputSystem.Player.Crouch.performed += OnCrouchPerformed;
@@ -79,14 +76,7 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnAttackCanceled(InputAction.CallbackContext context) {
         isAttacking = false;
     }
-
-    private void OnSlidePerformed(InputAction.CallbackContext context) {
-        isSliding = true;
-    }
-
-    private void OnSlideCanceled(InputAction.CallbackContext context) {
-        isSliding = false;
-    }
+    
 
     private void OnJumpPerformed(InputAction.CallbackContext context) {
         isJumping = true;

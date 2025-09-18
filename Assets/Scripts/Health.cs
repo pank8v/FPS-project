@@ -2,9 +2,9 @@ using UnityEngine;
 
 public abstract class Health : MonoBehaviour
 {
-    protected int health;
+    protected float health;
 
-    protected void TakeDamage(int damage) {
+     protected virtual void TakeDamage(int damage) {
         health -= damage;
         if(health <= 0) Die();
     }
