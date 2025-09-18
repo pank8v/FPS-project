@@ -14,7 +14,6 @@ public class RangeEnemy : Enemy
 
     protected override void Attack() {
         Vector3 direction = (target.position - enemyMuzzle.position).normalized;
-        Debug.Log(direction);
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSmooth);
 
