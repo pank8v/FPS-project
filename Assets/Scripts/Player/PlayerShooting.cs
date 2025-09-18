@@ -7,6 +7,7 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private Weapon currentWeapon;
     [SerializeField] private WeaponVisual weaponVisual;
     
+    
     private void OnEnable() {
         playerInputHandler.OnReloadPressed += HandleReload;
 

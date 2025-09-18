@@ -10,7 +10,6 @@ public abstract class Weapon : MonoBehaviour
    public WeaponData WeaponData => weaponData;
    protected float nextTimeToFire;
    
-   
    protected GameObject weaponMesh => weaponData.WeaponMesh;
    protected int maxAmmo => weaponData.MaxAmmo;
    protected float fireRate => weaponData.FireRate;

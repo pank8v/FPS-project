@@ -148,7 +148,6 @@ public class PlayerController : MonoBehaviour
     private void HandleSlide() {
         if(slideCoolDownTimer > 0) slideCoolDownTimer -= Time.deltaTime;
         if (isSliding) {
-            Debug.Log("sliding");
             characterController.Move(slideDir * moveSpeed * slideMultiplier * Time.deltaTime);
             slideTimer -= Time.deltaTime;
             characterController.height = crouchHeight;

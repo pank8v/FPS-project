@@ -16,7 +16,7 @@ public class HUD : MonoBehaviour
         if (rangeWeapon != null)
         {
             rangeWeapon.OnShoot -= UpdateAmmo;
-            rangeWeapon.OnReload -= UpdateAmmo;
+            rangeWeapon.OnReloadEnd += UpdateAmmo;
         }
 
         currentWeapon = weapon;
@@ -25,7 +25,7 @@ public class HUD : MonoBehaviour
         {
             rangeWeapon = rw;
             rangeWeapon.OnShoot += UpdateAmmo;
-            rangeWeapon.OnReload += UpdateAmmo;
+            rangeWeapon.OnReloadEnd += UpdateAmmo;
         }
         else
         {
