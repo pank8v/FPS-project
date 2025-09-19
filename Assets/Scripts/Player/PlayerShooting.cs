@@ -5,19 +5,31 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private PlayerInputHandler playerInputHandler;
     private GameObject weaponHolder;
     [SerializeField] private Weapon currentWeapon;
+    [SerializeField] private WeaponInventory weaponInventory;
     [SerializeField] private WeaponVisual weaponVisual;
     
     
     private void OnEnable() {
         playerInputHandler.OnReloadPressed += HandleReload;
+        playerInputHandler.OnMainWeaponSwitch += SwitchToMainWeapon;
+        playerInputHandler.OnAdditionalWeaponSwitch += SwitchToAdditionalWeapon;
 
     }
 
     private void OnDisable() {
         playerInputHandler.OnReloadPressed -= HandleReload;
+        playerInputHandler.OnMainWeaponSwitch -= SwitchToMainWeapon;
+        playerInputHandler.OnAdditionalWeaponSwitch -= SwitchToAdditionalWeapon;
     }
-    
 
+    
+    private void SwitchToMainWeapon() => weaponInventory.SwitchWeapon(0);
+    private void SwitchToAdditionalWeapon() => weaponInventory.SwitchWeapon(1);
+
+
+    private void Awake() {
+        currentWeapon.SetAmmoProvider(weaponInventory);
+    }
     
     private void Update() {
         HandleShooting();
@@ -29,6 +41,7 @@ public class PlayerShooting : MonoBehaviour
     public void SetCurrentWeapon(Weapon weapon) {
         currentWeapon = weapon;
         weaponHolder = weapon.gameObject;
+        currentWeapon.SetAmmoProvider(weaponInventory);
     }
 
     
@@ -47,6 +60,8 @@ public class PlayerShooting : MonoBehaviour
     private void HandleAiming() {
        currentWeapon.setIsAiming(playerInputHandler.isAiming);
     }
+
+    
 
     private void HandleSway() {
         weaponVisual.Sway(playerInputHandler.lookDirection);

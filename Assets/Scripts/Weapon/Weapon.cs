@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public abstract class Weapon : MonoBehaviour
 {
-   
    [SerializeField] protected WeaponData weaponData;
    [SerializeField] protected GameObject weaponMeshInstance;
+   [SerializeField] protected AmmoType ammoType;
    public WeaponData WeaponData => weaponData;
    protected float nextTimeToFire;
    
@@ -18,6 +18,7 @@ public abstract class Weapon : MonoBehaviour
    public Vector3 HipFirePosition => weaponData.HipFirePosition;
    public Vector3 AimFirePosition => weaponData.AimFirePosition;
    
+   protected IAmmoProvider ammoProvider;
 
    public event Action OnShoot;
 
@@ -34,6 +35,9 @@ public abstract class Weapon : MonoBehaviour
    }
    */
 
+      
+
+      
    protected virtual bool CanFire() {
       return true;
    }
@@ -56,6 +60,9 @@ public abstract class Weapon : MonoBehaviour
       isAiming = isAimingTriggered;
    }
 
+   public void SetAmmoProvider(IAmmoProvider provider) {
+      ammoProvider = provider;
+   }
    
 
 }

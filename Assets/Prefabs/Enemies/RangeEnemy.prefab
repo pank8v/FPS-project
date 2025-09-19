@@ -173,7 +173,7 @@ MonoBehaviour:
   waitingTime: 3
   bulletPrefab: {fileID: 4223330584917379867, guid: 111b6d6788296aa48b19bd3c43fcff14, type: 3}
   enemyMuzzle: {fileID: 118785581743467093}
-  bulletSpeed: 10
+  bulletSpeed: 30
 --- !u!1 &4359702498783347129
 GameObject:
   m_ObjectHideFlags: 0

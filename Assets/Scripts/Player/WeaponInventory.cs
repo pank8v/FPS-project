@@ -1,6 +1,8 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-public class WeaponInventory : MonoBehaviour
+
+public class WeaponInventory : MonoBehaviour, IAmmoProvider
 {
     [SerializeField] private CameraRecoil cameraRecoil;
     [SerializeField] private HUD hud;
@@ -8,27 +10,31 @@ public class WeaponInventory : MonoBehaviour
     [SerializeField] private PlayerShooting playerShooting; 
     [SerializeField] private Weapon[] weapons;
     
-    private void OnEnable() {
-        playerInputHandler.OnMainWeaponSwitch += SwitchToMainWeapon;
-        playerInputHandler.OnAdditionalWeaponSwitch += SwitchToAdditionalWeapon;
+    [SerializeField] private int RifleAmmo;
+    [SerializeField] private int ShotgunAmmo;
+
+    private Dictionary<AmmoType, int> ammoReserve = new Dictionary<AmmoType, int>();
+
+    public void GetAmmo(AmmoType ammoType) {
+        if (!ammoReserve.ContainsKey(ammoType)) {
+            ammoReserve.Add(ammoType, 0);
+        }
+        ammoReserve[ammoType]--;
+        Debug.Log(ammoReserve[ammoType]);
+        
     }
-
-    private void OnDisable() {
-        playerInputHandler.OnMainWeaponSwitch -= SwitchToMainWeapon;
-        playerInputHandler.OnAdditionalWeaponSwitch -= SwitchToAdditionalWeapon;
-    }
-
-    private void SwitchToMainWeapon() => SwitchWeapon(0);
-    private void SwitchToAdditionalWeapon() => SwitchWeapon(1);
-
+    
     private void Awake() {
         SwitchWeapon(0);
         hud.UpdateHUD(weapons[0]);
         cameraRecoil.SetCurrentWeapon(weapons[0]);
 
+        ammoReserve.Add(AmmoType.Rifle, RifleAmmo);
+        ammoReserve.Add(AmmoType.Shotgun, ShotgunAmmo);
+
     }
 
-    private void SwitchWeapon(int weaponIndex) {
+    public void SwitchWeapon(int weaponIndex) {
         Debug.Log(weaponIndex);
         for (int i = 0; i < weapons.Length; i++) {
             weapons[i].gameObject.SetActive(i == weaponIndex);

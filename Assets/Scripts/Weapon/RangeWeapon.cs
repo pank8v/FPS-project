@@ -36,6 +36,7 @@ public class RangeWeapon : Weapon, IReloadable
     */
     
     protected override void Shoot() {
+        ammoProvider.GetAmmo(ammoType);
         currentAmmo--;
         Vector3 targetPoint;
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
