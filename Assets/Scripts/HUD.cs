@@ -4,8 +4,8 @@ using UnityEngine.PlayerLoop;
 
 
 public class HUD : MonoBehaviour
-{
-    
+{ 
+    [SerializeField] private WeaponInventory weaponInventory;
    [SerializeField] private Weapon currentWeapon;
    [SerializeField] private TextMeshProUGUI ammoText;
     private RangeWeapon rangeWeapon;

@@ -36,7 +36,6 @@ public class RangeWeapon : Weapon, IReloadable
     */
     
     protected override void Shoot() {
-        ammoProvider.GetAmmo(ammoType);
         currentAmmo--;
         Vector3 targetPoint;
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -59,16 +58,17 @@ public class RangeWeapon : Weapon, IReloadable
     }
     
     public void Reload() {
-        if (currentAmmo < maxAmmo && !isReloading) {
-            StartCoroutine(ReloadWeapon());
+        int ammoLoad = maxAmmo - currentAmmo;
+        if (currentAmmo < maxAmmo && !isReloading && ammoProvider.HasReloadAmmo(ammoType, ammoLoad)) {
+            StartCoroutine(ReloadWeapon(ammoLoad));
         }
     }
 
-    private IEnumerator ReloadWeapon() {
+    private IEnumerator ReloadWeapon(int ammoLoad) {
         OnReload?.Invoke();
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
-        currentAmmo = maxAmmo;
+        currentAmmo += ammoProvider.AmountCount(ammoType, ammoLoad);
         OnReloadEnd?.Invoke();
         isReloading = false;
     }

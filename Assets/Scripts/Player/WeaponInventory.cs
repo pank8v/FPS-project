@@ -15,11 +15,27 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
 
     private Dictionary<AmmoType, int> ammoReserve = new Dictionary<AmmoType, int>();
 
-    public void GetAmmo(AmmoType ammoType) {
-        if (!ammoReserve.ContainsKey(ammoType)) {
-            ammoReserve.Add(ammoType, 0);
+
+
+
+    public int AmountCount(AmmoType ammoType, int amount) {
+        if (amount <= ammoReserve[ammoType]) {
+            ammoReserve[ammoType] -= amount;
+            Debug.Log(ammoReserve[ammoType]);
+            return amount;
         }
-        ammoReserve[ammoType]--;
+
+        int taken = ammoReserve[ammoType];
+        ammoReserve[ammoType] = taken;
+        return taken;
+    }
+    
+    public bool HasReloadAmmo(AmmoType ammoType, int amount) {
+        return ammoReserve.ContainsKey(ammoType) && ammoReserve[ammoType] > 0;
+    }
+    
+    
+    public void GetAmmo(AmmoType ammoType) {
         Debug.Log(ammoReserve[ammoType]);
         
     }
