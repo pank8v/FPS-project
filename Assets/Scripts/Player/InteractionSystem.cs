@@ -58,7 +58,7 @@ public class InteractionSystem : MonoBehaviour
             weaponPickUp.Interact(weaponInventory);
          }
          else {
-            currentInteractable.Interact();
+            currentInteractable.Interact(gameObject);
          }
       }
    }

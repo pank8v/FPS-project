@@ -6,18 +6,19 @@ public abstract class Weapon : MonoBehaviour
 {
    [SerializeField] protected WeaponData weaponData;
    [SerializeField] protected GameObject weaponMeshInstance;
-   [SerializeField] protected AmmoType ammoType;
-   public AmmoType AmmoType => ammoType;
    public WeaponData WeaponData => weaponData;
    protected float nextTimeToFire;
    
    protected GameObject weaponMesh => weaponData.WeaponMesh;
+   protected AmmoType ammoType => weaponData.AmmoType;
    protected int maxAmmo => weaponData.MaxAmmo;
    protected float fireRate => weaponData.FireRate;
    protected int damage => weaponData.Damage;
    protected float range => weaponData.Range;
    public Vector3 HipFirePosition => weaponData.HipFirePosition;
    public Vector3 AimFirePosition => weaponData.AimFirePosition;
+   public AmmoType AmmoType => ammoType;
+
    
    protected IAmmoProvider ammoProvider;
 

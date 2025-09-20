@@ -16,7 +16,12 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     private Dictionary<AmmoType, int> ammoReserve = new Dictionary<AmmoType, int>();
 
 
-
+    public void AddAmmo(AmmoType ammoType, int amount) {
+        if (ammoReserve.ContainsKey(ammoType)) {
+           ammoReserve[ammoType] += amount;
+           hud.UpdateAmmo();
+        }
+    }
 
     public int AmountCount(AmmoType ammoType, int amount) {
         if (amount <= ammoReserve[ammoType]) {

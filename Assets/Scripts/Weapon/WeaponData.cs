@@ -9,6 +9,7 @@ public class WeaponData : ScriptableObject
     [SerializeField] private float fireRate;
     [SerializeField] private int damage;
     [SerializeField] private float range;
+    [SerializeField] private AmmoType ammoType;
     [SerializeField] private int maxAmmo;
     [SerializeField] private float reloadTime = 3f;
     private int currentAmmo;
@@ -35,6 +36,7 @@ public class WeaponData : ScriptableObject
     public float FireRate => fireRate;
     public int Damage => damage;
     public float Range => range;
+    public AmmoType AmmoType => ammoType;
     public int CurrentAmmo => currentAmmo;
     public int MaxAmmo => maxAmmo;
     public float ReloadTime => reloadTime;

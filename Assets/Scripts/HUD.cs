@@ -8,6 +8,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private Weapon currentWeapon;
     [SerializeField] private TextMeshProUGUI ammoText;
     private RangeWeapon rangeWeapon;
+
     
     public void UpdateHUD(Weapon weapon) {
         if (rangeWeapon != null)
@@ -48,7 +49,7 @@ public class HUD : MonoBehaviour
     
 
 
-    private void UpdateAmmo() {
+    public void UpdateAmmo() {
         int currentAmmo = rangeWeapon.currentAmmo;
         ammoText.text = $"<color=#FF6AFF>{currentAmmo.ToString("D3")}</color> <color=#6AFFFE>/ {currentWeapon.GetAmmoCount().ToString("D3")}</color> <color=#6AFFFE></color>";
     }
