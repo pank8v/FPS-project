@@ -35,9 +35,10 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     }
     
     
-    public void GetAmmo(AmmoType ammoType) {
-        Debug.Log(ammoReserve[ammoType]);
-        
+    public int GetAmmoCount(AmmoType ammoType) {
+        if (!ammoReserve.ContainsKey(ammoType)) return 0;
+        return ammoReserve[ammoType];
+
     }
     
     private void Awake() {

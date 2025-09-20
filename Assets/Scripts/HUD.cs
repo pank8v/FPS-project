@@ -5,13 +5,10 @@ using UnityEngine.PlayerLoop;
 
 public class HUD : MonoBehaviour
 { 
-    [SerializeField] private WeaponInventory weaponInventory;
-   [SerializeField] private Weapon currentWeapon;
-   [SerializeField] private TextMeshProUGUI ammoText;
+    [SerializeField] private Weapon currentWeapon;
+    [SerializeField] private TextMeshProUGUI ammoText;
     private RangeWeapon rangeWeapon;
-
-
-
+    
     public void UpdateHUD(Weapon weapon) {
         if (rangeWeapon != null)
         {
@@ -53,7 +50,6 @@ public class HUD : MonoBehaviour
 
     private void UpdateAmmo() {
         int currentAmmo = rangeWeapon.currentAmmo;
-        int maxAmmo = currentWeapon.WeaponData.MaxAmmo;
-        ammoText.text = $"<color=#FF6AFF>{currentAmmo}</color> <color=#6AFFFE>/ {maxAmmo}</color>";
+        ammoText.text = $"<color=#FF6AFF>{currentAmmo.ToString("D3")}</color> <color=#6AFFFE>/ {currentWeapon.GetAmmoCount().ToString("D3")}</color> <color=#6AFFFE></color>";
     }
 }

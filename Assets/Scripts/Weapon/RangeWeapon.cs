@@ -58,17 +58,20 @@ public class RangeWeapon : Weapon, IReloadable
     }
     
     public void Reload() {
-        int ammoLoad = maxAmmo - currentAmmo;
-        if (currentAmmo < maxAmmo && !isReloading && ammoProvider.HasReloadAmmo(ammoType, ammoLoad)) {
-            StartCoroutine(ReloadWeapon(ammoLoad));
+        int ammoToLoad = maxAmmo - currentAmmo;
+        if (currentAmmo < maxAmmo && !isReloading && ammoProvider.HasReloadAmmo(ammoType, ammoToLoad)) {
+            StartCoroutine(ReloadWeapon(ammoToLoad));
         }
     }
 
-    private IEnumerator ReloadWeapon(int ammoLoad) {
+
+  
+    
+    private IEnumerator ReloadWeapon(int ammoToLoad) {
         OnReload?.Invoke();
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
-        currentAmmo += ammoProvider.AmountCount(ammoType, ammoLoad);
+        currentAmmo += ammoProvider.AmountCount(ammoType, ammoToLoad);
         OnReloadEnd?.Invoke();
         isReloading = false;
     }

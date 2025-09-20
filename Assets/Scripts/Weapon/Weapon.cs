@@ -7,6 +7,7 @@ public abstract class Weapon : MonoBehaviour
    [SerializeField] protected WeaponData weaponData;
    [SerializeField] protected GameObject weaponMeshInstance;
    [SerializeField] protected AmmoType ammoType;
+   public AmmoType AmmoType => ammoType;
    public WeaponData WeaponData => weaponData;
    protected float nextTimeToFire;
    
@@ -60,9 +61,13 @@ public abstract class Weapon : MonoBehaviour
       isAiming = isAimingTriggered;
    }
 
+   
    public void SetAmmoProvider(IAmmoProvider provider) {
       ammoProvider = provider;
    }
    
+   public int GetAmmoCount() {
+      return ammoProvider.GetAmmoCount(ammoType);
+   }
 
 }

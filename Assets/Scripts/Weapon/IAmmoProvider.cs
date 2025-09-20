@@ -7,5 +7,5 @@ public interface IAmmoProvider
 
     public int AmountCount(AmmoType ammoType, int amount);
     
-    public void GetAmmo(AmmoType ammoType);
+    public int GetAmmoCount(AmmoType ammoType);
 }
