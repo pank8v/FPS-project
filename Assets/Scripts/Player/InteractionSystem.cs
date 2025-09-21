@@ -54,12 +54,7 @@ public class InteractionSystem : MonoBehaviour
    
    private void Interact() {
       if (currentInteractable != null) {
-         if (currentInteractable is IPickUpWeapon weaponPickUp) {
-            weaponPickUp.Interact(weaponInventory);
-         }
-         else {
-            currentInteractable.Interact(gameObject);
-         }
+         currentInteractable.Interact(gameObject);
       }
    }
    
