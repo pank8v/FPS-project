@@ -35,6 +35,7 @@ public class PlayerShooting : MonoBehaviour
         HandleShooting();
         HandleAiming();
         HandleSway();
+        HandleBobing();
     }
 
 
@@ -42,6 +43,8 @@ public class PlayerShooting : MonoBehaviour
         if (currentWeapon is RangeWeapon range) {
             range.isReloading = false;
         }
+
+        weaponVisual = weapon.GetComponent<WeaponVisual>();
         currentWeapon = weapon;
         weaponHolder = weapon.gameObject;
         currentWeapon.SetAmmoProvider(weaponInventory);
@@ -68,5 +71,9 @@ public class PlayerShooting : MonoBehaviour
 
     private void HandleSway() {
         weaponVisual.Sway(playerInputHandler.lookDirection);
+    }
+
+    private void HandleBobing() {
+       weaponVisual.Bobing(playerInputHandler.moveDirection);
     }
 }

@@ -31,6 +31,13 @@ public class WeaponData : ScriptableObject
     [SerializeField] private float snappiness;
     [SerializeField] private float returnSpeed;
 
+    [Header("Bobbing")]
+    [SerializeField] private float bobbingSpeedX;
+
+    [SerializeField] private float bobbingAmountX;
+    [SerializeField] private float bobbingSpeedY;
+    [SerializeField] private float bobbingAmountY;
+    
     public GameObject WeaponMesh => weaponMesh;
     public float FireRate => fireRate;
     public int Damage => damage;
@@ -47,6 +54,13 @@ public class WeaponData : ScriptableObject
     public Vector3 HandsHipPosition => handsHipPosition;
     public Vector3 HandsAimPosition => handsAimPosition;
     public Quaternion HandsRotation => handsRotation;
+    
+    public float BobbingSpeedX => bobbingSpeedX;
+    public float BobbingAmountX => bobbingAmountX;
+    public float BobbingSpeedY => bobbingSpeedY;
+    public float BobbingAmountY => bobbingAmountY;
+    
+    
     
     public float MinimumRecoilX => minimumRecoilX;
     public float MaximumRecoilX => maximumRecoilX;

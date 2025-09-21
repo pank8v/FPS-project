@@ -21,17 +21,26 @@ public class WeaponVisual : MonoBehaviour
    [SerializeField] private float rotationSwayX = 1f;
    [SerializeField] private float rotationSwayY= 1f;
    [SerializeField] private float rotationSwaySmooth = 2f;
+  
    [Header("Position Sway Settings")]
    [SerializeField] private float maxSwayAmount = 0.2f;
    [SerializeField] private float swayAmount = 0.1f;
    [SerializeField] private float positionSwaySmooth = 2f;
+
+
+   [Header("Bobing")]
+   private float bobbingSpeedX => rangeWeapon.WeaponData.BobbingSpeedX;
+
+   private float bobbingAmountX => rangeWeapon.WeaponData.BobbingAmountX;
+   private float bobbingSpeedY => rangeWeapon.WeaponData.BobbingSpeedY;
+   private float bobbingAmountY => rangeWeapon.WeaponData.BobbingAmountY;
    
    private Vector3 handsTargetPosition;
    private Vector3 recoilOffset;
    private Vector3 swayPositionOffset;
    private Quaternion handsInitialRotation;
 
-
+   private Vector3 bobingOffset;
 
    
    private void OnEnable() {
@@ -53,11 +62,11 @@ public class WeaponVisual : MonoBehaviour
    
    
    private void Update() {
-      Vector3 desiredHandsPosition = rangeWeapon.IsAiming ? handsAimPosition : handsHipPosition; 
+      Vector3 desiredHandsPosition = rangeWeapon.IsAiming ? handsAimPosition + bobingOffset : handsHipPosition + bobingOffset; 
       handsTargetPosition = Vector3.Lerp(handsTargetPosition, desiredHandsPosition, Time.deltaTime * aimSmooth);
       recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero, recoilSmooth * Time.deltaTime);
       transform.localPosition = weaponPosition;
-      handsTransform.localPosition = handsTargetPosition + recoilOffset+ swayPositionOffset;
+      handsTransform.localPosition = handsTargetPosition + recoilOffset + swayPositionOffset;
    }
    
    private void Recoil() {
@@ -67,7 +76,7 @@ public class WeaponVisual : MonoBehaviour
 
    public void Sway(Vector3 lookDirection) {
       //rotation
-      Quaternion targetRotation = Quaternion.Euler(lookDirection.y * rotationSwayY, lookDirection.x * rotationSwayX, -lookDirection.x * rotationSwayX * 0.5f);
+      Quaternion targetRotation = Quaternion.Euler(lookDirection.y * rotationSwayX, lookDirection.x * rotationSwayY, -lookDirection.x * rotationSwayX);
       handsTransform.localRotation = Quaternion.Slerp(handsTransform.localRotation,handsInitialRotation * targetRotation, Time.deltaTime * positionSwaySmooth);
          
       //position
@@ -75,5 +84,11 @@ public class WeaponVisual : MonoBehaviour
          desiredSway.x = Mathf.Clamp(swayPositionOffset.x, -maxSwayAmount, maxSwayAmount);
          desiredSway.y = Mathf.Clamp(swayPositionOffset.y, -maxSwayAmount, maxSwayAmount);
          swayPositionOffset = Vector3.Lerp(swayPositionOffset, desiredSway, positionSwaySmooth * Time.deltaTime);
+   }
+
+   public void Bobing(Vector3 moveDirection) {
+      float bobingY = Mathf.Cos(Time.time * bobbingSpeedY) * moveDirection.y * bobbingAmountY;
+      float bobingX = Mathf.Sin(Time.time * bobbingSpeedX) * moveDirection.x * bobbingAmountX;
+      bobingOffset = new Vector3(bobingX, bobingY, 0);
    }
 }

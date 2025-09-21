@@ -12,6 +12,8 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     
     [SerializeField] private int RifleAmmo;
     [SerializeField] private int ShotgunAmmo;
+    [SerializeField] private int PistolAmmo;
+    [SerializeField] private int SmgAmmo;
    
     private int currentWeaponIndex = 0;
 
@@ -55,6 +57,8 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
 
         ammoReserve.Add(AmmoType.Rifle, RifleAmmo);
         ammoReserve.Add(AmmoType.Shotgun, ShotgunAmmo);
+        ammoReserve.Add(AmmoType.Pistol, PistolAmmo);
+        ammoReserve.Add(AmmoType.Smg, SmgAmmo);
 
     }
 
