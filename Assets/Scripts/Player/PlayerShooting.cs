@@ -39,6 +39,9 @@ public class PlayerShooting : MonoBehaviour
 
 
     public void SetCurrentWeapon(Weapon weapon) {
+        if (currentWeapon is RangeWeapon range) {
+            range.isReloading = false;
+        }
         currentWeapon = weapon;
         weaponHolder = weapon.gameObject;
         currentWeapon.SetAmmoProvider(weaponInventory);

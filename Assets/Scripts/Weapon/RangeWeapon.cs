@@ -10,7 +10,7 @@ public class RangeWeapon : Weapon, IReloadable
     private float reloadTime => weaponData.ReloadTime;
     protected float bulletSpeed => weaponData.BulletSpeed;
 
-    private bool isReloading = false;
+    public bool isReloading = false;
     
     public int currentAmmo { get; private set; }
 
