@@ -12,6 +12,8 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     
     [SerializeField] private int RifleAmmo;
     [SerializeField] private int ShotgunAmmo;
+   
+    private int currentWeaponIndex = 0;
 
     private Dictionary<AmmoType, int> ammoReserve = new Dictionary<AmmoType, int>();
 
@@ -57,7 +59,7 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     }
 
     public void SwitchWeapon(int weaponIndex) {
-        Debug.Log(weaponIndex);
+        currentWeaponIndex = weaponIndex;
         for (int i = 0; i < weapons.Length; i++) {
             weapons[i].gameObject.SetActive(i == weaponIndex);
         }
@@ -67,13 +69,10 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     }
 
 
-    public void SetNewWeapon(WeaponData weapondata) {
-    //    weapons[0].WeaponData = weapondata;
+    public void SetNewWeapon(WeaponData weaponData) {
+        weapons[currentWeaponIndex].Equipd(weaponData);
+        Debug.Log("new weapon set");
     }
     
-    
-//    private void SwitchCurrentWeapon(int weaponCount) {
-      //  currentWeapon.Equipd(weapons[weaponCount]);
-
     
 }

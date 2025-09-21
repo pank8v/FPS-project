@@ -18,8 +18,7 @@ public class WeaponData : ScriptableObject
     [SerializeField] private AudioClip reloadSound;
 
     [Header("Position data")]
-    [SerializeField] private Vector3 hipFirePosition;
-    [SerializeField] private Vector3 aimFirePosition;
+    [SerializeField] private Vector3 weaponPosition;
     [SerializeField] private Vector3 handsHipPosition;
     [SerializeField] private Vector3 handsAimPosition;
     [SerializeField] private Quaternion handsRotation;
@@ -43,9 +42,8 @@ public class WeaponData : ScriptableObject
     public float BulletSpeed => bulletSpeed;
     public AudioClip ShotSound => shotSound;
     public AudioClip ReloadSound => reloadSound;
-    
-    public Vector3 HipFirePosition => hipFirePosition;
-    public Vector3 AimFirePosition => aimFirePosition;
+
+    public Vector3 WeaponPosition => weaponPosition;
     public Vector3 HandsHipPosition => handsHipPosition;
     public Vector3 HandsAimPosition => handsAimPosition;
     public Quaternion HandsRotation => handsRotation;

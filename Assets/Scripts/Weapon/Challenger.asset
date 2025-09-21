@@ -23,7 +23,7 @@ MonoBehaviour:
   bulletSpeed: 80
   shotSound: {fileID: 8300000, guid: d11f77a6a963444419de15d73a42e259, type: 3}
   reloadSound: {fileID: 8300000, guid: da7012d847f7d654e832248f60a2a1e5, type: 3}
-  hipFirePosition: {x: 0.14, y: -0.141, z: 0.479}
+  hipFirePosition: {x: 0.01433505, y: 0.02590769, z: -0.07633706}
   aimFirePosition: {x: 0, y: -0.077, z: 0.347}
   handsHipPosition: {x: 0, y: 0, z: 0}
   handsAimPosition: {x: -0.1400003, y: 0.06400001, z: -0.1320001}

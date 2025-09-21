@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public abstract class Weapon : MonoBehaviour
 {
    [SerializeField] protected WeaponData weaponData;
-   [SerializeField] protected GameObject weaponMeshInstance;
+   protected GameObject weaponMeshInstance;
+   
    public WeaponData WeaponData => weaponData;
    protected float nextTimeToFire;
    
@@ -15,8 +16,6 @@ public abstract class Weapon : MonoBehaviour
    protected float fireRate => weaponData.FireRate;
    protected int damage => weaponData.Damage;
    protected float range => weaponData.Range;
-   public Vector3 HipFirePosition => weaponData.HipFirePosition;
-   public Vector3 AimFirePosition => weaponData.AimFirePosition;
    public AmmoType AmmoType => ammoType;
 
    
@@ -25,17 +24,19 @@ public abstract class Weapon : MonoBehaviour
    public event Action OnShoot;
 
 
-
-      /*   public virtual void Equipd(WeaponData newWeaponData) {
+   private void Start() {
+      weaponMeshInstance = Instantiate(weaponData.WeaponMesh, transform);
+   }
+   
+   public virtual void Equipd(WeaponData newWeaponData) {
       weaponData = newWeaponData;
-       
       if (weaponMeshInstance != null) {
          Destroy(weaponMeshInstance);
       }
       weaponMeshInstance = Instantiate(weaponData.WeaponMesh, transform);
       
    }
-   */
+   
 
       
 
