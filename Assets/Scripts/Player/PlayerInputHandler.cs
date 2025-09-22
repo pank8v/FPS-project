@@ -17,6 +17,7 @@ public class PlayerInputHandler : MonoBehaviour
     public event Action OnMainWeaponSwitch;
     public event Action OnAdditionalWeaponSwitch;
     public event Action OnInteract;
+    public event Action Heal;
 
     private void Awake() {
         inputSystem = new InputSystem_Actions();
@@ -39,7 +40,7 @@ public class PlayerInputHandler : MonoBehaviour
         inputSystem.Player.MainWeaponSwitch.performed += OnMainWeaponSwitchPerformed;
         inputSystem.Player.AdditionalWeaponSwitch.performed += OnAdditionalWeaponSwitchPerformed;
         inputSystem.Player.Interact.performed += OnInteractPerformed;
-
+        inputSystem.Player.Heal.performed += OnHealPerformed;
 
     }
 
@@ -117,4 +118,7 @@ public class PlayerInputHandler : MonoBehaviour
         isCrouching = false;
     }
 
+    private void OnHealPerformed(InputAction.CallbackContext context) {
+        Heal?.Invoke();
+    }
 }

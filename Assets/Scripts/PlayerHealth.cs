@@ -15,7 +15,7 @@ public class PlayerHealth : Health
          if(health <= 0) Die();
     }
 
-    protected bool AddHealth(float amount) {
+    public bool AddHealth(float amount) {
         if (health < playerHealth) {
             float needed = playerHealth - health;
           
@@ -31,10 +31,7 @@ public class PlayerHealth : Health
 
         return false;
     }
-
-    public bool ApplyHeal(float amount) {
-        return AddHealth(amount);
-    }
+    
     
     protected override void Die() {
         Destroy(gameObject);
