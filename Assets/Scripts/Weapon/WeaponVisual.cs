@@ -5,6 +5,7 @@ public class WeaponVisual : MonoBehaviour
    [Header("Positions")]
    [SerializeField] private RangeWeapon rangeWeapon;
    [SerializeField] private Transform handsTransform;
+   [SerializeField] private Transform muzzleTransform;
    private Vector3 weaponPosition => rangeWeapon.WeaponData.WeaponPosition;
 
    private Vector3 handsHipPosition => rangeWeapon.WeaponData.HandsHipPosition;
@@ -34,6 +35,7 @@ public class WeaponVisual : MonoBehaviour
    private float bobbingAmountX => rangeWeapon.WeaponData.BobbingAmountX;
    private float bobbingSpeedY => rangeWeapon.WeaponData.BobbingSpeedY;
    private float bobbingAmountY => rangeWeapon.WeaponData.BobbingAmountY;
+   private Vector3 muzzlePosition => rangeWeapon.WeaponData.MuzzlePosition;
    
    private Vector3 handsTargetPosition;
    private Vector3 recoilOffset;
@@ -67,6 +69,7 @@ public class WeaponVisual : MonoBehaviour
       recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero, recoilSmooth * Time.deltaTime);
       transform.localPosition = weaponPosition;
       handsTransform.localPosition = handsTargetPosition + recoilOffset + swayPositionOffset;
+      muzzleTransform.localPosition = muzzlePosition;
    }
    
    private void Recoil() {

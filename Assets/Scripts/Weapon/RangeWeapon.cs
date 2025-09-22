@@ -25,7 +25,8 @@ public class RangeWeapon : Weapon, IReloadable
     private void Awake() {
         currentAmmo = weaponData.MaxAmmo;
     }
-
+    
+    
    public override void Equipd(WeaponData newWeaponData) {
         weaponData = newWeaponData;
         if (weaponMeshInstance != null) {
@@ -33,7 +34,7 @@ public class RangeWeapon : Weapon, IReloadable
         }
         currentAmmo = weaponData.MaxAmmo;
         weaponMeshInstance = Instantiate(weaponData.WeaponMesh, transform);
-    } 
+   } 
 
     
     protected override void Shoot() {
