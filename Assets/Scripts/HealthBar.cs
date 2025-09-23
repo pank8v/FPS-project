@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
    [SerializeField] private Image fillImage;
-   [SerializeField] private float smoothSpee = 5f;
+   [SerializeField] private float smoothSpeed = 5f;
 
    private float targetFill = 1f;
    private float currentFill = 1f;
@@ -14,7 +14,7 @@ public class HealthBar : MonoBehaviour
    }
 
    private void Update() {
-      currentFill = Mathf.Lerp(currentFill, targetFill, Time.deltaTime * smoothSpee);
+      currentFill = Mathf.Lerp(currentFill, targetFill, Time.deltaTime * smoothSpeed);
       fillImage.fillAmount = currentFill;
    }
 

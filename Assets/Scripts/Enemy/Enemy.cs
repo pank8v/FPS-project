@@ -2,13 +2,13 @@ using UnityEngine;
 using UnityEngine.AI;
 public abstract class Enemy : MonoBehaviour
 {
-   
    [SerializeField] protected EnemyData enemyData;
    public EnemyData EnemyData => enemyData;
    [SerializeField] protected NavMeshAgent agent;
    [SerializeField] protected Transform target;
-
    
+   [SerializeField] private GameObject weaponObject;
+
    [Header("Patrol")]
    [SerializeField] protected Transform[] patrolPoints;
    [SerializeField] protected float waitingTime = 5f;
@@ -118,9 +118,26 @@ public abstract class Enemy : MonoBehaviour
       agent.SetDestination(target.position);
       Debug.Log("chase");
    }
-   
+
+
    
    protected abstract void Attack();
+   
+   
+   
+   
+   public void HandleDeath() {
+      SpawnWeapon();
+   }
+
+   
+   private void SpawnWeapon() {
+      if (weaponObject != null) {
+         Instantiate(weaponObject, transform.position, Quaternion.identity);
+      }
+   }
+   
+   
    
    public  void SetTarget(Transform playerTransform) {
       target = playerTransform;
@@ -133,4 +150,6 @@ public abstract class Enemy : MonoBehaviour
    public void SetPatrolPoints(Transform[] points) {
       patrolPoints = points;
    }
+   
+
 }

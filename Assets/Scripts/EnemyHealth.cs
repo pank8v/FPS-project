@@ -9,6 +9,7 @@ public class EnemyHealth : Health
    }
 
    protected override void Die() {
+      enemy.HandleDeath();
       Destroy(gameObject);
    }
 

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class RangeEnemy : Enemy
 {
+    [SerializeField] private GameObject weapon;
     [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected Transform enemyMuzzle;
     [SerializeField] protected float bulletSpeed = 7f;
@@ -22,13 +23,14 @@ public class RangeEnemy : Enemy
             GameObject bullet = Instantiate(bulletPrefab, enemyMuzzle.position, Quaternion.LookRotation(direction));
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             Bullet bulletScript = bullet.GetComponent<Bullet>();
-            bulletScript.setDamage(damage, Bullet.DamageSource.Player);
+            bulletScript.SetDamage(damage, Bullet.DamageSource.Player);
             bulletRb.linearVelocity = direction * bulletSpeed;
             nextTimeToFire = Time.time + attackRate;
         }
 
     }
 
+    
     
 
 }

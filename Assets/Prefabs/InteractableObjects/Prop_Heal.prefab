@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39370d26176dac94fbb8c0b3beace901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickableHeal
-  healAmount: 20
+  healAmount: 1
 --- !u!65 &5827951584981898314
 BoxCollider:
   m_ObjectHideFlags: 0

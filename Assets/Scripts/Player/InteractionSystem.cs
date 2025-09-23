@@ -21,11 +21,11 @@ public class InteractionSystem : MonoBehaviour
    }
    
    private void OnEnable() {
-      playerInputHandler.OnInteract += TryInteract;
+      playerInputHandler.OnInteract += Interact;
    }
 
    private void OnDisable() {
-      playerInputHandler.OnInteract -= TryInteract;
+      playerInputHandler.OnInteract -= Interact;
    }
    
    private void Update() {
@@ -58,7 +58,7 @@ public class InteractionSystem : MonoBehaviour
   
    }
    
-   private void TryInteract() {
+   private void Interact() {
       if (currentInteractable != null) {
          currentInteractable.Interact(interactor);
       }

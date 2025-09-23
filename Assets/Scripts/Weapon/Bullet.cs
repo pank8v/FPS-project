@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
     
-    public void setDamage(int weaponDamage, DamageSource source) {
+    public void SetDamage(int weaponDamage, DamageSource source) {
         damage = weaponDamage;
         damageSource = source;
     }

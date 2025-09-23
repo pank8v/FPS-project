@@ -53,7 +53,7 @@ public class RangeWeapon : Weapon, IReloadable
         GameObject bullet = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bulletScript.setDamage(weaponData.Damage, Bullet.DamageSource.Enemy);
+        bulletScript.SetDamage(weaponData.Damage, Bullet.DamageSource.Enemy);
         if (rb != null) {
             rb.linearVelocity = direction * bulletSpeed;
         }

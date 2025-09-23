@@ -6,6 +6,7 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
 {
     [SerializeField] private CameraRecoil cameraRecoil;
     [SerializeField] private HUD hud;
+    [SerializeField] private HealCount healCount;
     [SerializeField] private PlayerInputHandler playerInputHandler;
     [SerializeField] private PlayerShooting playerShooting; 
     [SerializeField] private Weapon[] weapons;
@@ -31,6 +32,7 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     private void Awake() {
         SwitchWeapon(0);
         hud.UpdateHUD(weapons[0]);
+        healCount.UpdateHealCount(healAmount);
         cameraRecoil.SetCurrentWeapon(weapons[0]);
         interactor = GetComponentInParent<IInteractor>();
 
@@ -50,12 +52,14 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     
     public void AddHeal(int amount) {
         healAmount += amount;
+        healCount.UpdateHealCount(healAmount);
     }
     
     public void UseHeal() {
         if (healAmount < 1) return;
         if (healItem.Use(interactor)) {
             healAmount -= 1;
+            healCount.UpdateHealCount(healAmount);
         } 
     }
 
