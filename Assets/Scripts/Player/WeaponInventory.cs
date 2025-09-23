@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 
-public class WeaponInventory : MonoBehaviour, IAmmoProvider, IHealProvider
+public class WeaponInventory : MonoBehaviour, IAmmoProvider
 {
     [SerializeField] private CameraRecoil cameraRecoil;
     [SerializeField] private HUD hud;
@@ -15,34 +15,52 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider, IHealProvider
     [SerializeField] private int PistolAmmo;
     [SerializeField] private int SmgAmmo;
     private int currentWeaponIndex = 0;
-    private HealItem heal = new HealItem();
+    private HealItem healItem = new HealItem();
 
-    private int healAmount = 1;
+
+    [SerializeField] private int healAmount;
+    private Dictionary<AmmoType, int> ammoReserve = new Dictionary<AmmoType, int>();
+   
+    private IInteractor interactor;
+
 
     private void OnEnable() {
         playerInputHandler.Heal += UseHeal;
     }
+    
+    private void Awake() {
+        SwitchWeapon(0);
+        hud.UpdateHUD(weapons[0]);
+        cameraRecoil.SetCurrentWeapon(weapons[0]);
+        interactor = GetComponentInParent<IInteractor>();
+
+        ammoReserve.Add(AmmoType.Rifle, RifleAmmo);
+        ammoReserve.Add(AmmoType.Shotgun, ShotgunAmmo);
+        ammoReserve.Add(AmmoType.Pistol, PistolAmmo);
+        ammoReserve.Add(AmmoType.Smg, SmgAmmo);
+
+    }
+
 
     private void Update() {
         Debug.Log("heals" + healAmount);
     }
 
 
-    public void UseHeal() {
-        if (healAmount < 1) return;
-        if (heal.Use(gameObject)) {
-            healAmount -= 1;
-        } 
-    }
-
+    
     public void AddHeal(int amount) {
         healAmount += amount;
     }
     
-    private Dictionary<HealItem, int> heals = new Dictionary<HealItem, int>();
-    private Dictionary<AmmoType, int> ammoReserve = new Dictionary<AmmoType, int>();
+    public void UseHeal() {
+        if (healAmount < 1) return;
+        if (healItem.Use(interactor)) {
+            healAmount -= 1;
+        } 
+    }
 
-   
+
+    
     
     public void AddAmmo(AmmoType ammoType, int amount) {
         if (ammoReserve.ContainsKey(ammoType)) {
@@ -74,17 +92,6 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider, IHealProvider
 
     }
     
-    private void Awake() {
-        SwitchWeapon(0);
-        hud.UpdateHUD(weapons[0]);
-        cameraRecoil.SetCurrentWeapon(weapons[0]);
-
-        ammoReserve.Add(AmmoType.Rifle, RifleAmmo);
-        ammoReserve.Add(AmmoType.Shotgun, ShotgunAmmo);
-        ammoReserve.Add(AmmoType.Pistol, PistolAmmo);
-        ammoReserve.Add(AmmoType.Smg, SmgAmmo);
-
-    }
 
     public void SwitchWeapon(int weaponIndex) {
         currentWeaponIndex = weaponIndex;

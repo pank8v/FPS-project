@@ -7,10 +7,9 @@ public class PickableAmmo : MonoBehaviour, IInteractable
     public AmmoType AmmoType => ammoType;
     public int AmmoCount => ammoCount;
     
-    public void Interact(GameObject interactor) {
-        var provider = interactor.GetComponent<IAmmoProvider>();
-        if (provider != null) {
-            provider.AddAmmo(AmmoType, AmmoCount);
+    public void Interact(IInteractor interactor) {
+        if (interactor.WeaponInventory != null) {
+            interactor.WeaponInventory.AddAmmo(AmmoType, AmmoCount);
             Destroy(gameObject);
         }
     }

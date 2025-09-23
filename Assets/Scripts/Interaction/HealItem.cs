@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class HealItem : IUsable
 {
-    public bool Use(GameObject interactor) {
-       var health =  interactor.GetComponent<PlayerHealth>();
-       if (health != null) {
-        return health.AddHealth(20);
+    private float healAmount = 20f;
+    public bool Use(IInteractor interactor) {
+       if ( interactor.PlayerHealth != null) {
+        return interactor.PlayerHealth.AddHealth(healAmount);
        }
 
        return false;

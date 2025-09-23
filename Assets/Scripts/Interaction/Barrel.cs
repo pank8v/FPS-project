@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Barrel: MonoBehaviour, IInteractable
 {
-    public void Interact(GameObject interactor) {
+    public void Interact(IInteractor interactor) {
         Debug.Log("Barrel Interact");
     }
 }

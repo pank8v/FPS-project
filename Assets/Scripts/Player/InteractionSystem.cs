@@ -5,21 +5,27 @@ public class InteractionSystem : MonoBehaviour
 {
    [SerializeField] private Camera mainCamera;
    [SerializeField] private PlayerInputHandler playerInputHandler;
+   
    [SerializeField] private WeaponInventory weaponInventory;
    [SerializeField] private float maxViewAngle = 90f;
    [SerializeField] private float interactionRadius = 2f;
    [SerializeField] private LayerMask interactableLayer;
+   private IInteractor interactor;
    private IInteractable currentInteractable;
-   
-   
-   
+
+   public WeaponInventory WeaponInventory => weaponInventory;
+
+
+   private void Awake() {
+      interactor = GetComponent<IInteractor>();
+   }
    
    private void OnEnable() {
-      playerInputHandler.OnInteract += Interact;
+      playerInputHandler.OnInteract += TryInteract;
    }
 
    private void OnDisable() {
-      playerInputHandler.OnInteract -= Interact;
+      playerInputHandler.OnInteract -= TryInteract;
    }
    
    private void Update() {
@@ -52,9 +58,9 @@ public class InteractionSystem : MonoBehaviour
   
    }
    
-   private void Interact() {
+   private void TryInteract() {
       if (currentInteractable != null) {
-         currentInteractable.Interact(gameObject);
+         currentInteractable.Interact(interactor);
       }
    }
    
