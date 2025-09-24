@@ -11,21 +11,23 @@ public class PlayerShooting : MonoBehaviour
     
     private void OnEnable() {
         playerInputHandler.OnReloadPressed += HandleReload;
-        playerInputHandler.OnMainWeaponSwitch += SwitchToMainWeapon;
-        playerInputHandler.OnAdditionalWeaponSwitch += SwitchToAdditionalWeapon;
+        playerInputHandler.OnFirstWeaponSwitch += SwitchToMainWeapon;
+        playerInputHandler.OnSecondWeaponSwitch += SwitchToAdditionalWeapon;
+        playerInputHandler.OnThirdWeaponSwitch += SwitchToThirdWeapon;
 
     }
 
     private void OnDisable() {
         playerInputHandler.OnReloadPressed -= HandleReload;
-        playerInputHandler.OnMainWeaponSwitch -= SwitchToMainWeapon;
-        playerInputHandler.OnAdditionalWeaponSwitch -= SwitchToAdditionalWeapon;
+        playerInputHandler.OnFirstWeaponSwitch -= SwitchToMainWeapon;
+        playerInputHandler.OnSecondWeaponSwitch -= SwitchToAdditionalWeapon;
+        playerInputHandler.OnThirdWeaponSwitch -= SwitchToThirdWeapon;
     }
 
     
     private void SwitchToMainWeapon() => weaponInventory.SwitchWeapon(0);
     private void SwitchToAdditionalWeapon() => weaponInventory.SwitchWeapon(1);
-
+    private void SwitchToThirdWeapon() => weaponInventory.SwitchWeapon(2);
 
     private void Awake() {
         currentWeapon.SetAmmoProvider(weaponInventory);
@@ -40,14 +42,14 @@ public class PlayerShooting : MonoBehaviour
 
 
     public void SetCurrentWeapon(Weapon weapon) {
-        if (currentWeapon is RangeWeapon range) {
-            range.isReloading = false;
+        var rangeWeapon = currentWeapon as RangeWeapon;
+        if (rangeWeapon) {
+            rangeWeapon.isReloading = false;
         }
-
+        
         weaponVisual = weapon.GetComponent<WeaponVisual>();
         currentWeapon = weapon;
         weaponHolder = weapon.gameObject;
-        currentWeapon.SetAmmoProvider(weaponInventory);
     }
 
     

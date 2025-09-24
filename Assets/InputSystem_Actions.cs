@@ -183,7 +183,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MainWeaponSwitch"",
+                    ""name"": ""FirstWeaponSwitch"",
                     ""type"": ""Button"",
                     ""id"": ""927dc46c-1746-4074-9310-0af213edc392"",
                     ""expectedControlType"": """",
@@ -192,9 +192,18 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""AdditionalWeaponSwitch"",
+                    ""name"": ""SecondWeaponSwitch"",
                     ""type"": ""Button"",
                     ""id"": ""ec5395b5-459e-47b6-a69f-0ca37d261da8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThirdWeaponSwitch"",
+                    ""type"": ""Button"",
+                    ""id"": ""13742e52-1c37-4f0b-826b-dd964e398156"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -612,7 +621,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""MainWeaponSwitch"",
+                    ""action"": ""FirstWeaponSwitch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -623,7 +632,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""AdditionalWeaponSwitch"",
+                    ""action"": ""SecondWeaponSwitch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -646,6 +655,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Heal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""12ef8afc-893f-4ae3-bd7b-2217ff219517"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThirdWeaponSwitch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1243,8 +1263,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
-        m_Player_MainWeaponSwitch = m_Player.FindAction("MainWeaponSwitch", throwIfNotFound: true);
-        m_Player_AdditionalWeaponSwitch = m_Player.FindAction("AdditionalWeaponSwitch", throwIfNotFound: true);
+        m_Player_FirstWeaponSwitch = m_Player.FindAction("FirstWeaponSwitch", throwIfNotFound: true);
+        m_Player_SecondWeaponSwitch = m_Player.FindAction("SecondWeaponSwitch", throwIfNotFound: true);
+        m_Player_ThirdWeaponSwitch = m_Player.FindAction("ThirdWeaponSwitch", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
         // UI
@@ -1350,8 +1371,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Reload;
     private readonly InputAction m_Player_Aim;
-    private readonly InputAction m_Player_MainWeaponSwitch;
-    private readonly InputAction m_Player_AdditionalWeaponSwitch;
+    private readonly InputAction m_Player_FirstWeaponSwitch;
+    private readonly InputAction m_Player_SecondWeaponSwitch;
+    private readonly InputAction m_Player_ThirdWeaponSwitch;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Heal;
     /// <summary>
@@ -1406,13 +1428,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         /// <summary>
-        /// Provides access to the underlying input action "Player/MainWeaponSwitch".
+        /// Provides access to the underlying input action "Player/FirstWeaponSwitch".
         /// </summary>
-        public InputAction @MainWeaponSwitch => m_Wrapper.m_Player_MainWeaponSwitch;
+        public InputAction @FirstWeaponSwitch => m_Wrapper.m_Player_FirstWeaponSwitch;
         /// <summary>
-        /// Provides access to the underlying input action "Player/AdditionalWeaponSwitch".
+        /// Provides access to the underlying input action "Player/SecondWeaponSwitch".
         /// </summary>
-        public InputAction @AdditionalWeaponSwitch => m_Wrapper.m_Player_AdditionalWeaponSwitch;
+        public InputAction @SecondWeaponSwitch => m_Wrapper.m_Player_SecondWeaponSwitch;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/ThirdWeaponSwitch".
+        /// </summary>
+        public InputAction @ThirdWeaponSwitch => m_Wrapper.m_Player_ThirdWeaponSwitch;
         /// <summary>
         /// Provides access to the underlying input action "Player/Crouch".
         /// </summary>
@@ -1477,12 +1503,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
-            @MainWeaponSwitch.started += instance.OnMainWeaponSwitch;
-            @MainWeaponSwitch.performed += instance.OnMainWeaponSwitch;
-            @MainWeaponSwitch.canceled += instance.OnMainWeaponSwitch;
-            @AdditionalWeaponSwitch.started += instance.OnAdditionalWeaponSwitch;
-            @AdditionalWeaponSwitch.performed += instance.OnAdditionalWeaponSwitch;
-            @AdditionalWeaponSwitch.canceled += instance.OnAdditionalWeaponSwitch;
+            @FirstWeaponSwitch.started += instance.OnFirstWeaponSwitch;
+            @FirstWeaponSwitch.performed += instance.OnFirstWeaponSwitch;
+            @FirstWeaponSwitch.canceled += instance.OnFirstWeaponSwitch;
+            @SecondWeaponSwitch.started += instance.OnSecondWeaponSwitch;
+            @SecondWeaponSwitch.performed += instance.OnSecondWeaponSwitch;
+            @SecondWeaponSwitch.canceled += instance.OnSecondWeaponSwitch;
+            @ThirdWeaponSwitch.started += instance.OnThirdWeaponSwitch;
+            @ThirdWeaponSwitch.performed += instance.OnThirdWeaponSwitch;
+            @ThirdWeaponSwitch.canceled += instance.OnThirdWeaponSwitch;
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
@@ -1530,12 +1559,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
-            @MainWeaponSwitch.started -= instance.OnMainWeaponSwitch;
-            @MainWeaponSwitch.performed -= instance.OnMainWeaponSwitch;
-            @MainWeaponSwitch.canceled -= instance.OnMainWeaponSwitch;
-            @AdditionalWeaponSwitch.started -= instance.OnAdditionalWeaponSwitch;
-            @AdditionalWeaponSwitch.performed -= instance.OnAdditionalWeaponSwitch;
-            @AdditionalWeaponSwitch.canceled -= instance.OnAdditionalWeaponSwitch;
+            @FirstWeaponSwitch.started -= instance.OnFirstWeaponSwitch;
+            @FirstWeaponSwitch.performed -= instance.OnFirstWeaponSwitch;
+            @FirstWeaponSwitch.canceled -= instance.OnFirstWeaponSwitch;
+            @SecondWeaponSwitch.started -= instance.OnSecondWeaponSwitch;
+            @SecondWeaponSwitch.performed -= instance.OnSecondWeaponSwitch;
+            @SecondWeaponSwitch.canceled -= instance.OnSecondWeaponSwitch;
+            @ThirdWeaponSwitch.started -= instance.OnThirdWeaponSwitch;
+            @ThirdWeaponSwitch.performed -= instance.OnThirdWeaponSwitch;
+            @ThirdWeaponSwitch.canceled -= instance.OnThirdWeaponSwitch;
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
@@ -1913,19 +1945,26 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAim(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "MainWeaponSwitch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "FirstWeaponSwitch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMainWeaponSwitch(InputAction.CallbackContext context);
+        void OnFirstWeaponSwitch(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "AdditionalWeaponSwitch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "SecondWeaponSwitch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnAdditionalWeaponSwitch(InputAction.CallbackContext context);
+        void OnSecondWeaponSwitch(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ThirdWeaponSwitch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnThirdWeaponSwitch(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Crouch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

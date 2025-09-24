@@ -14,8 +14,9 @@ public class PlayerInputHandler : MonoBehaviour
     public bool isCrouching { get; private set; }
 
     public event Action OnReloadPressed;
-    public event Action OnMainWeaponSwitch;
-    public event Action OnAdditionalWeaponSwitch;
+    public event Action OnFirstWeaponSwitch;
+    public event Action OnSecondWeaponSwitch;
+    public event Action OnThirdWeaponSwitch;
     public event Action OnInteract;
     public event Action Heal;
 
@@ -37,8 +38,9 @@ public class PlayerInputHandler : MonoBehaviour
         inputSystem.Player.Reload.performed += OnReloadPerformed;
         inputSystem.Player.Aim.performed += OnAimPerformed;
         inputSystem.Player.Aim.canceled += OnAimCanceled;
-        inputSystem.Player.MainWeaponSwitch.performed += OnMainWeaponSwitchPerformed;
-        inputSystem.Player.AdditionalWeaponSwitch.performed += OnAdditionalWeaponSwitchPerformed;
+        inputSystem.Player.FirstWeaponSwitch.performed += OnFirstWeaponSwitchPerformed;
+        inputSystem.Player.SecondWeaponSwitch.performed += OnSecondWeaponSwitchPerformed;
+        inputSystem.Player.ThirdWeaponSwitch.performed += OnThirdWeaponSwitchPerformed;
         inputSystem.Player.Interact.performed += OnInteractPerformed;
         inputSystem.Player.Heal.performed += OnHealPerformed;
 
@@ -99,11 +101,15 @@ public class PlayerInputHandler : MonoBehaviour
         isAiming = false;
     }
     
-    private void OnMainWeaponSwitchPerformed(InputAction.CallbackContext context) {
-        OnMainWeaponSwitch?.Invoke();
+    private void OnFirstWeaponSwitchPerformed(InputAction.CallbackContext context) {
+        OnFirstWeaponSwitch?.Invoke();
     }
-    private void OnAdditionalWeaponSwitchPerformed(InputAction.CallbackContext context) {
-        OnAdditionalWeaponSwitch?.Invoke();
+    private void OnSecondWeaponSwitchPerformed(InputAction.CallbackContext context) {
+        OnSecondWeaponSwitch?.Invoke();
+    }
+
+    private void OnThirdWeaponSwitchPerformed(InputAction.CallbackContext context) {
+        OnThirdWeaponSwitch?.Invoke();
     }
 
     private void OnInteractPerformed(InputAction.CallbackContext context) {

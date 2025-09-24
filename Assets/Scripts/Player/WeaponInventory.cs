@@ -110,7 +110,6 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
 
     public void SetNewWeapon(WeaponData weaponData) {
         weapons[currentWeaponIndex].Equipd(weaponData);
-        Debug.Log("new weapon set");
     }
     
     
