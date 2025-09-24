@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 733d371d3d8526f4eb23cc929f08ae7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickableWeapon
-  weaponData: {fileID: 11400000, guid: 2b274489a70e89045a69cb908ce1ef29, type: 2}
+  weaponData: {fileID: 11400000, guid: 689bdc20eb6020d4586a399fdfad8629, type: 2}
 --- !u!65 &145809767547409022
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -2,27 +2,26 @@ using UnityEngine;
 
 public class MeleeWeapon : Weapon
 {
-   [SerializeField] private BoxCollider boxCollider;
+    
+    private Vector3 halfExtents = new Vector3(0.5f, 0.5f, 1f);
+    private float maxDistance = 4f;
+    
+    
 
-   private bool isAttacking;
-   
-   private void Start() {
-      boxCollider.enabled = false;
-   }
-   
-   
-   protected override void Shoot() {
-      boxCollider.enabled = true;
-   }
-
-
-   private void OnCollisionEnter(Collision collision) {
-      var enemyHealth = GetComponent<EnemyHealth>();
-      if (enemyHealth != null) {
-         enemyHealth.ApplyDamage(damage);
-      }
-   }
-   
-
+    protected override void Shoot() {
+        Vector3 direction = transform.forward;
+        RaycastHit hit;
+        if (Physics.BoxCast(transform.position, halfExtents, direction, out hit, Quaternion.identity, maxDistance)) {
+            var enemyHealth = hit.collider.GetComponent<EnemyHealth>();
+            if (enemyHealth) {
+                enemyHealth.ApplyDamage(damage);
+            }
+            Debug.Log("hit" + hit.collider.name);
+            Debug.DrawRay(transform.position, direction * hit.distance, Color.red);   
+        }
+        else {
+            Debug.DrawRay(transform.position, direction * maxDistance, Color.green);
+        }
+    }
 
 }

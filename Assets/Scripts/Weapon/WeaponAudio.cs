@@ -3,30 +3,32 @@ using UnityEngine;
 public class WeaponAudio : MonoBehaviour
 {
    [SerializeField] private AudioSource audioSource;
-   [SerializeField] private Weapon weapon;
+   [SerializeField] private Weapon currentWeapon;
 
-   private IReloadable reloadableWeapon;
+   private RangeWeapon rangeWeapon;
    
    private void OnEnable() {
-      weapon.OnShoot += PlayShotSound;
-      if (weapon is IReloadable ir) {
-         ir.OnReload += PlayReloadSound;
+      currentWeapon.OnShoot += PlayShotSound;
+      rangeWeapon = currentWeapon as RangeWeapon;
+      if (rangeWeapon) {
+         rangeWeapon.OnReload += PlayReloadSound;
       }
       
    }
 
    private void OnDisable() {
-      weapon.OnShoot -= PlayShotSound;
-      if (reloadableWeapon != null) {
-         reloadableWeapon.OnReload -= PlayReloadSound;
+      currentWeapon.OnShoot -= PlayShotSound;
+      rangeWeapon = currentWeapon as RangeWeapon;
+      if (rangeWeapon) {
+         rangeWeapon.OnReload -= PlayReloadSound;
       }
    }
 
    private void PlayShotSound() {
-      audioSource.PlayOneShot(weapon.WeaponData.ShotSound);
+      audioSource.PlayOneShot(currentWeapon.WeaponData.ShotSound);
    }
 
    private void PlayReloadSound() {
-      audioSource.PlayOneShot(weapon.WeaponData.ReloadSound);
+      audioSource.PlayOneShot(rangeWeapon.RangeWeaponData.ReloadSound);
    }
 }

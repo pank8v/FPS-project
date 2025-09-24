@@ -9,16 +9,9 @@ public class WeaponData : ScriptableObject
     [SerializeField] private float fireRate;
     [SerializeField] private int damage;
     [SerializeField] private float range;
-    [SerializeField] private AmmoType ammoType;
-    [SerializeField] private int maxAmmo;
-    [SerializeField] private float reloadTime = 3f;
-    private int currentAmmo;
-    [SerializeField] private float bulletSpeed;
     [SerializeField] private AudioClip shotSound;
-    [SerializeField] private AudioClip reloadSound;
 
     [Header("Position data")]
-    [SerializeField] private Vector3 muzzlePosition;
     [SerializeField] private Vector3 weaponPosition;
     [SerializeField] private Vector3 handsHipPosition;
     [SerializeField] private Vector3 handsAimPosition;
@@ -43,15 +36,8 @@ public class WeaponData : ScriptableObject
     public float FireRate => fireRate;
     public int Damage => damage;
     public float Range => range;
-    public AmmoType AmmoType => ammoType;
-    public int CurrentAmmo => currentAmmo;
-    public int MaxAmmo => maxAmmo;
-    public float ReloadTime => reloadTime;
-    public float BulletSpeed => bulletSpeed;
     public AudioClip ShotSound => shotSound;
-    public AudioClip ReloadSound => reloadSound;
 
-    public Vector3 MuzzlePosition => muzzlePosition;
     public Vector3 WeaponPosition => weaponPosition;
     public Vector3 HandsHipPosition => handsHipPosition;
     public Vector3 HandsAimPosition => handsAimPosition;

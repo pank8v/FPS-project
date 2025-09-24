@@ -5,8 +5,9 @@ using UnityEngine.PlayerLoop;
 
 public class HUD : MonoBehaviour
 { 
-    [SerializeField] private Weapon currentWeapon;
-    [SerializeField] private TextMeshProUGUI ammoText;
+    [SerializeField] private TextMeshProUGUI currentAmmoText;
+    [SerializeField] private TextMeshProUGUI reserveAmmoText;
+    private Weapon currentWeapon;
     private RangeWeapon rangeWeapon;
 
     
@@ -14,43 +15,38 @@ public class HUD : MonoBehaviour
         if (rangeWeapon != null)
         {
             rangeWeapon.OnShoot -= UpdateAmmo;
-            rangeWeapon.OnReloadEnd += UpdateAmmo;
+            rangeWeapon.OnReloadEnd -= UpdateAmmo;
         }
-
-        currentWeapon = weapon;
         
-        if (weapon is RangeWeapon rw)
-        {
-            rangeWeapon = rw;
+        
+        rangeWeapon = weapon as RangeWeapon;
+        if (rangeWeapon) {
             rangeWeapon.OnShoot += UpdateAmmo;
             rangeWeapon.OnReloadEnd += UpdateAmmo;
+            UpdateAmmo(); 
         }
-        else
-        {
-            rangeWeapon = null;
-        }
-
-        UpdateAmmo(); 
     }
     
     
     private void Awake() {
-        if (currentWeapon is RangeWeapon rw) {
-            rangeWeapon = rw;
-        }
-        else {
-            ammoText.text = "";
+        rangeWeapon = currentWeapon as RangeWeapon;
+        if (!rangeWeapon) {
+            currentAmmoText.text = "";
+            reserveAmmoText.text = "";
         }
     }
 
     private void Start() {
-        UpdateAmmo();
+        if (rangeWeapon) {
+            UpdateAmmo();
+        }
     }
     
 
 
     public void UpdateAmmo() {
         int currentAmmo = rangeWeapon.currentAmmo;
-        ammoText.text = $"<color=#FF6AFF>{currentAmmo.ToString("D3")}</color> <color=#6AFFFE>/ {currentWeapon.GetAmmoCount().ToString("D3")}</color> <color=#6AFFFE></color>";
+        currentAmmoText.text = $"<color=#FF6AFF>{currentAmmo.ToString("D3")}</color>";
+        reserveAmmoText.text = $"<color=#6AFFFE>{rangeWeapon.GetAmmoCount().ToString("D3")}</color> <color=#6AFFFE></color>";
     }
 }

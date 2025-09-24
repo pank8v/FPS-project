@@ -105,4 +105,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 733d371d3d8526f4eb23cc929f08ae7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickableWeapon
-  weaponData: {fileID: 11400000, guid: 1dfe6c566588e9f499954776b9a5774f, type: 2}
+  weaponData: {fileID: 11400000, guid: 06bd0dc9f820c4048b79d1865d518ee5, type: 2}

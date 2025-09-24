@@ -5,30 +5,34 @@ using Unity.VisualScripting;
 
 public abstract class Weapon : MonoBehaviour
 {
+   // weaponData
    [SerializeField] protected WeaponData weaponData;
-   protected GameObject weaponMeshInstance;
-   
    public WeaponData WeaponData => weaponData;
-   protected float nextTimeToFire;
-   
+
+   protected GameObject weaponMeshInstance;
    protected GameObject weaponMesh => weaponData.WeaponMesh;
-   protected AmmoType ammoType => weaponData.AmmoType;
-   protected int maxAmmo => weaponData.MaxAmmo;
+   
    protected float fireRate => weaponData.FireRate;
    protected int damage => weaponData.Damage;
    protected float range => weaponData.Range;
-   public AmmoType AmmoType => ammoType;
-
+   protected float nextTimeToFire;
    
-   protected IAmmoProvider ammoProvider;
-
+   //aiming
+   protected bool isAiming;
+   public bool IsAiming => isAiming;
+   
    public event Action OnShoot;
 
-
+ 
+   protected virtual bool CanFire() {
+      return true;
+   }
+   
+ 
    private void Start() {
       weaponMeshInstance = Instantiate(weaponData.WeaponMesh, transform);
    }
-   
+
    public virtual void Equipd(WeaponData newWeaponData) {
       weaponData = newWeaponData;
       if (weaponMeshInstance != null) {
@@ -38,19 +42,9 @@ public abstract class Weapon : MonoBehaviour
       
    }
    
-
-      
-
-      
-   protected virtual bool CanFire() {
-      return true;
-   }
-   
-   protected bool isAiming;
-   public bool IsAiming => isAiming;
    
    protected abstract void Shoot();
-
+   
    public virtual void Fire() {
       if (!CanFire()) return;
       if (Time.time >= nextTimeToFire) {
@@ -60,17 +54,9 @@ public abstract class Weapon : MonoBehaviour
       }
    }
 
+   
    public void setIsAiming(bool isAimingTriggered) {
       isAiming = isAimingTriggered;
-   }
-
-   
-   public void SetAmmoProvider(IAmmoProvider provider) {
-      ammoProvider = provider;
-   }
-   
-   public int GetAmmoCount() {
-      return ammoProvider.GetAmmoCount(ammoType);
    }
 
 }

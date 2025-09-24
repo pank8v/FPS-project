@@ -9,24 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c6582eaab048434aaec4212df50a793, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e9e3d654435e4041b12e02aa90d35a8, type: 3}
   m_Name: Point
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  m_EditorClassIdentifier: Assembly-CSharp::RangeWeaponData
   weaponMesh: {fileID: 3626248878269675547, guid: 2e270d86301cb674792e66a6771ab87a, type: 3}
   weaponName: Point
   fireRate: 7
   damage: 25
   range: 30
-  ammoType: 1
-  maxAmmo: 11
-  reloadTime: 2
-  bulletSpeed: 40
   shotSound: {fileID: 8300000, guid: 101a910724d21184889f95f6218811d5, type: 3}
-  reloadSound: {fileID: 8300000, guid: da7012d847f7d654e832248f60a2a1e5, type: 3}
   weaponPosition: {x: 0.1557, y: -0.238, z: 0.6029}
   handsHipPosition: {x: 0, y: -0.055, z: 0.06}
   handsAimPosition: {x: -0.154, y: 0.05, z: -0.201}
-  handsRotation: {x: 0, y: 0, z: 0, w: 1}
+  handsRotation: {x: 0, y: 0, z: 0, w: 0}
   minimumRecoilX: -8
   maximumRecoilX: -12
   minimumRecoilY: 2
@@ -37,3 +32,9 @@ MonoBehaviour:
   bobbingAmountX: 0.01
   bobbingSpeedY: 6
   bobbingAmountY: 0.01
+  ammoType: 1
+  reloadTime: 2
+  maxAmmo: 11
+  bulletSpeed: 80
+  reloadSound: {fileID: 8300000, guid: da7012d847f7d654e832248f60a2a1e5, type: 3}
+  muzzlePosition: {x: 0, y: 0, z: 0.55}

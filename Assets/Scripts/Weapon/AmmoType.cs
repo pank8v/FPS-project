@@ -5,5 +5,6 @@ public enum AmmoType
     Smg,
     Pistol,
     Rifle,
-    Shotgun
+    Shotgun,
+    Melee
 }

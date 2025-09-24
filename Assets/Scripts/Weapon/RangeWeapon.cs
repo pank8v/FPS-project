@@ -2,29 +2,50 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class RangeWeapon : Weapon, IReloadable
+public class RangeWeapon : Weapon
 {
+    [SerializeField] private RangeWeaponData rangeWeaponData;
+    public RangeWeaponData RangeWeaponData => rangeWeaponData;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform muzzle;
-    
-    private float reloadTime => weaponData.ReloadTime;
-    protected float bulletSpeed => weaponData.BulletSpeed;
+    protected IAmmoProvider ammoProvider;
+   
+    // weaponData
+    protected int maxAmmo => rangeWeaponData.MaxAmmo;
 
-    public bool isReloading = false;
-    
+    protected AmmoType ammoType => rangeWeaponData.AmmoType;
+
+    public AmmoType AmmoType => rangeWeaponData.AmmoType;
+
+    private float reloadTime => rangeWeaponData.ReloadTime;
+    protected float bulletSpeed => rangeWeaponData.BulletSpeed;
+
+
     public int currentAmmo { get; private set; }
+    public bool isReloading = false;
+
 
     public event Action OnReload;
     public event Action OnReloadEnd;
     
     protected override bool CanFire() {
         return currentAmmo > 0 && !isReloading;
-        
     }
     
+    
     private void Awake() {
-        currentAmmo = weaponData.MaxAmmo;
+        currentAmmo = rangeWeaponData.MaxAmmo;
     }
+    
+    public void SetAmmoProvider(IAmmoProvider provider) {
+        ammoProvider = provider;
+    }
+
+    
+    public int GetAmmoCount() {
+        return ammoProvider.GetAmmoCount(ammoType);
+    }
+
     
     
    public override void Equipd(WeaponData newWeaponData) {
@@ -32,7 +53,10 @@ public class RangeWeapon : Weapon, IReloadable
         if (weaponMeshInstance != null) {
             Destroy(weaponMeshInstance);
         }
-        currentAmmo = weaponData.MaxAmmo;
+        rangeWeaponData = weaponData as RangeWeaponData;
+        if (rangeWeaponData) {
+            currentAmmo = rangeWeaponData.MaxAmmo;
+        }
         weaponMeshInstance = Instantiate(weaponData.WeaponMesh, transform);
    } 
 
@@ -59,7 +83,7 @@ public class RangeWeapon : Weapon, IReloadable
         }
     }
     
-    public void Reload() {
+    public void TryReload() {
         int ammoToLoad = maxAmmo - currentAmmo;
         if (currentAmmo < maxAmmo && !isReloading && ammoProvider.HasReloadAmmo(ammoType, ammoToLoad)) {
             StartCoroutine(ReloadWeapon(ammoToLoad));
@@ -78,4 +102,7 @@ public class RangeWeapon : Weapon, IReloadable
         isReloading = false;
     }
     
+    
+    
+
 }

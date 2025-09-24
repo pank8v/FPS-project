@@ -9,24 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c6582eaab048434aaec4212df50a793, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e9e3d654435e4041b12e02aa90d35a8, type: 3}
   m_Name: SMG
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  m_EditorClassIdentifier: Assembly-CSharp::RangeWeaponData
   weaponMesh: {fileID: 3566347261712635835, guid: 2caee91f7d937434c8f1351d3145e6fc, type: 3}
   weaponName: SMG
   fireRate: 14
   damage: 15
   range: 100
-  ammoType: 0
-  maxAmmo: 24
-  reloadTime: 2
-  bulletSpeed: 80
   shotSound: {fileID: 8300000, guid: d11f77a6a963444419de15d73a42e259, type: 3}
-  reloadSound: {fileID: 8300000, guid: da7012d847f7d654e832248f60a2a1e5, type: 3}
   weaponPosition: {x: 0.1384, y: -0.297, z: 0.076}
   handsHipPosition: {x: 0, y: 0, z: 0}
   handsAimPosition: {x: -0.1400003, y: 0.06400001, z: -0.1320001}
-  handsRotation: {x: 0, y: 0, z: 0, w: 1}
+  handsRotation: {x: 0, y: 0, z: 0, w: 0}
   minimumRecoilX: -3
   maximumRecoilX: -5
   minimumRecoilY: 0.8
@@ -37,3 +32,9 @@ MonoBehaviour:
   bobbingAmountX: 0.01
   bobbingSpeedY: 6
   bobbingAmountY: 0.01
+  ammoType: 0
+  reloadTime: 2
+  maxAmmo: 24
+  bulletSpeed: 80
+  reloadSound: {fileID: 8300000, guid: da7012d847f7d654e832248f60a2a1e5, type: 3}
+  muzzlePosition: {x: 0, y: 0, z: 0.55}

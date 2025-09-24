@@ -1,13 +1,15 @@
+using System;
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private PlayerInputHandler playerInputHandler;
-    private GameObject weaponHolder;
     [SerializeField] private Weapon currentWeapon;
     [SerializeField] private WeaponInventory weaponInventory;
     [SerializeField] private WeaponVisual weaponVisual;
-    
+    private GameObject weaponHolder;
+    private RangeWeapon rangeWeapon;
+
     
     private void OnEnable() {
         playerInputHandler.OnReloadPressed += HandleReload;
@@ -30,25 +32,31 @@ public class PlayerShooting : MonoBehaviour
     private void SwitchToThirdWeapon() => weaponInventory.SwitchWeapon(2);
 
     private void Awake() {
-        currentWeapon.SetAmmoProvider(weaponInventory);
+         rangeWeapon = currentWeapon as RangeWeapon;
+        if (rangeWeapon) {
+            rangeWeapon.SetAmmoProvider(weaponInventory);
+        }
     }
     
     private void Update() {
         HandleShooting();
         HandleAiming();
-        HandleSway();
-        HandleBobing();
+        if (rangeWeapon) {
+            HandleSway();
+            HandleBobbing();  
+        }
     }
 
 
     public void SetCurrentWeapon(Weapon weapon) {
-        var rangeWeapon = currentWeapon as RangeWeapon;
+        currentWeapon = weapon; 
+        rangeWeapon = currentWeapon as RangeWeapon;
         if (rangeWeapon) {
             rangeWeapon.isReloading = false;
+            rangeWeapon.SetAmmoProvider(weaponInventory);
         }
-        
         weaponVisual = weapon.GetComponent<WeaponVisual>();
-        currentWeapon = weapon;
+
         weaponHolder = weapon.gameObject;
     }
 
@@ -60,9 +68,10 @@ public class PlayerShooting : MonoBehaviour
     }
 
     private void HandleReload() {
-            if (currentWeapon is IReloadable rangeWeapon) {
-                rangeWeapon.Reload();
-            }
+        rangeWeapon = currentWeapon as RangeWeapon;
+        if (rangeWeapon) {
+            rangeWeapon.TryReload();
+        }
     }
 
     private void HandleAiming() {
@@ -72,10 +81,10 @@ public class PlayerShooting : MonoBehaviour
     
 
     private void HandleSway() {
-        weaponVisual.Sway(playerInputHandler.lookDirection);
+            weaponVisual.Sway(playerInputHandler.lookDirection);
     }
 
-    private void HandleBobing() {
-       weaponVisual.Bobing(playerInputHandler.moveDirection);
+    private void HandleBobbing() {
+            weaponVisual.Bobing(playerInputHandler.moveDirection);
     }
 }

@@ -5,11 +5,11 @@ public class InteractionSystem : MonoBehaviour
 {
    [SerializeField] private Camera mainCamera;
    [SerializeField] private PlayerInputHandler playerInputHandler;
-   
    [SerializeField] private WeaponInventory weaponInventory;
    [SerializeField] private float maxViewAngle = 90f;
    [SerializeField] private float interactionRadius = 2f;
    [SerializeField] private LayerMask interactableLayer;
+   
    private IInteractor interactor;
    private IInteractable currentInteractable;
 
@@ -49,13 +49,6 @@ public class InteractionSystem : MonoBehaviour
             currentInteractable = interactable;
          }
       }
-      if (currentInteractable != null) {
-         Debug.Log(currentInteractable);
-      }
-      else {
-         Debug.Log("No interactable");
-      }
-  
    }
    
    private void Interact() {
