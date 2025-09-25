@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9e3d654435e4041b12e02aa90d35a8, type: 3}
   m_Name: Codreanu
   m_EditorClassIdentifier: Assembly-CSharp::RangeWeaponData
-  weaponMesh: {fileID: 8408343962161368004, guid: 27c94885110fd6145ba2ab28c2f83c60, type: 3}
+  weaponMesh: {fileID: 1418956817418073202, guid: 7c3136bdf44272946803cebf6f1632be, type: 3}
   weaponName: Codreanu
   fireRate: 5
   damage: 40
   range: 30
   shotSound: {fileID: 8300000, guid: 101a910724d21184889f95f6218811d5, type: 3}
   weaponPosition: {x: 0.1557, y: -0.238, z: 0.6029}
-  handsHipPosition: {x: 0, y: -0.055, z: 0.06}
-  handsAimPosition: {x: -0.154, y: 0.05, z: -0.201}
-  handsRotation: {x: 0, y: 0, z: 0, w: 0}
+  hipPosition: {x: 0.06, y: -0.055, z: 0.06}
+  aimPosition: {x: -0.154, y: 0.05, z: -0.201}
+  rotation: {x: 0, y: 0, z: 0, w: 0}
   minimumRecoilX: -8
   maximumRecoilX: -12
   minimumRecoilY: 2

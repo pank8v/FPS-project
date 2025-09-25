@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class WeaponVisual : MonoBehaviour
 {
-   [SerializeField] private Weapon currentWeapon;
+   [SerializeField] private Transform[] weaponSlots;
+   private int currentWeaponIndex;
+   private Weapon currentWeapon;
    private RangeWeapon rangeWeapon;
-   
+  
    [Header("Positions")]
-   [SerializeField] private Transform handsTransform;
-   [SerializeField] private Transform muzzleTransform;
    private Vector3 weaponPosition => currentWeapon.WeaponData.WeaponPosition;
-
-   private Vector3 handsHipPosition => currentWeapon.WeaponData.HandsHipPosition;
-   private Vector3 handsAimPosition => currentWeapon.WeaponData.HandsAimPosition;
+   private Vector3 HipPosition => currentWeapon.WeaponData.HipPosition;
+   private Vector3 AimPosition => currentWeapon.WeaponData.AimPosition;
    
    [SerializeField] private float aimSmooth = 0.5f;
    
@@ -37,48 +36,49 @@ public class WeaponVisual : MonoBehaviour
    private float bobbingAmountX => currentWeapon.WeaponData.BobbingAmountX;
    private float bobbingSpeedY => currentWeapon.WeaponData.BobbingSpeedY;
    private float bobbingAmountY => currentWeapon.WeaponData.BobbingAmountY;
- //  private Vector3 muzzlePosition => currentWeapon.WeaponData.MuzzlePosition;
    
-   private Vector3 handsTargetPosition;
+   
+   private Vector3 targetPosition;
    private Vector3 recoilOffset;
    private Vector3 swayPositionOffset;
-   private Quaternion handsInitialRotation;
+   private Quaternion initialRotation;
 
    private Vector3 bobingOffset;
 
-   
-   private void OnEnable() {
+
+   private void Start() {
+      initialRotation = transform.rotation;
+   }
+
+   public void SetCurrentWeapon(Weapon weapon, int weaponIndex) {
+      currentWeapon = weapon;
+      currentWeaponIndex = weaponIndex;
       rangeWeapon = currentWeapon as RangeWeapon;
-      if (rangeWeapon) {
-         currentWeapon.OnShoot += Recoil;
+      if (rangeWeapon) {        
+         rangeWeapon.OnShoot -= Recoil;
+         rangeWeapon.OnShoot += Recoil;
          recoilOffset = Vector3.zero;
          swayPositionOffset = Vector3.zero;
       }
-      handsTargetPosition = currentWeapon.IsAiming ? handsAimPosition : handsHipPosition; 
+      targetPosition = currentWeapon.IsAiming ? AimPosition : HipPosition; 
 
    }
+   
+   
 
-   private void OnDisable() {
-      if (rangeWeapon) {
-         rangeWeapon.OnShoot -= Recoil;
-      }
-   }
-
-
-   private void Start() {
-      handsInitialRotation = handsTransform.localRotation;
-   }
 
    
    
    private void Update() {
-      Vector3 desiredHandsPosition = currentWeapon.IsAiming ? handsAimPosition + bobingOffset : handsHipPosition + bobingOffset; 
-      handsTargetPosition = Vector3.Lerp(handsTargetPosition, desiredHandsPosition, Time.deltaTime * aimSmooth);
-      transform.localPosition = weaponPosition;
-      handsTransform.localPosition = handsTargetPosition + recoilOffset + swayPositionOffset;
-      if (rangeWeapon) {
-         recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero, recoilSmooth * Time.deltaTime);
-       //  muzzleTransform.localPosition = muzzlePosition;
+      if (currentWeapon) {
+         Vector3 desiredHandsPosition = currentWeapon.IsAiming ? AimPosition + bobingOffset : HipPosition + bobingOffset; 
+         targetPosition = Vector3.Lerp(targetPosition, desiredHandsPosition, Time.deltaTime * aimSmooth);
+         weaponSlots[currentWeaponIndex].transform.localPosition = weaponPosition;
+         transform.localPosition = targetPosition + recoilOffset + swayPositionOffset;
+         if (rangeWeapon) {
+            recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero, recoilSmooth * Time.deltaTime);
+            //  muzzleTransform.localPosition = muzzlePosition;
+         }
       }
    }
    
@@ -88,20 +88,20 @@ public class WeaponVisual : MonoBehaviour
 
 
    public void Sway(Vector3 lookDirection) {
-     /* //rotation
+      //rotation
       Quaternion targetRotation = Quaternion.Euler(lookDirection.y * rotationSwayX, lookDirection.x * rotationSwayY, -lookDirection.x * rotationSwayX);
-      handsTransform.localRotation = Quaternion.Slerp(handsTransform.localRotation,handsInitialRotation * targetRotation, Time.deltaTime * positionSwaySmooth);
+      transform.localRotation = Quaternion.Slerp(transform.localRotation,initialRotation * targetRotation, Time.deltaTime * positionSwaySmooth);
          
       //position
          Vector3 desiredSway = new Vector3(-lookDirection.x * swayAmount, -lookDirection.y * swayAmount, 0);
          desiredSway.x = Mathf.Clamp(swayPositionOffset.x, -maxSwayAmount, maxSwayAmount);
          desiredSway.y = Mathf.Clamp(swayPositionOffset.y, -maxSwayAmount, maxSwayAmount);
-         swayPositionOffset = Vector3.Lerp(swayPositionOffset, desiredSway, positionSwaySmooth * Time.deltaTime);*/
+         swayPositionOffset = Vector3.Lerp(swayPositionOffset, desiredSway, positionSwaySmooth * Time.deltaTime);
    }
 
    public void Bobing(Vector3 moveDirection) {
-    /*  float bobingY = Mathf.Cos(Time.time * bobbingSpeedY) * moveDirection.y * bobbingAmountY;
+      float bobingY = Mathf.Cos(Time.time * bobbingSpeedY) * moveDirection.y * bobbingAmountY;
       float bobingX = Mathf.Sin(Time.time * bobbingSpeedX) * moveDirection.x * bobbingAmountX;
-      bobingOffset = new Vector3(bobingX, bobingY, 0); */
+      bobingOffset = new Vector3(bobingX, bobingY, 0); 
    }
 }

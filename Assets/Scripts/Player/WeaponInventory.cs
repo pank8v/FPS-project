@@ -5,8 +5,10 @@ using System.Collections.Generic;
 public class WeaponInventory : MonoBehaviour, IAmmoProvider
 {
     [SerializeField] private PlayerInputHandler playerInputHandler;
-    [SerializeField] private PlayerShooting playerShooting; 
-    [SerializeField] private Weapon[] weapons;
+    [SerializeField] private WeaponVisual weaponVisual;
+    [SerializeField] private PlayerShooting playerShooting;
+    [SerializeField] private Transform[] weaponSlots;
+    private Weapon[] weapons = new Weapon[3];
     private IInteractor interactor;
 
     
@@ -40,39 +42,46 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     private void Awake() {
         SwitchWeapon(0);
         interactor = GetComponentInParent<IInteractor>();
-        hud.UpdateHUD(weapons[0]);
-        healCount.UpdateHealCount(healAmount);
-        cameraRecoil.SetCurrentWeapon(weapons[0]);
-
-        ammoReserve.Add(AmmoType.Rifle, RifleAmmo);
-        ammoReserve.Add(AmmoType.Shotgun, ShotgunAmmo);
-        ammoReserve.Add(AmmoType.Pistol, PistolAmmo);
-        ammoReserve.Add(AmmoType.Smg, SmgAmmo);
-
+        healCount.UpdateHealCount(healAmount); 
+        
+      ammoReserve.Add(AmmoType.Rifle, RifleAmmo);
+      ammoReserve.Add(AmmoType.Shotgun, ShotgunAmmo);
+      ammoReserve.Add(AmmoType.Pistol, PistolAmmo);
+      ammoReserve.Add(AmmoType.Smg, SmgAmmo);
     }
 
     // weapon    
     
     public void SwitchWeapon(int weaponIndex) {
         currentWeaponIndex = weaponIndex;
-        for (int i = 0; i < weapons.Length; i++) {
-            weapons[i].gameObject.SetActive(i == weaponIndex);
+        for (int i = 0; i < weaponSlots.Length; i++) {
+            weaponSlots[i].gameObject.SetActive(i == weaponIndex);
         }
-        playerShooting.SetCurrentWeapon(weapons[weaponIndex]);
-        hud.UpdateHUD(weapons[weaponIndex]);
-        cameraRecoil.SetCurrentWeapon(weapons[weaponIndex]);
+       if (weapons[currentWeaponIndex]) {
+           playerShooting.SetCurrentWeapon(weapons[currentWeaponIndex]);
+           cameraRecoil.SetCurrentWeapon(weapons[weaponIndex]);
+           hud.UpdateHUD(weapons[weaponIndex]);
+           weaponVisual.SetCurrentWeapon(weapons[weaponIndex], currentWeaponIndex);
+        }
+
     }
 
 
     public void SetNewWeapon(WeaponData weaponData) {
-        weapons[currentWeaponIndex].Equipd(weaponData);
-        var rangeWeaponData = weaponData as RangeWeaponData;
-        if (rangeWeaponData) {
-            hud.UpdateAmmo();
+        var oldWeapon = weaponSlots[currentWeaponIndex].GetComponentInChildren<Weapon>();
+        if (oldWeapon) {
+            Destroy(oldWeapon.gameObject);
         }
-
+        GameObject weapon = Instantiate(weaponData.WeaponMesh, weaponSlots[currentWeaponIndex].transform);
+        weapons[currentWeaponIndex] = weapon.GetComponent<Weapon>();
+        var currentWeapon = weapons[currentWeaponIndex];
+        playerShooting.SetCurrentWeapon(currentWeapon);
+        cameraRecoil.SetCurrentWeapon(currentWeapon); 
+        hud.UpdateHUD(currentWeapon);
+        weaponVisual.SetCurrentWeapon(currentWeapon, currentWeaponIndex);
+        
     }
-
+    
     // heal
     
     public void AddHeal(int amount) {

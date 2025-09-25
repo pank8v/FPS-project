@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fe752b41fd5414da6dbcb7c9ba8786, type: 3}
   m_Name: Bat
   m_EditorClassIdentifier: Assembly-CSharp::MeleeWeaponData
-  weaponMesh: {fileID: 2013290783607153299, guid: de2762bc055e0b24f8fa5d29419ee159, type: 3}
+  weaponMesh: {fileID: 9222557885731250033, guid: a3ec4e2091175ae41a329e92648ba369, type: 3}
   weaponName: Bat
   fireRate: 5
   damage: 40
   range: 3
   shotSound: {fileID: 8300000, guid: 101a910724d21184889f95f6218811d5, type: 3}
   weaponPosition: {x: 0.14, y: -0.3, z: 0.52}
-  handsHipPosition: {x: 0, y: 0, z: 0}
-  handsAimPosition: {x: 0, y: 0, z: 0}
-  handsRotation: {x: 0, y: 0, z: 0, w: 0}
+  hipPosition: {x: 0, y: 0, z: 0}
+  aimPosition: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0, w: 0}
   minimumRecoilX: 0
   maximumRecoilX: 0
   minimumRecoilY: 0

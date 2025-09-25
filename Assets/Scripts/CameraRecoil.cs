@@ -3,37 +3,36 @@ using UnityEngine;
 public class CameraRecoil : MonoBehaviour
 {
     [SerializeField] private PlayerInputHandler playerInputHandler;
-        private Weapon weapon;
+    private Weapon currentWeapon;
     
-    private float minimumRecoilX => weapon.WeaponData.MinimumRecoilX;
-   private float maximumRecoilX => weapon.WeaponData.MaximumRecoilX;
-   private float minimumRecoilY => weapon.WeaponData.MinimumRecoilY;
-   private float maximumRecoilY => weapon.WeaponData.MaximumRecoilY;
-   private float snappiness => weapon.WeaponData.Snappiness;
-   private float returnSpeed => weapon.WeaponData.ReturnSpeed;
+    private float minimumRecoilX => currentWeapon.WeaponData.MinimumRecoilX;
+   private float maximumRecoilX => currentWeapon.WeaponData.MaximumRecoilX;
+   private float minimumRecoilY => currentWeapon.WeaponData.MinimumRecoilY;
+   private float maximumRecoilY => currentWeapon.WeaponData.MaximumRecoilY;
+   private float snappiness => currentWeapon.WeaponData.Snappiness;
+   private float returnSpeed => currentWeapon.WeaponData.ReturnSpeed;
 
 
     private Vector3 currentRotation;
     private Vector3 targetRotation;
-    private void OnEnable() {
-        weapon.OnShoot += AddRecoil;
-    }
-
-    private void OnDisable() {
-        weapon.OnShoot -= AddRecoil;
-    }
     private void Update() {
-       targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, Time.deltaTime * returnSpeed);
-       currentRotation = Vector3.Lerp(currentRotation, targetRotation, Time.fixedDeltaTime * snappiness);
-       transform.localRotation = Quaternion.Euler(currentRotation);
+        HandleRecoil();
     }
 
 
-    public void SetCurrentWeapon(Weapon currentWeapon) {
-        weapon = currentWeapon;
-        if (weapon != null) {
-            weapon.OnShoot -= AddRecoil;
-            weapon.OnShoot += AddRecoil;
+    public void SetCurrentWeapon(Weapon newWeapon) {
+        currentWeapon = newWeapon;
+        if (currentWeapon != null) {
+            currentWeapon.OnShoot -= AddRecoil;
+            currentWeapon.OnShoot += AddRecoil;
+        }
+    }
+
+    private void HandleRecoil() {
+        if (currentWeapon) {
+            targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, Time.deltaTime * returnSpeed);
+            currentRotation = Vector3.Lerp(currentRotation, targetRotation, Time.fixedDeltaTime * snappiness);
+            transform.localRotation = Quaternion.Euler(currentRotation);
         }
     }
 

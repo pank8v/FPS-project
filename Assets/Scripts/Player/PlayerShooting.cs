@@ -4,10 +4,9 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private PlayerInputHandler playerInputHandler;
-    [SerializeField] private Weapon currentWeapon;
     [SerializeField] private WeaponInventory weaponInventory;
     [SerializeField] private WeaponVisual weaponVisual;
-    private GameObject weaponHolder;
+    private Weapon currentWeapon;
     private RangeWeapon rangeWeapon;
 
     
@@ -32,32 +31,31 @@ public class PlayerShooting : MonoBehaviour
     private void SwitchToThirdWeapon() => weaponInventory.SwitchWeapon(2);
 
     private void Awake() {
-         rangeWeapon = currentWeapon as RangeWeapon;
-        if (rangeWeapon) {
-            rangeWeapon.SetAmmoProvider(weaponInventory);
-        }
+      //   rangeWeapon = currentWeapon as RangeWeapon;
+     //   if (rangeWeapon) {
+    //        rangeWeapon.SetAmmoProvider(weaponInventory);
+    //    }
     }
     
     private void Update() {
         HandleShooting();
-        HandleAiming();
-        if (rangeWeapon) {
+        if (currentWeapon) {
+            HandleAiming(); 
             HandleSway();
-            HandleBobbing();  
+            HandleBobbing();
         }
     }
 
 
     public void SetCurrentWeapon(Weapon weapon) {
         currentWeapon = weapon; 
+        
         rangeWeapon = currentWeapon as RangeWeapon;
         if (rangeWeapon) {
             rangeWeapon.isReloading = false;
             rangeWeapon.SetAmmoProvider(weaponInventory);
         }
-        weaponVisual = weapon.GetComponent<WeaponVisual>();
-
-        weaponHolder = weapon.gameObject;
+       
     }
 
     
@@ -75,7 +73,7 @@ public class PlayerShooting : MonoBehaviour
     }
 
     private void HandleAiming() {
-       currentWeapon.setIsAiming(playerInputHandler.isAiming);
+            currentWeapon.setIsAiming(playerInputHandler.isAiming);
     }
 
     

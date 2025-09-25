@@ -13,9 +13,9 @@ public class WeaponData : ScriptableObject
 
     [Header("Position data")]
     [SerializeField] private Vector3 weaponPosition;
-    [SerializeField] private Vector3 handsHipPosition;
-    [SerializeField] private Vector3 handsAimPosition;
-    [SerializeField] private Quaternion handsRotation;
+    [SerializeField] private Vector3 hipPosition;
+    [SerializeField] private Vector3 aimPosition;
+    [SerializeField] private Quaternion rotation;
     
     [Header("Recoil data")]
     [SerializeField] private float minimumRecoilX;
@@ -39,9 +39,9 @@ public class WeaponData : ScriptableObject
     public AudioClip ShotSound => shotSound;
 
     public Vector3 WeaponPosition => weaponPosition;
-    public Vector3 HandsHipPosition => handsHipPosition;
-    public Vector3 HandsAimPosition => handsAimPosition;
-    public Quaternion HandsRotation => handsRotation;
+    public Vector3 HipPosition => hipPosition;
+    public Vector3 AimPosition => aimPosition;
+    public Quaternion HandsRotation => rotation;
     
     public float BobbingSpeedX => bobbingSpeedX;
     public float BobbingAmountX => bobbingAmountX;

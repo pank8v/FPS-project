@@ -4,7 +4,7 @@ using System.Collections;
 
 public class RangeWeapon : Weapon
 {
-    [SerializeField] private RangeWeaponData rangeWeaponData;
+    protected RangeWeaponData rangeWeaponData => weaponData as RangeWeaponData;
     public RangeWeaponData RangeWeaponData => rangeWeaponData;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform muzzle;
@@ -45,20 +45,6 @@ public class RangeWeapon : Weapon
     public int GetAmmoCount() {
         return ammoProvider.GetAmmoCount(ammoType);
     }
-
-    
-    
-   public override void Equipd(WeaponData newWeaponData) {
-        weaponData = newWeaponData;
-        if (weaponMeshInstance != null) {
-            Destroy(weaponMeshInstance);
-        }
-        rangeWeaponData = weaponData as RangeWeaponData;
-        if (rangeWeaponData) {
-            currentAmmo = rangeWeaponData.MaxAmmo;
-        }
-        weaponMeshInstance = Instantiate(weaponData.WeaponMesh, transform);
-   } 
 
     
     protected override void Shoot() {

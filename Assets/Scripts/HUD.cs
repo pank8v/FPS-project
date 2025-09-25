@@ -23,8 +23,8 @@ public class HUD : MonoBehaviour
         if (rangeWeapon) {
             rangeWeapon.OnShoot += UpdateAmmo;
             rangeWeapon.OnReloadEnd += UpdateAmmo;
-            UpdateAmmo(); 
         }
+        UpdateAmmo(); 
     }
     
     
@@ -45,8 +45,15 @@ public class HUD : MonoBehaviour
 
 
     public void UpdateAmmo() {
-        int currentAmmo = rangeWeapon.currentAmmo;
-        currentAmmoText.text = $"<color=#FF6AFF>{currentAmmo.ToString("D3")}</color>";
-        reserveAmmoText.text = $"<color=#6AFFFE>{rangeWeapon.GetAmmoCount().ToString("D3")}</color> <color=#6AFFFE></color>";
+        if (rangeWeapon) {
+            int currentAmmo = rangeWeapon.currentAmmo;
+            currentAmmoText.text = $"<color=#FF6AFF>{currentAmmo.ToString("D3")}</color>";
+            reserveAmmoText.text = $"<color=#6AFFFE>{rangeWeapon.GetAmmoCount().ToString("D3")}</color>";
+        }
+        else {
+            currentAmmoText.text = "";
+            reserveAmmoText.text = "";
+        }
+
     }
 }
