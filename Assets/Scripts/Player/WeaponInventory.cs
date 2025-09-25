@@ -56,13 +56,12 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
         currentWeaponIndex = weaponIndex;
         for (int i = 0; i < weaponSlots.Length; i++) {
             weaponSlots[i].gameObject.SetActive(i == weaponIndex);
+            playerShooting.SetCurrentWeapon(weapons[currentWeaponIndex]);
+            cameraRecoil.SetCurrentWeapon(weapons[weaponIndex]);
+            hud.UpdateHUD(weapons[weaponIndex]);
+            weaponVisual.SetCurrentWeapon(weapons[weaponIndex], currentWeaponIndex);
         }
-       if (weapons[currentWeaponIndex]) {
-           playerShooting.SetCurrentWeapon(weapons[currentWeaponIndex]);
-           cameraRecoil.SetCurrentWeapon(weapons[weaponIndex]);
-           hud.UpdateHUD(weapons[weaponIndex]);
-           weaponVisual.SetCurrentWeapon(weapons[weaponIndex], currentWeaponIndex);
-        }
+      
 
     }
 

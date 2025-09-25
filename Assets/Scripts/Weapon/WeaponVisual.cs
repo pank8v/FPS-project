@@ -61,8 +61,8 @@ public class WeaponVisual : MonoBehaviour
          rangeWeapon.OnShoot += Recoil;
          recoilOffset = Vector3.zero;
          swayPositionOffset = Vector3.zero;
+         targetPosition = currentWeapon.IsAiming ? AimPosition : HipPosition; 
       }
-      targetPosition = currentWeapon.IsAiming ? AimPosition : HipPosition; 
 
    }
    

@@ -38,8 +38,8 @@ public class PlayerShooting : MonoBehaviour
     }
     
     private void Update() {
-        HandleShooting();
         if (currentWeapon) {
+            HandleShooting();
             HandleAiming(); 
             HandleSway();
             HandleBobbing();
