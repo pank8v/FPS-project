@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9e3d654435e4041b12e02aa90d35a8, type: 3}
   m_Name: SMG
   m_EditorClassIdentifier: Assembly-CSharp::RangeWeaponData
-  weaponMesh: {fileID: 3566347261712635835, guid: 2caee91f7d937434c8f1351d3145e6fc, type: 3}
+  weaponMesh: {fileID: 3107769282266709824, guid: 0225e581a9c240a45b15d7bd77087ffd, type: 3}
   weaponName: SMG
   fireRate: 14
   damage: 15
   range: 100
   shotSound: {fileID: 8300000, guid: d11f77a6a963444419de15d73a42e259, type: 3}
   weaponPosition: {x: 0.1384, y: -0.297, z: 0.076}
-  handsHipPosition: {x: 0, y: 0, z: 0}
-  handsAimPosition: {x: -0.1400003, y: 0.06400001, z: -0.1320001}
-  handsRotation: {x: 0, y: 0, z: 0, w: 0}
+  hipPosition: {x: 0, y: 0, z: 0}
+  aimPosition: {x: -0.14, y: 0.04, z: -0.18}
+  rotation: {x: 0, y: 0, z: 0, w: 0}
   minimumRecoilX: -3
   maximumRecoilX: -5
   minimumRecoilY: 0.8

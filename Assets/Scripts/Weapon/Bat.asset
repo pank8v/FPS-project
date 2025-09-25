@@ -17,8 +17,8 @@ MonoBehaviour:
   fireRate: 5
   damage: 40
   range: 3
-  shotSound: {fileID: 8300000, guid: 101a910724d21184889f95f6218811d5, type: 3}
-  weaponPosition: {x: 0.14, y: -0.3, z: 0.52}
+  shotSound: {fileID: 8300000, guid: da7012d847f7d654e832248f60a2a1e5, type: 3}
+  weaponPosition: {x: 0.03, y: -0.08, z: -0.18}
   hipPosition: {x: 0, y: 0, z: 0}
   aimPosition: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 0}

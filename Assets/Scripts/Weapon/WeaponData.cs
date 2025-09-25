@@ -37,7 +37,7 @@ public class WeaponData : ScriptableObject
     public int Damage => damage;
     public float Range => range;
     public AudioClip ShotSound => shotSound;
-
+    
     public Vector3 WeaponPosition => weaponPosition;
     public Vector3 HipPosition => hipPosition;
     public Vector3 AimPosition => aimPosition;

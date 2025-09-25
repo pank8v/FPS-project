@@ -3,6 +3,8 @@ using UnityEngine;
 public class WeaponVisual : MonoBehaviour
 {
    [SerializeField] private Transform[] weaponSlots;
+   [SerializeField] private Transform rightHandTransform;
+   [SerializeField] private Transform leftHandTransform;
    private int currentWeaponIndex;
    private Weapon currentWeapon;
    private RangeWeapon rangeWeapon;
@@ -77,8 +79,8 @@ public class WeaponVisual : MonoBehaviour
          transform.localPosition = targetPosition + recoilOffset + swayPositionOffset;
          if (rangeWeapon) {
             recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero, recoilSmooth * Time.deltaTime);
-            //  muzzleTransform.localPosition = muzzlePosition;
          }
+         
       }
    }
    
