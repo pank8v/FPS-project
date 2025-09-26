@@ -172,6 +172,8 @@ MonoBehaviour:
   weaponObject: {fileID: 5803623858679958302}
   patrolPoints: []
   waitingTime: 3
+  animator: {fileID: 0}
+  rifleshooting: {fileID: 0}
   weapon: {fileID: 5803623858679958302}
   bulletPrefab: {fileID: 4223330584917379867, guid: 111b6d6788296aa48b19bd3c43fcff14, type: 3}
   enemyMuzzle: {fileID: 118785581743467093}

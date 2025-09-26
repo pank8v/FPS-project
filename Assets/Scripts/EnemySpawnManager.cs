@@ -7,7 +7,7 @@ public class EnemySpawnManager : MonoBehaviour
    [SerializeField] private GameObject rangeEnemy;
    [SerializeField] private Transform target;
    [SerializeField] private Transform[] patrolPoints;
-   private int enemyCount = 1;
+   [SerializeField] private int enemyCount;
    
 
    private void Awake() {

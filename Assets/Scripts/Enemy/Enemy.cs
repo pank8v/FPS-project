@@ -6,7 +6,7 @@ public abstract class Enemy : MonoBehaviour
    public EnemyData EnemyData => enemyData;
    [SerializeField] protected NavMeshAgent agent;
    [SerializeField] protected Transform target;
-   
+   [SerializeField] protected Animator animator;
    [SerializeField] private GameObject weaponObject;
 
    [Header("Patrol")]
@@ -30,6 +30,7 @@ public abstract class Enemy : MonoBehaviour
    protected float attackRate => enemyData.AttackRate;
    
    
+   
    protected enum EnemyState
    {
       Patrol, 
@@ -41,6 +42,7 @@ public abstract class Enemy : MonoBehaviour
 
    
    protected bool CanSeePlayer() {
+      
       Vector3 dirToPlayer = (target.position - transform.position).normalized;
       float angle = Vector3.Angle(transform.forward, dirToPlayer);
       if (angle < viewAngle) {
@@ -58,6 +60,17 @@ public abstract class Enemy : MonoBehaviour
    
    
    protected virtual void Update() {
+      Vector3 localMovement = transform.InverseTransformDirection(agent.velocity);
+      float x = localMovement.x;
+      float y = localMovement.y;
+      
+      float currentVelocity = agent.velocity.magnitude;
+      animator.SetFloat("Speed", currentVelocity);
+      animator.SetFloat("X", x);
+      animator.SetFloat("Y", y);
+      
+      
+      
       if (target == null) return;
       distance = Vector3.Distance(transform.position, target.position);
       HandleState();
@@ -109,7 +122,7 @@ public abstract class Enemy : MonoBehaviour
             isWaiting = false;
          }
       }
-      Debug.Log("patrol");
+      Debug.Log("Patrol");
    }
   
    protected virtual void Chase() {

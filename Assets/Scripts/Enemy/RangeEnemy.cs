@@ -14,6 +14,7 @@ public class RangeEnemy : Enemy
   
 
     protected override void Attack() {
+        animator.SetTrigger("Shoot");
         Vector3 direction = (target.position - enemyMuzzle.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSmooth);
