@@ -435,9 +435,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 14
+  m_Acceleration: 24
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 720
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -463,7 +463,10 @@ MonoBehaviour:
   target: {fileID: 0}
   animator: {fileID: 7587856851395772730}
   weaponObject: {fileID: 0}
+  capsuleCollider: {fileID: 9169643816740678979}
   patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -471,7 +474,7 @@ MonoBehaviour:
   weapon: {fileID: 5816217443084112300}
   bulletPrefab: {fileID: 4223330584917379867, guid: 111b6d6788296aa48b19bd3c43fcff14, type: 3}
   enemyMuzzle: {fileID: 5890900077578216205}
-  bulletSpeed: 7
+  bulletSpeed: 15
 --- !u!114 &483232660012330036
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,8 +9,6 @@ public class RangeWeaponData : WeaponData
     [SerializeField] private int maxAmmo;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private AudioClip reloadSound;
-    [SerializeField] private Vector3 muzzlePosition;
-
 
 
     public AmmoType AmmoType => ammoType;
@@ -18,7 +16,6 @@ public class RangeWeaponData : WeaponData
     public int MaxAmmo => maxAmmo;
     public float BulletSpeed => bulletSpeed;
     public AudioClip ReloadSound => reloadSound;
-    public Vector3 MuzzlePosition => muzzlePosition;
 
 
 

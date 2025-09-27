@@ -6,6 +6,7 @@ public class RangeWeapon : Weapon
 {
     protected RangeWeaponData rangeWeaponData => weaponData as RangeWeaponData;
     public RangeWeaponData RangeWeaponData => rangeWeaponData;
+    [SerializeField] private ParticleSystem muzzleFlash;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform muzzle;
     protected IAmmoProvider ammoProvider;
@@ -49,6 +50,7 @@ public class RangeWeapon : Weapon
     
     protected override void Shoot() {
         currentAmmo--;
+        muzzleFlash.Play();
         Vector3 targetPoint;
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
        

@@ -10,7 +10,7 @@ public class EnemyHealth : Health
 
    protected override void Die() {
       enemy.HandleDeath();
-      Destroy(gameObject);
+      this.enabled = false;
    }
 
    public override void ApplyDamage(int damage) {

@@ -18,8 +18,8 @@ public class RangeEnemy : Enemy
         Vector3 direction = (target.position - enemyMuzzle.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSmooth);
-
-        agent.isStopped = true;
+        agent.destination = agent.transform.position;
+       // agent.isStopped = true;
         if (nextTimeToFire <= Time.time) {
             GameObject bullet = Instantiate(bulletPrefab, enemyMuzzle.position, Quaternion.LookRotation(direction));
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();

@@ -8,7 +8,8 @@ public abstract class Enemy : MonoBehaviour
    [SerializeField] protected Transform target;
    [SerializeField] protected Animator animator;
    [SerializeField] private GameObject weaponObject;
-
+   [SerializeField] private CapsuleCollider capsuleCollider;
+   
    [Header("Patrol")]
    [SerializeField] protected Transform[] patrolPoints;
    [SerializeField] protected float waitingTime = 5f;
@@ -60,16 +61,7 @@ public abstract class Enemy : MonoBehaviour
    
    
    protected virtual void Update() {
-      Vector3 localMovement = transform.InverseTransformDirection(agent.velocity);
-      float x = localMovement.x;
-      float y = localMovement.y;
-      
-      float currentVelocity = agent.velocity.magnitude;
-      animator.SetFloat("Speed", currentVelocity);
-      animator.SetFloat("X", x);
-      animator.SetFloat("Y", y);
-      
-      
+      HandleMovementAnimations();
       
       if (target == null) return;
       distance = Vector3.Distance(transform.position, target.position);
@@ -96,7 +88,7 @@ public abstract class Enemy : MonoBehaviour
             Attack();
             if (!CanSeePlayer())
                currentState = EnemyState.Patrol;
-            else if (distance > attackDistance) {
+            else if (distance < attackDistance) {
                currentState = EnemyState.Chase;
             }
             break;
@@ -141,6 +133,15 @@ public abstract class Enemy : MonoBehaviour
    
    public void HandleDeath() {
       SpawnWeapon();
+      animator.SetBool("Dead", true);
+      if (agent) {
+         agent.enabled = false;
+      }
+
+      if (capsuleCollider) {
+         capsuleCollider.enabled = false;
+      }
+      this.enabled = false;
    }
 
    
@@ -163,6 +164,12 @@ public abstract class Enemy : MonoBehaviour
    public void SetPatrolPoints(Transform[] points) {
       patrolPoints = points;
    }
-   
+
+
+   private void HandleMovementAnimations() {
+      float currentVelocity = agent.velocity.magnitude;
+      animator.SetFloat("Speed", currentVelocity);
+      
+   }
 
 }

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Solider
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   health: 100
-  damage: 1
-  attackDistance: 20
-  patrolSpeed: 5
-  chaseSpeed: 14
+  damage: 30
+  attackDistance: 10
+  patrolSpeed: 2
+  chaseSpeed: 11
   viewAngle: 135
-  viewDistance: 30
-  attackRate: 0.4
+  viewDistance: 18
+  attackRate: 0.1
