@@ -12,6 +12,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool isAiming { get; private set; }
     public bool isJumping { get; private set; }
     public bool isCrouching { get; private set; }
+    public bool pauseTriggered { get; private set; }
 
     public event Action OnReloadPressed;
     public event Action OnFirstWeaponSwitch;
@@ -43,6 +44,7 @@ public class PlayerInputHandler : MonoBehaviour
         inputSystem.Player.ThirdWeaponSwitch.performed += OnThirdWeaponSwitchPerformed;
         inputSystem.Player.Interact.performed += OnInteractPerformed;
         inputSystem.Player.Heal.performed += OnHealPerformed;
+        inputSystem.UI.Pause.performed += OnPausePerformed;
 
     }
 
@@ -127,4 +129,9 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnHealPerformed(InputAction.CallbackContext context) {
         Heal?.Invoke();
     }
+
+    private void OnPausePerformed(InputAction.CallbackContext context) { 
+        pauseTriggered = !pauseTriggered;
+    }
+    
 }
