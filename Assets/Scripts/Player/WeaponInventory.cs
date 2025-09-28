@@ -89,11 +89,13 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     }
     
     public void UseHeal() {
-        if (healAmount < 1) return;
-        if (healItem.Use(interactor)) {
-            healAmount -= 1;
-            healCount.UpdateHealCount(healAmount);
-        } 
+        if (!PauseManager.isPaused) {
+            if (healAmount < 1) return;
+            if (healItem.Use(interactor)) {
+                healAmount -= 1;
+                healCount.UpdateHealCount(healAmount);
+            } 
+        }
     }
     
     // ammo

@@ -38,11 +38,13 @@ public class PlayerShooting : MonoBehaviour
     }
     
     private void Update() {
-        if (currentWeapon) {
-            HandleShooting();
-            HandleAiming(); 
-            HandleSway();
-            HandleBobbing();
+        if (!PauseManager.isPaused) {
+            if (currentWeapon) {
+                HandleShooting();
+                HandleAiming(); 
+                HandleSway();
+                HandleBobbing();
+            }
         }
     }
 
@@ -66,9 +68,11 @@ public class PlayerShooting : MonoBehaviour
     }
 
     private void HandleReload() {
-        rangeWeapon = currentWeapon as RangeWeapon;
-        if (rangeWeapon) {
-            rangeWeapon.TryReload();
+        if (!PauseManager.isPaused) {
+            rangeWeapon = currentWeapon as RangeWeapon;
+            if (rangeWeapon && !PauseManager.isPaused) {
+                rangeWeapon.TryReload();
+            }
         }
     }
 

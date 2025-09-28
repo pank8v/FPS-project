@@ -52,8 +52,10 @@ public class InteractionSystem : MonoBehaviour
    }
    
    private void Interact() {
-      if (currentInteractable != null) {
-         currentInteractable.Interact(interactor);
+      if (!PauseManager.isPaused) {
+         if (currentInteractable != null) {
+            currentInteractable.Interact(interactor);
+         }
       }
    }
    

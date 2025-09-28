@@ -48,9 +48,7 @@ public abstract class Enemy : MonoBehaviour
       float angle = Vector3.Angle(transform.forward, dirToPlayer);
       if (angle < viewAngle) {
          if (Physics.Raycast(transform.position + Vector3.up, dirToPlayer, out RaycastHit hit, viewDistance)) {
-            Debug.DrawLine(transform.position + Vector3.up, hit.point, Color.red);
             if (hit.collider.CompareTag("Player")) {
-               Debug.Log("detected");
                return true;
             }
          }
@@ -88,7 +86,7 @@ public abstract class Enemy : MonoBehaviour
             Attack();
             if (!CanSeePlayer())
                currentState = EnemyState.Patrol;
-            else if (distance < attackDistance) {
+            else if (distance > attackDistance) {
                currentState = EnemyState.Chase;
             }
             break;
@@ -167,7 +165,6 @@ public abstract class Enemy : MonoBehaviour
    private void HandleMovementAnimations() {
       float currentVelocity = agent.velocity.magnitude;
       animator.SetFloat("Speed", currentVelocity);
-      
    }
 
 }

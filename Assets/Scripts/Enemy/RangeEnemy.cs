@@ -13,13 +13,13 @@ public class RangeEnemy : Enemy
   
 
     protected override void Attack() {
-        animator.SetTrigger("Shoot");
         Vector3 direction = (target.position - enemyMuzzle.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSmooth);
         agent.destination = agent.transform.position;
        // agent.isStopped = true;
-        if (nextTimeToFire <= Time.time) {
+        if (nextTimeToFire <= Time.time && Vector3.Distance(transform.position, target.position) <= attackDistance) {
+            animator.SetTrigger("Shoot");
             GameObject bullet = Instantiate(bulletPrefab, enemyMuzzle.position, Quaternion.LookRotation(direction));
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             Bullet bulletScript = bullet.GetComponent<Bullet>();

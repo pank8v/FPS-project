@@ -54,10 +54,11 @@ public class PlayerController : MonoBehaviour
     }
     
     private void Update() {
-        HandleMovement();
-        HanldeCrouch();
-        HandleSlide();
-        
+        if (!PauseManager.isPaused) {
+            HandleMovement();
+            HanldeCrouch();
+            HandleSlide();
+        }
     }
 
     
