@@ -60,6 +60,7 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
             cameraRecoil.SetCurrentWeapon(weapons[weaponIndex]);
             hud.UpdateHUD(weapons[weaponIndex]);
             weaponVisual.SetCurrentWeapon(weapons[weaponIndex], currentWeaponIndex);
+            
         }
       
 
