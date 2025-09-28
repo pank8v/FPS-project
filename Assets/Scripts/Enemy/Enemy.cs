@@ -8,7 +8,7 @@ public abstract class Enemy : MonoBehaviour
    [SerializeField] protected Transform target;
    [SerializeField] protected Animator animator;
    [SerializeField] private GameObject weaponObject;
-   [SerializeField] private CapsuleCollider capsuleCollider;
+   [SerializeField] private RagdollController ragdollController;
    
    [Header("Patrol")]
    [SerializeField] protected Transform[] patrolPoints;
@@ -137,10 +137,8 @@ public abstract class Enemy : MonoBehaviour
       if (agent) {
          agent.enabled = false;
       }
-
-      if (capsuleCollider) {
-         capsuleCollider.enabled = false;
-      }
+      ragdollController.SetRagDoll(true);
+      
       this.enabled = false;
    }
 

@@ -12,7 +12,6 @@ public class PlayerInputHandler : MonoBehaviour
     public bool isAiming { get; private set; }
     public bool isJumping { get; private set; }
     public bool isCrouching { get; private set; }
-    public bool pauseTriggered { get; private set; }
 
     public event Action OnReloadPressed;
     public event Action OnFirstWeaponSwitch;
@@ -20,6 +19,7 @@ public class PlayerInputHandler : MonoBehaviour
     public event Action OnThirdWeaponSwitch;
     public event Action OnInteract;
     public event Action Heal;
+    public event Action OnPause;
 
     private void Awake() {
         inputSystem = new InputSystem_Actions();
@@ -131,7 +131,7 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
     private void OnPausePerformed(InputAction.CallbackContext context) { 
-        pauseTriggered = !pauseTriggered;
+        OnPause?.Invoke();
     }
     
 }

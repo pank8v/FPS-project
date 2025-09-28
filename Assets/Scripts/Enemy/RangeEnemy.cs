@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class RangeEnemy : Enemy
 {
-    [SerializeField] private GameObject weapon;
     [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected Transform enemyMuzzle;
     [SerializeField] protected float bulletSpeed = 7f;

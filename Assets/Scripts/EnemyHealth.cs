@@ -8,6 +8,10 @@ public class EnemyHealth : Health
       health = enemy.EnemyData.Health;
    }
 
+   private void Update() {
+      Debug.Log(health);
+   }
+
    protected override void Die() {
       enemy.HandleDeath();
       this.enabled = false;
