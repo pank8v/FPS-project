@@ -49,7 +49,7 @@ public class WeaponVisual : MonoBehaviour
 
 
    private void Start() {
-      initialRotation = transform.rotation;
+      initialRotation = Quaternion.identity;
    }
 
    public void SetCurrentWeapon(Weapon weapon, int weaponIndex) {

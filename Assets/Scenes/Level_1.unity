@@ -912,6 +912,7 @@ GameObject:
   - component: {fileID: 72881273}
   - component: {fileID: 72881275}
   - component: {fileID: 72881274}
+  - component: {fileID: 72881276}
   m_Layer: 5
   m_Name: Crosshair
   m_TagString: Untagged
@@ -976,6 +977,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 72881272}
   m_CullTransparentMesh: 1
+--- !u!114 &72881276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72881272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b025e46057190408509f34706235b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DynamicCrosshair
+  currentWeapon: {fileID: 0}
+  playerInputHandler: {fileID: 211044268}
+  crosshairImage: {fileID: 72881273}
+  idleSize: 100
+  shotSize: 200
+  smooth: 30
+  targetSize: 0
 --- !u!4 &73217897 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8966627916916610821, guid: 711016e15dc0bf14c91cd472ebddb879, type: 3}
@@ -8662,7 +8682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1136497802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11279,8 +11299,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375b525a7d54c8248962478d8f8acc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HUD
+  crosshair: {fileID: 72881273}
   currentAmmoText: {fileID: 248877652}
   reserveAmmoText: {fileID: 1880722270}
+  shotOffset: 100
+  crosshairSmoothing: 1
+  shootKick: 30
+  returnSpeed: 5
 --- !u!222 &1452313444
 CanvasRenderer:
   m_ObjectHideFlags: 0
