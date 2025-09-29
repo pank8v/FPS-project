@@ -3,8 +3,6 @@ using UnityEngine;
 public class WeaponVisual : MonoBehaviour
 {
    [SerializeField] private Transform[] weaponSlots;
-   [SerializeField] private Transform rightHandTransform;
-   [SerializeField] private Transform leftHandTransform;
    private int currentWeaponIndex;
    private Weapon currentWeapon;
    private RangeWeapon rangeWeapon;

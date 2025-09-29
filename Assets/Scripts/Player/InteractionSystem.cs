@@ -40,16 +40,19 @@ public class InteractionSystem : MonoBehaviour
       for (int i = 0; i < hits.Length; i++) {
          IInteractable interactable = hits[i].GetComponent<IInteractable>();
          if (interactable == null) continue;
-         Vector3 dirToObject = hits[i].transform.position - transform.position;
+         Vector3 closestPoint = hits[i].ClosestPoint(transform.position);
+         Vector3 dirToObject = (closestPoint - mainCamera.transform.position).normalized;
          float angle = Vector3.Angle(mainCamera.transform.forward, dirToObject);
          if (angle > maxViewAngle / 2f) continue;
-         float distance = Vector3.Distance(transform.position, hits[i].transform.position);
+         float distance = Vector3.Distance(transform.position, closestPoint);
          if (distance < minDistance) {
             minDistance = distance;
             currentInteractable = interactable;
          }
       }
    }
+   
+   
    
    private void Interact() {
       if (!PauseManager.isPaused) {
