@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class InteractionSystem : MonoBehaviour
 {
+   [SerializeField] private InteractableUI interactableUI;
    [SerializeField] private Camera mainCamera;
    [SerializeField] private PlayerInputHandler playerInputHandler;
    [SerializeField] private WeaponInventory weaponInventory;
@@ -12,6 +13,7 @@ public class InteractionSystem : MonoBehaviour
    
    private IInteractor interactor;
    private IInteractable currentInteractable;
+   private IInteractable lastInteractable;
 
    public WeaponInventory WeaponInventory => weaponInventory;
 
@@ -30,6 +32,10 @@ public class InteractionSystem : MonoBehaviour
    
    private void Update() {
      FindInteractables();
+     if (currentInteractable != lastInteractable) {
+        interactableUI.UpdateText(currentInteractable);
+        lastInteractable = currentInteractable;
+     }
    }
 
 
@@ -44,7 +50,7 @@ public class InteractionSystem : MonoBehaviour
          Vector3 dirToObject = (closestPoint - mainCamera.transform.position).normalized;
          float angle = Vector3.Angle(mainCamera.transform.forward, dirToObject);
          if (angle > maxViewAngle / 2f) continue;
-         float distance = Vector3.Distance(transform.position, closestPoint);
+         float distance = Vector3.Distance(mainCamera.transform.position, closestPoint);
          if (distance < minDistance) {
             minDistance = distance;
             currentInteractable = interactable;

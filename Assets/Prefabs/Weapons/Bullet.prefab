@@ -98,9 +98,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4033755977234947143}
-  - component: {fileID: 6714952960772199757}
   - component: {fileID: -4215909508435543004}
   - component: {fileID: 4232432766181736221}
+  - component: {fileID: -9098833852555881009}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -124,18 +124,6 @@ Transform:
   - {fileID: 6427105944595070491}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6714952960772199757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223330584917379867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68c713ba9ca4b584c8c1e97929eaf847, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bullet
 --- !u!54 &-4215909508435543004
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -144,7 +132,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4223330584917379867}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 3
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -184,3 +172,15 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.055791736
   m_Center: {x: 0, y: 0.0017621815, z: -0.004428491}
+--- !u!114 &-9098833852555881009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223330584917379867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68c713ba9ca4b584c8c1e97929eaf847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bullet

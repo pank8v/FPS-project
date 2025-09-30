@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PickableAmmo : MonoBehaviour, IInteractable
 {
+    [SerializeField] private string interactionText;
+    public string InteractionText => interactionText;
+    
     [SerializeField] AmmoType ammoType;
     [SerializeField] private int ammoCount;
     public AmmoType AmmoType => ammoType;

@@ -32,5 +32,8 @@ public class Bullet : MonoBehaviour
             health.ApplyDamage(damage);
             Destroy(gameObject);
         }
+        else {
+            Destroy(gameObject);
+        }
     }
 }
