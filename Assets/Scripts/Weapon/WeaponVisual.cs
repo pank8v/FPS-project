@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class WeaponVisual : MonoBehaviour
 {
+   [SerializeField] private WeaponInventory weaponInventory;
    [SerializeField] private Transform[] weaponSlots;
    private int currentWeaponIndex;
    private Weapon currentWeapon;
@@ -46,6 +47,15 @@ public class WeaponVisual : MonoBehaviour
    private Vector3 bobingOffset;
 
 
+   private void OnEnable() {
+      weaponInventory.OnWeaponSwitch += SetCurrentWeapon;
+   }
+   
+   private void OnDisable() {
+      weaponInventory.OnWeaponSwitch -= SetCurrentWeapon;
+   }
+   
+   
    private void Start() {
       initialRotation = Quaternion.identity;
    }
@@ -63,10 +73,6 @@ public class WeaponVisual : MonoBehaviour
       }
 
    }
-   
-   
-
-
    
    
    private void Update() {

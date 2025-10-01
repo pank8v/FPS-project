@@ -13926,6 +13926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375b525a7d54c8248962478d8f8acc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HUD
+  weaponInventory: {fileID: 8599241445532810189}
   crosshair: {fileID: 72881273}
   currentAmmoText: {fileID: 248877652}
   reserveAmmoText: {fileID: 1880722270}
@@ -18878,6 +18879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1f3f803e1443a44db80306b6ee1fecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
+  playerHealth: {fileID: 3602483526016644030}
   fillImage: {fileID: 1513640919}
   smoothSpeed: 5
 --- !u!114 &2053255012
@@ -20292,6 +20294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraRecoil
   playerInputHandler: {fileID: 211044268}
+  weaponInventory: {fileID: 8599241445532810189}
 --- !u!1001 &3040173523896208555
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20300,6 +20303,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1102555028}
     m_Modifications:
+    - target: {fileID: 712409782590391665, guid: 67407aa5f0db1e348b452b88f4d21be5, type: 3}
+      propertyPath: interactionText
+      value: E to Interact
+      objectReference: {fileID: 0}
     - target: {fileID: 1742944956032216138, guid: 67407aa5f0db1e348b452b88f4d21be5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.603975
@@ -20369,8 +20376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eec90293883c0f428b27d2fccc95cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  healthBar: {fileID: 2053255011}
-  playerHealth: 100
+  maxHealth: 100
 --- !u!1 &3681008233029958252
 GameObject:
   m_ObjectHideFlags: 0
@@ -20418,6 +20424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 937f26efe0f99c2429d41675daeeabda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponVisual
+  weaponInventory: {fileID: 8599241445532810189}
   weaponSlots:
   - {fileID: 473043093821151817}
   - {fileID: 4292363248512713562}
@@ -20491,9 +20498,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 897d715edcc4d5e4a88c9d6d72a375cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem
+  playerInputHandler: {fileID: 211044268}
   interactableUI: {fileID: 92466312}
   mainCamera: {fileID: 1957230888324134865}
-  playerInputHandler: {fileID: 211044268}
   weaponInventory: {fileID: 8599241445532810189}
   maxViewAngle: 90
   interactionRadius: 2
@@ -20524,7 +20531,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8480962862490722093}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -21034,14 +21041,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponInventory
   playerInputHandler: {fileID: 211044268}
-  weaponVisual: {fileID: 4059170968810404256}
   playerShooting: {fileID: 7716934466664874304}
   weaponSlots:
   - {fileID: 473043093821151817}
   - {fileID: 4292363248512713562}
   - {fileID: 5404613089936909315}
-  cameraRecoil: {fileID: 3030188530006557964}
-  hud: {fileID: 1452313443}
   healCount: {fileID: 1213521263}
   RifleAmmo: 200
   ShotgunAmmo: 30

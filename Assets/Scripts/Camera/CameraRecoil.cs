@@ -3,6 +3,7 @@ using UnityEngine;
 public class CameraRecoil : MonoBehaviour
 {
     [SerializeField] private PlayerInputHandler playerInputHandler;
+    [SerializeField] private WeaponInventory weaponInventory;
     private Weapon currentWeapon;
     
     private float minimumRecoilX => currentWeapon.WeaponData.MinimumRecoilX;
@@ -15,12 +16,17 @@ public class CameraRecoil : MonoBehaviour
 
     private Vector3 currentRotation;
     private Vector3 targetRotation;
+
+    private void OnEnable() {
+        weaponInventory.OnWeaponSwitch += SetCurrentWeapon;
+    }
+    
     private void Update() {
         HandleRecoil();
     }
 
 
-    public void SetCurrentWeapon(Weapon newWeapon) {
+    public void SetCurrentWeapon(Weapon newWeapon, int _) {
         currentWeapon = newWeapon;
         if (currentWeapon != null) {
             currentWeapon.OnShoot -= AddRecoil;

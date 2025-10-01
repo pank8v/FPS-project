@@ -4,7 +4,7 @@ using UnityEngine;
 public class InteractableUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI interactableText;
-
+    
     public void UpdateText(IInteractable interactable) {
         if (interactable != null) {
             interactableText.gameObject.SetActive(true);

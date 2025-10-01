@@ -23,6 +23,7 @@ public class PlayerShooting : MonoBehaviour
         playerInputHandler.OnFirstWeaponSwitch -= SwitchToMainWeapon;
         playerInputHandler.OnSecondWeaponSwitch -= SwitchToAdditionalWeapon;
         playerInputHandler.OnThirdWeaponSwitch -= SwitchToThirdWeapon;
+
     }
 
     
@@ -49,9 +50,8 @@ public class PlayerShooting : MonoBehaviour
     }
 
 
-    public void SetCurrentWeapon(Weapon weapon) {
+    public void SetCurrentWeapon(Weapon weapon, int _) {
         currentWeapon = weapon; 
-        
         rangeWeapon = currentWeapon as RangeWeapon;
         if (rangeWeapon) {
             rangeWeapon.isReloading = false;

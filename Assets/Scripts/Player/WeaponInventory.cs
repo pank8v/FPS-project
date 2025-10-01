@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -5,31 +6,29 @@ using System.Collections.Generic;
 public class WeaponInventory : MonoBehaviour, IAmmoProvider
 {
     [SerializeField] private PlayerInputHandler playerInputHandler;
-    [SerializeField] private WeaponVisual weaponVisual;
     [SerializeField] private PlayerShooting playerShooting;
     [SerializeField] private Transform[] weaponSlots;
     private Weapon[] weapons = new Weapon[3];
+    
+    private Weapon currentWeapon;
+    private int currentWeaponIndex = 0;
     private IInteractor interactor;
 
     
-    
-    [SerializeField] private CameraRecoil cameraRecoil;
-    [SerializeField] private HUD hud;
     [SerializeField] private HealCount healCount;
-    
     [SerializeField] private int RifleAmmo;
     [SerializeField] private int ShotgunAmmo;
     [SerializeField] private int PistolAmmo;
     [SerializeField] private int SmgAmmo;
     
-    private int currentWeaponIndex = 0;
     private HealItem healItem = new HealItem();
 
 
     [SerializeField] private int healAmount;
     private Dictionary<AmmoType, int> ammoReserve = new Dictionary<AmmoType, int>();
-   
 
+    public event Action<Weapon, int> OnWeaponSwitch;
+    public event Action OnAmmoChange;
 
     private void OnEnable() {
         playerInputHandler.Heal += UseHeal;
@@ -39,8 +38,8 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
         playerInputHandler.Heal -= UseHeal;
     }
     
-    private void Awake() {
-        SwitchWeapon(0);
+    private void Awake() { 
+        SwitchWeapon(currentWeaponIndex); 
         interactor = GetComponentInParent<IInteractor>();
         healCount.UpdateHealCount(healAmount); 
         
@@ -56,16 +55,14 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
         currentWeaponIndex = weaponIndex;
         for (int i = 0; i < weaponSlots.Length; i++) {
             weaponSlots[i].gameObject.SetActive(i == weaponIndex);
-            playerShooting.SetCurrentWeapon(weapons[currentWeaponIndex]);
-            cameraRecoil.SetCurrentWeapon(weapons[weaponIndex]);
-            hud.UpdateHUD(weapons[weaponIndex]);
-            weaponVisual.SetCurrentWeapon(weapons[weaponIndex], currentWeaponIndex);
+            currentWeapon = weapons[currentWeaponIndex];
+            playerShooting.SetCurrentWeapon(currentWeapon, currentWeaponIndex);
+            OnWeaponSwitch?.Invoke(currentWeapon, currentWeaponIndex);
             
         }
       
 
     }
-
 
     public void SetNewWeapon(WeaponData weaponData) {
         var oldWeapon = weaponSlots[currentWeaponIndex].GetComponentInChildren<Weapon>();
@@ -75,10 +72,8 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
         GameObject weapon = Instantiate(weaponData.WeaponMesh, weaponSlots[currentWeaponIndex].transform);
         weapons[currentWeaponIndex] = weapon.GetComponent<Weapon>();
         var currentWeapon = weapons[currentWeaponIndex];
-        playerShooting.SetCurrentWeapon(currentWeapon);
-        cameraRecoil.SetCurrentWeapon(currentWeapon); 
-        hud.UpdateHUD(currentWeapon);
-        weaponVisual.SetCurrentWeapon(currentWeapon, currentWeaponIndex);
+        playerShooting.SetCurrentWeapon(currentWeapon, currentWeaponIndex);
+        OnWeaponSwitch?.Invoke(currentWeapon, currentWeaponIndex);
         
     }
     
@@ -120,7 +115,7 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     public void AddAmmo(AmmoType ammoType, int amount) {
         if (ammoReserve.ContainsKey(ammoType)) {
            ammoReserve[ammoType] += amount;
-           hud.UpdateAmmo();
+           OnAmmoChange?.Invoke();
         }
     }
     

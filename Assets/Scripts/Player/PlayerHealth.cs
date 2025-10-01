@@ -1,31 +1,32 @@
+using System;
 using UnityEngine;
 
 public class PlayerHealth : Health
 {
-    [SerializeField] private HealthBar healthBar;
-    [SerializeField] protected float playerHealth = 100;
-
+    [SerializeField] protected float maxHealth = 100;
+    public event Action<float> OnHealthChange;
+    
     protected void Awake() {
-        health = playerHealth;
+        health = maxHealth;
     }
 
      protected override void TakeDamage(int damage) {
          health -= damage;
-         healthBar.SetHealth(health / playerHealth);
+         OnHealthChange?.Invoke(health / maxHealth);
          if(health <= 0) Die();
     }
 
     public bool AddHealth(float amount) {
-        if (health < playerHealth) {
-            float needed = playerHealth - health;
+        if (health < maxHealth) {
+            float needed = maxHealth - health;
           
             if (needed < amount) {
-                health = playerHealth;
+                health = maxHealth;
             }
             else {
                 health += amount;
             }
-            healthBar.SetHealth(health / playerHealth);
+            OnHealthChange?.Invoke(health / maxHealth);
             return true;
         }
 
