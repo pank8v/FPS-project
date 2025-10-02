@@ -122,7 +122,6 @@ public class PlayerController : MonoBehaviour
             }
             else {
                 Crouch();
-                Debug.Log("crouch");
             }
 
         }

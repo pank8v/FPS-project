@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-   [SerializeField] private PlayerHealth playerHealth;
+   [SerializeField] private UIController uiController;
    [SerializeField] private Image fillImage;
    [SerializeField] private float smoothSpeed = 5f;
 
@@ -12,11 +12,11 @@ public class HealthBar : MonoBehaviour
    
 
    private void OnEnable() {
-      playerHealth.OnHealthChange += SetHealth;
+      uiController.OnHealthChanged += SetHealth;
    }
 
    private void OnDisable() {
-      playerHealth.OnHealthChange -= SetHealth;
+      uiController.OnHealthChanged -= SetHealth;
    }
    
    public void SetHealth(float health) {

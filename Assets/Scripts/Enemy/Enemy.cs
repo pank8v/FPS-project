@@ -112,14 +112,12 @@ public abstract class Enemy : MonoBehaviour
             isWaiting = false;
          }
       }
-      Debug.Log("Patrol");
    }
   
    protected virtual void Chase() {
       agent.isStopped = false;
       agent.speed = chaseSpeed;
       agent.SetDestination(target.position);
-      Debug.Log("chase");
    }
 
 

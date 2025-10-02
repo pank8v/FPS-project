@@ -16,11 +16,6 @@ public class MeleeWeapon : Weapon
             if (enemyHealth) {
                 enemyHealth.ApplyDamage(damage);
             }
-            Debug.Log("hit" + hit.collider.name);
-            Debug.DrawRay(transform.position, direction * hit.distance, Color.red);   
-        }
-        else {
-            Debug.DrawRay(transform.position, direction * maxDistance, Color.green);
         }
     }
 

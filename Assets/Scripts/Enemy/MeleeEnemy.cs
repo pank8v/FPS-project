@@ -12,7 +12,6 @@ public class MeleeEnemy : Enemy
             Health health = target.GetComponent<Health>();
             health.ApplyDamage(damage);
             agent.isStopped = true;
-            Debug.Log("attack");
             nextTimeToAttack = Time.time + attackRate;
         }
 

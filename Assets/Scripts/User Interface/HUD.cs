@@ -5,6 +5,7 @@ using UnityEngine.PlayerLoop;
 
 public class HUD : MonoBehaviour
 {
+    [SerializeField] private UIController uiController;
     [SerializeField] private WeaponInventory weaponInventory;
     private Weapon currentWeapon;
     private RangeWeapon rangeWeapon;
@@ -26,12 +27,12 @@ public class HUD : MonoBehaviour
 
     private void OnEnable() {
         weaponInventory.OnWeaponSwitch += UpdateHUD;
-        weaponInventory.OnAmmoChange += UpdateAmmo;
+        uiController.OnAmmoChanged += UpdateAmmo;
     }
     
     private void OnDisable() {
         weaponInventory.OnWeaponSwitch -= UpdateHUD;
-        weaponInventory.OnAmmoChange -= UpdateAmmo;
+        uiController.OnAmmoChanged -= UpdateAmmo;
     }
     
     

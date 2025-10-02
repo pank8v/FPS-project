@@ -28,8 +28,9 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     private Dictionary<AmmoType, int> ammoReserve = new Dictionary<AmmoType, int>();
 
     public event Action<Weapon, int> OnWeaponSwitch;
-    public event Action OnAmmoChange;
-
+    public event Action OnAmmoChanged;
+    public event Action<int> OnHealAmountChanged;
+    
     private void OnEnable() {
         playerInputHandler.Heal += UseHeal;
     }
@@ -39,9 +40,9 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     }
     
     private void Awake() { 
+        OnHealAmountChanged?.Invoke(healAmount);
         SwitchWeapon(currentWeaponIndex); 
         interactor = GetComponentInParent<IInteractor>();
-        healCount.UpdateHealCount(healAmount); 
         
       ammoReserve.Add(AmmoType.Rifle, RifleAmmo);
       ammoReserve.Add(AmmoType.Shotgun, ShotgunAmmo);
@@ -65,13 +66,21 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     }
 
     public void SetNewWeapon(WeaponData weaponData) {
+        if (weapons[currentWeaponIndex]) {
+            for (int i = 0; i < weapons.Length; i++) {
+                if (weapons[i] == null) {
+                    SwitchWeapon(i);
+                    break;
+                }
+        }
+        }
         var oldWeapon = weaponSlots[currentWeaponIndex].GetComponentInChildren<Weapon>();
         if (oldWeapon) {
             Destroy(oldWeapon.gameObject);
         }
         GameObject weapon = Instantiate(weaponData.WeaponMesh, weaponSlots[currentWeaponIndex].transform);
         weapons[currentWeaponIndex] = weapon.GetComponent<Weapon>();
-        var currentWeapon = weapons[currentWeaponIndex];
+        currentWeapon = weapons[currentWeaponIndex];
         playerShooting.SetCurrentWeapon(currentWeapon, currentWeaponIndex);
         OnWeaponSwitch?.Invoke(currentWeapon, currentWeaponIndex);
         
@@ -81,7 +90,7 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     
     public void AddHeal(int amount) {
         healAmount += amount;
-        healCount.UpdateHealCount(healAmount);
+        OnHealAmountChanged?.Invoke(healAmount);
     }
     
     public void UseHeal() {
@@ -89,7 +98,7 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
             if (healAmount < 1) return;
             if (healItem.Use(interactor)) {
                 healAmount -= 1;
-                healCount.UpdateHealCount(healAmount);
+                OnHealAmountChanged?.Invoke(healAmount);
             } 
         }
     }
@@ -115,7 +124,7 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     public void AddAmmo(AmmoType ammoType, int amount) {
         if (ammoReserve.ContainsKey(ammoType)) {
            ammoReserve[ammoType] += amount;
-           OnAmmoChange?.Invoke();
+           OnAmmoChanged?.Invoke();
         }
     }
     

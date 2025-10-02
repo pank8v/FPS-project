@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerHealth : Health
 {
     [SerializeField] protected float maxHealth = 100;
-    public event Action<float> OnHealthChange;
+    public event Action<float> OnPlayerHealthChanged;
     
     protected void Awake() {
         health = maxHealth;
@@ -12,7 +12,7 @@ public class PlayerHealth : Health
 
      protected override void TakeDamage(int damage) {
          health -= damage;
-         OnHealthChange?.Invoke(health / maxHealth);
+         OnPlayerHealthChanged?.Invoke(health / maxHealth);
          if(health <= 0) Die();
     }
 
@@ -26,7 +26,7 @@ public class PlayerHealth : Health
             else {
                 health += amount;
             }
-            OnHealthChange?.Invoke(health / maxHealth);
+            OnPlayerHealthChanged?.Invoke(health / maxHealth);
             return true;
         }
 

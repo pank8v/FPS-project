@@ -805,7 +805,6 @@ GameObject:
   - component: {fileID: 72881273}
   - component: {fileID: 72881275}
   - component: {fileID: 72881274}
-  - component: {fileID: 72881276}
   m_Layer: 5
   m_Name: Crosshair
   m_TagString: Untagged
@@ -870,18 +869,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 72881272}
   m_CullTransparentMesh: 1
---- !u!114 &72881276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 72881272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2b025e46057190408509f34706235b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DynamicCrosshair
 --- !u!1001 &88745999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11783,6 +11770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a0cd960b3f0d046bc9c2108e01000d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealCount
+  uiController: {fileID: 1462106642}
   healCountText: {fileID: 640820214}
 --- !u!4 &1214828856 stripped
 Transform:
@@ -13926,6 +13914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375b525a7d54c8248962478d8f8acc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HUD
+  uiController: {fileID: 1462106642}
   weaponInventory: {fileID: 8599241445532810189}
   crosshair: {fileID: 72881273}
   currentAmmoText: {fileID: 248877652}
@@ -14100,6 +14089,52 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f8243e974ac3464bbd53a5792d8f6c2, type: 3}
+--- !u!1 &1462106641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1462106643}
+  - component: {fileID: 1462106642}
+  m_Layer: 0
+  m_Name: UIController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1462106642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462106641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1fe454c7872ab46aeeec31bfb65ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIController
+  weaponInventory: {fileID: 8599241445532810189}
+  playerHealth: {fileID: 3602483526016644030}
+--- !u!4 &1462106643
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462106641}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.32829, y: -1, z: 1.66539}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1463588083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18879,7 +18914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1f3f803e1443a44db80306b6ee1fecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
-  playerHealth: {fileID: 3602483526016644030}
+  uiController: {fileID: 1462106642}
   fillImage: {fileID: 1513640919}
   smoothSpeed: 5
 --- !u!114 &2053255012
@@ -20501,7 +20536,6 @@ MonoBehaviour:
   playerInputHandler: {fileID: 211044268}
   interactableUI: {fileID: 92466312}
   mainCamera: {fileID: 1957230888324134865}
-  weaponInventory: {fileID: 8599241445532810189}
   maxViewAngle: 90
   interactionRadius: 2
   interactableLayer:
@@ -21105,3 +21139,4 @@ SceneRoots:
   - {fileID: 1170023479}
   - {fileID: 1455081009}
   - {fileID: 276015662}
+  - {fileID: 1462106643}

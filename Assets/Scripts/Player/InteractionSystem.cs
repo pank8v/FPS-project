@@ -7,7 +7,6 @@ public class InteractionSystem : MonoBehaviour
    [SerializeField] private PlayerInputHandler playerInputHandler;
    [SerializeField] private InteractableUI interactableUI;
    [SerializeField] private Camera mainCamera;
-   [SerializeField] private WeaponInventory weaponInventory;
    [SerializeField] private float maxViewAngle = 90f;
    [SerializeField] private float interactionRadius = 2f;
    [SerializeField] private LayerMask interactableLayer;
