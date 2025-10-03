@@ -22,12 +22,15 @@ MonoBehaviour:
   hipPosition: {x: 0.06, y: -0.055, z: 0.06}
   aimPosition: {x: -0.154, y: 0.05, z: -0.201}
   rotation: {x: 0, y: 0, z: 0, w: 0}
-  minimumRecoilX: -8
-  maximumRecoilX: -12
-  minimumRecoilY: 2
-  maximumRecoilY: -2
-  snappiness: 1
-  returnSpeed: 12
+  recoilY: 0.008
+  recoilZ: 0.02
+  recoilSmooth: 5
+  cameraMinimumRecoilX: -8
+  cameraMaximumRecoilX: -12
+  cameraMinimumRecoilY: 2
+  cameraMaximumRecoilY: -2
+  cameraSnappiness: 1
+  cameraReturnSpeed: 12
   bobbingSpeedX: 8
   bobbingAmountX: 0.01
   bobbingSpeedY: 6
@@ -37,4 +40,3 @@ MonoBehaviour:
   maxAmmo: 6
   bulletSpeed: 80
   reloadSound: {fileID: 8300000, guid: da7012d847f7d654e832248f60a2a1e5, type: 3}
-  muzzlePosition: {x: 0, y: 0, z: 0.55}

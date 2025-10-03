@@ -22,12 +22,15 @@ MonoBehaviour:
   hipPosition: {x: 0, y: 0, z: 0}
   aimPosition: {x: -0.14, y: 0.04, z: -0.18}
   rotation: {x: 0, y: 0, z: 0, w: 0}
-  minimumRecoilX: -3
-  maximumRecoilX: -5
-  minimumRecoilY: 0.8
-  maximumRecoilY: -0.8
-  snappiness: 1
-  returnSpeed: 12
+  recoilY: 0.002
+  recoilZ: 0.015
+  recoilSmooth: 1.8
+  cameraMinimumRecoilX: -3
+  cameraMaximumRecoilX: -5
+  cameraMinimumRecoilY: 0.8
+  cameraMaximumRecoilY: -0.8
+  cameraSnappiness: 1
+  cameraReturnSpeed: 12
   bobbingSpeedX: 8
   bobbingAmountX: 0.01
   bobbingSpeedY: 6

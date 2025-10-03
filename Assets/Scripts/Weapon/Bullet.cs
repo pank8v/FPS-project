@@ -9,10 +9,10 @@ public class Bullet : MonoBehaviour
     }
 
     private DamageSource damageSource;
-    private int lifeTime = 5;
+    private int lifeTime = 4;
     private int damage;
 
-    private void Update() {
+    private void Start() {
         Destroy(gameObject, lifeTime);
     }
     
@@ -24,16 +24,19 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision) {
         Debug.Log(collision.gameObject.name);
         var health = collision.gameObject.GetComponent<Health>();
-        if (health == null) return;
-        if (damageSource == DamageSource.Enemy && health is EnemyHealth) {
-            health.ApplyDamage(damage);
-            Destroy(gameObject);
-        }else if (damageSource == DamageSource.Player && health is PlayerHealth) {
-            health.ApplyDamage(damage);
-            Destroy(gameObject);
+        if (health != null) {
+            if (damageSource == DamageSource.Enemy && health is EnemyHealth) {
+                health.ApplyDamage(damage);
+                Destroy(gameObject);
+            }else if (damageSource == DamageSource.Player && health is PlayerHealth) {
+                health.ApplyDamage(damage);
+                Destroy(gameObject);
+            }
         }
         else {
             Destroy(gameObject);
         }
+        
+       
     }
 }
