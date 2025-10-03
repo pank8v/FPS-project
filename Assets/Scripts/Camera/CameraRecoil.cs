@@ -6,12 +6,12 @@ public class CameraRecoil : MonoBehaviour
     [SerializeField] private WeaponInventory weaponInventory;
     private Weapon currentWeapon;
     
-    private float minimumRecoilX => currentWeapon.WeaponData.MinimumRecoilX;
-   private float maximumRecoilX => currentWeapon.WeaponData.MaximumRecoilX;
-   private float minimumRecoilY => currentWeapon.WeaponData.MinimumRecoilY;
-   private float maximumRecoilY => currentWeapon.WeaponData.MaximumRecoilY;
-   private float snappiness => currentWeapon.WeaponData.Snappiness;
-   private float returnSpeed => currentWeapon.WeaponData.ReturnSpeed;
+    private float minimumRecoilX => currentWeapon.WeaponData.CameraMinimumRecoilX;
+   private float maximumRecoilX => currentWeapon.WeaponData.CameraMaximumRecoilX;
+   private float minimumRecoilY => currentWeapon.WeaponData.CameraMinimumRecoilY;
+   private float maximumRecoilY => currentWeapon.WeaponData.CameraMaximumRecoilY;
+   private float snappiness => currentWeapon.WeaponData.CameraSnappiness;
+   private float returnSpeed => currentWeapon.WeaponData.CameraReturnSpeed;
 
 
     private Vector3 currentRotation;

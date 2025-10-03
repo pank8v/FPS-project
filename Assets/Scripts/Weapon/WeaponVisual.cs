@@ -3,23 +3,10 @@ using UnityEngine;
 public class WeaponVisual : MonoBehaviour
 {
    [SerializeField] private WeaponInventory weaponInventory;
-   [SerializeField] private Transform[] weaponSlots;
-   private int currentWeaponIndex;
    private Weapon currentWeapon;
    private RangeWeapon rangeWeapon;
-  
-   [Header("Positions")]
-   private Vector3 weaponPosition => currentWeapon.WeaponData.WeaponPosition;
-   private Vector3 HipPosition => currentWeapon.WeaponData.HipPosition;
-   private Vector3 AimPosition => currentWeapon.WeaponData.AimPosition;
    
-   [SerializeField] private float aimSmooth = 0.5f;
    
-   [Header("Recoil Settings")]
-   [SerializeField] private float recoilY = 0.002f;
-   [SerializeField] private float recoilZ = 0.015f;
-   [SerializeField] private float recoilSmooth = 1.8f;
-
    [Header("Rotation Sway Settings")]
    [SerializeField] private float rotationSwayX = 1f;
    [SerializeField] private float rotationSwayY= 1f;
@@ -29,14 +16,28 @@ public class WeaponVisual : MonoBehaviour
    [SerializeField] private float maxSwayAmount = 0.2f;
    [SerializeField] private float swayAmount = 0.1f;
    [SerializeField] private float positionSwaySmooth = 2f;
+   
+   [Header("Aim Settings")]
+   [SerializeField] private float aimSmooth = 0.5f;
 
+   //positions
+   private Vector3 weaponPosition => currentWeapon.WeaponData.WeaponPosition;
+   private Vector3 HipPosition => currentWeapon.WeaponData.HipPosition;
+   private Vector3 AimPosition => currentWeapon.WeaponData.AimPosition;
+   
+   
+   //recoil settings
+    private float recoilY => currentWeapon.WeaponData.RecoilY;
+    private float recoilZ => currentWeapon.WeaponData.RecoilZ;
+    private float recoilSmooth => currentWeapon.WeaponData.RecoilSmooth;
+    
 
-   [Header("Bobing")]
-   private float bobbingSpeedX => currentWeapon.WeaponData.BobbingSpeedX;
+   //bobbing
+    private float bobbingSpeedX => currentWeapon.WeaponData.BobbingSpeedX;
 
-   private float bobbingAmountX => currentWeapon.WeaponData.BobbingAmountX;
-   private float bobbingSpeedY => currentWeapon.WeaponData.BobbingSpeedY;
-   private float bobbingAmountY => currentWeapon.WeaponData.BobbingAmountY;
+    private float bobbingAmountX => currentWeapon.WeaponData.BobbingAmountX;
+    private float bobbingSpeedY => currentWeapon.WeaponData.BobbingSpeedY;
+    private float bobbingAmountY => currentWeapon.WeaponData.BobbingAmountY;
    
    
    private Vector3 targetPosition;
@@ -62,14 +63,13 @@ public class WeaponVisual : MonoBehaviour
 
    public void SetCurrentWeapon(Weapon weapon, int weaponIndex) {
       currentWeapon = weapon;
-      currentWeaponIndex = weaponIndex;
       rangeWeapon = currentWeapon as RangeWeapon;
       if (rangeWeapon) {        
          rangeWeapon.OnShoot -= Recoil;
          rangeWeapon.OnShoot += Recoil;
          recoilOffset = Vector3.zero;
          swayPositionOffset = Vector3.zero;
-         targetPosition = currentWeapon.IsAiming ? AimPosition : HipPosition; 
+         targetPosition = currentWeapon.IsAiming ? AimPosition + weaponPosition : HipPosition + weaponPosition; 
       }
 
    }
@@ -77,9 +77,8 @@ public class WeaponVisual : MonoBehaviour
    
    private void Update() {
       if (currentWeapon) {
-         Vector3 desiredHandsPosition = currentWeapon.IsAiming ? AimPosition + bobingOffset : HipPosition + bobingOffset; 
+         Vector3 desiredHandsPosition = currentWeapon.IsAiming ? AimPosition + bobingOffset + weaponPosition : HipPosition + bobingOffset + weaponPosition; 
          targetPosition = Vector3.Lerp(targetPosition, desiredHandsPosition, Time.deltaTime * aimSmooth);
-         weaponSlots[currentWeaponIndex].transform.localPosition = weaponPosition;
          transform.localPosition = targetPosition + recoilOffset + swayPositionOffset;
          if (rangeWeapon) {
             recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero, recoilSmooth * Time.deltaTime);

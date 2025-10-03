@@ -16,14 +16,20 @@ public class WeaponData : ScriptableObject
     [SerializeField] private Vector3 hipPosition;
     [SerializeField] private Vector3 aimPosition;
     [SerializeField] private Quaternion rotation;
+
+    [Header("Weapon Recoil data")]
+    [SerializeField] private float recoilY;
+    [SerializeField] private float recoilZ;
+    [SerializeField] private float recoilSmooth;
     
-    [Header("Recoil data")]
-    [SerializeField] private float minimumRecoilX;
-    [SerializeField] private float maximumRecoilX;
-    [SerializeField] private float minimumRecoilY;
-    [SerializeField] private float maximumRecoilY;
-    [SerializeField] private float snappiness;
-    [SerializeField] private float returnSpeed;
+    
+    [Header("Camera Recoil data")]
+    [SerializeField] private float cameraMinimumRecoilX;
+    [SerializeField] private float cameraMaximumRecoilX;
+    [SerializeField] private float cameraMinimumRecoilY;
+    [SerializeField] private float cameraMaximumRecoilY;
+    [SerializeField] private float cameraSnappiness;
+    [SerializeField] private float cameraReturnSpeed;
 
     [Header("Bobbing")]
     [SerializeField] private float bobbingSpeedX;
@@ -41,7 +47,6 @@ public class WeaponData : ScriptableObject
     public Vector3 WeaponPosition => weaponPosition;
     public Vector3 HipPosition => hipPosition;
     public Vector3 AimPosition => aimPosition;
-    public Quaternion HandsRotation => rotation;
     
     public float BobbingSpeedX => bobbingSpeedX;
     public float BobbingAmountX => bobbingAmountX;
@@ -50,10 +55,14 @@ public class WeaponData : ScriptableObject
     
     
     
-    public float MinimumRecoilX => minimumRecoilX;
-    public float MaximumRecoilX => maximumRecoilX;
-    public float MinimumRecoilY => minimumRecoilY;
-    public float MaximumRecoilY => maximumRecoilY;
-    public float Snappiness => snappiness;
-    public float ReturnSpeed => returnSpeed;
+     public float RecoilY => recoilY;
+     public float RecoilZ => recoilZ;
+     public float RecoilSmooth => recoilSmooth;
+    
+    public float CameraMinimumRecoilX => cameraMinimumRecoilX;
+    public float CameraMaximumRecoilX => cameraMaximumRecoilX;
+    public float CameraMinimumRecoilY => cameraMinimumRecoilY;
+    public float CameraMaximumRecoilY => cameraMaximumRecoilY;
+    public float CameraSnappiness => cameraSnappiness;
+    public float CameraReturnSpeed => cameraReturnSpeed;
 }
