@@ -9,12 +9,15 @@ public class PlayerShooting : MonoBehaviour
     private Weapon currentWeapon;
     private RangeWeapon rangeWeapon;
 
+    [SerializeField] private float scrollCooldown = 0.2f;
+    private float lastScrollTime = 0f;
     
     private void OnEnable() {
         playerInputHandler.OnReloadPressed += HandleReload;
         playerInputHandler.OnFirstWeaponSwitch += SwitchToMainWeapon;
         playerInputHandler.OnSecondWeaponSwitch += SwitchToAdditionalWeapon;
         playerInputHandler.OnThirdWeaponSwitch += SwitchToThirdWeapon;
+        playerInputHandler.OnScroll += HandleScroll;
 
     }
 
@@ -23,6 +26,7 @@ public class PlayerShooting : MonoBehaviour
         playerInputHandler.OnFirstWeaponSwitch -= SwitchToMainWeapon;
         playerInputHandler.OnSecondWeaponSwitch -= SwitchToAdditionalWeapon;
         playerInputHandler.OnThirdWeaponSwitch -= SwitchToThirdWeapon;
+        playerInputHandler.OnScroll -= HandleScroll;
 
     }
 
@@ -31,11 +35,17 @@ public class PlayerShooting : MonoBehaviour
     private void SwitchToAdditionalWeapon() => weaponInventory.SwitchWeapon(1);
     private void SwitchToThirdWeapon() => weaponInventory.SwitchWeapon(2);
 
-    private void Awake() {
-      //   rangeWeapon = currentWeapon as RangeWeapon;
-     //   if (rangeWeapon) {
-    //        rangeWeapon.SetAmmoProvider(weaponInventory);
-    //    }
+    private void HandleScroll(float scrollInput) {
+        if (Time.time - lastScrollTime < scrollCooldown) {
+            return;
+        }
+        if (scrollInput < 0) {
+            weaponInventory.SwitchToNextWeapon();
+        }else if (scrollInput > 0) {
+            weaponInventory.SwitchToPreviousWeapon();
+        }
+
+        lastScrollTime = Time.time;
     }
     
     private void Update() {

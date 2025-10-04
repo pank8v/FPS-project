@@ -12,11 +12,12 @@ public class PlayerInputHandler : MonoBehaviour
     public bool isAiming { get; private set; }
     public bool isJumping { get; private set; }
     public bool isCrouching { get; private set; }
-
+    public float scrollInput { get; private set; }
     public event Action OnReloadPressed;
     public event Action OnFirstWeaponSwitch;
     public event Action OnSecondWeaponSwitch;
     public event Action OnThirdWeaponSwitch;
+    public event Action<float> OnScroll;
     public event Action OnInteract;
     public event Action Heal;
     public event Action OnPause;
@@ -45,6 +46,7 @@ public class PlayerInputHandler : MonoBehaviour
         inputSystem.Player.Interact.performed += OnInteractPerformed;
         inputSystem.Player.Heal.performed += OnHealPerformed;
         inputSystem.UI.Pause.performed += OnPausePerformed;
+        inputSystem.Player.ScrollY.performed += OnScrollPerformed;
 
     }
 
@@ -133,5 +135,10 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnPausePerformed(InputAction.CallbackContext context) { 
         OnPause?.Invoke();
     }
-    
+
+    private void OnScrollPerformed(InputAction.CallbackContext context) {
+        scrollInput = context.ReadValue<float>();
+        OnScroll?.Invoke(scrollInput);
+    }
+
 }

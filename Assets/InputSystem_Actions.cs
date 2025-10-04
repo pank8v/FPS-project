@@ -226,6 +226,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ScrollY"",
+                    ""type"": ""Value"",
+                    ""id"": ""9c18b464-6a2c-4009-b502-83aff2d777ab"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -666,6 +675,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ThirdWeaponSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80fe8c23-d657-4498-a502-06eb6ba895b2"",
+                    ""path"": ""<Mouse>/Scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""ScrollY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1288,6 +1308,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_ThirdWeaponSwitch = m_Player.FindAction("ThirdWeaponSwitch", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
+        m_Player_ScrollY = m_Player.FindAction("ScrollY", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1397,6 +1418,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ThirdWeaponSwitch;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Heal;
+    private readonly InputAction m_Player_ScrollY;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1469,6 +1491,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Heal => m_Wrapper.m_Player_Heal;
         /// <summary>
+        /// Provides access to the underlying input action "Player/ScrollY".
+        /// </summary>
+        public InputAction @ScrollY => m_Wrapper.m_Player_ScrollY;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1539,6 +1565,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Heal.started += instance.OnHeal;
             @Heal.performed += instance.OnHeal;
             @Heal.canceled += instance.OnHeal;
+            @ScrollY.started += instance.OnScrollY;
+            @ScrollY.performed += instance.OnScrollY;
+            @ScrollY.canceled += instance.OnScrollY;
         }
 
         /// <summary>
@@ -1595,6 +1624,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Heal.started -= instance.OnHeal;
             @Heal.performed -= instance.OnHeal;
             @Heal.canceled -= instance.OnHeal;
+            @ScrollY.started -= instance.OnScrollY;
+            @ScrollY.performed -= instance.OnScrollY;
+            @ScrollY.canceled -= instance.OnScrollY;
         }
 
         /// <summary>
@@ -2011,6 +2043,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnHeal(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ScrollY" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnScrollY(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

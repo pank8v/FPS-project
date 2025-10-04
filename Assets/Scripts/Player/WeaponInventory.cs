@@ -51,6 +51,17 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     }
 
     // weapon    
+
+    public void SwitchToNextWeapon() {
+        currentWeaponIndex = (currentWeaponIndex + 1) % weapons.Length;
+        SwitchWeapon(currentWeaponIndex);
+    }
+
+
+    public void SwitchToPreviousWeapon() {
+        currentWeaponIndex = (currentWeaponIndex - 1 + weapons.Length) % weapons.Length;
+        SwitchWeapon(currentWeaponIndex);
+    }
     
     public void SwitchWeapon(int weaponIndex) {
         currentWeaponIndex = weaponIndex;
