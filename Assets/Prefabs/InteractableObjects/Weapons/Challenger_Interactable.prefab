@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a989899f2fbf99142b2a316240ce910f, type: 2}
     - target: {fileID: 919132149155446097, guid: ca2704ba1a8e9a146aafe07b1e2a78bc, type: 3}
       propertyPath: m_Name
-      value: ChallengerPickUp
+      value: Challenger_Interactable
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ca2704ba1a8e9a146aafe07b1e2a78bc, type: 3}
       propertyPath: m_Layer
@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 733d371d3d8526f4eb23cc929f08ae7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickableWeapon
+  interactionText: Challenger
   weaponData: {fileID: 11400000, guid: c7d3e293207eeb1499237ac3db205759, type: 2}
 --- !u!65 &3057238394939299874
 BoxCollider:

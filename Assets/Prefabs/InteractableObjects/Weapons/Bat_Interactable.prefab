@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5802b81d1903cd34eb17f7cf71efdc52, type: 3}
       propertyPath: m_Name
-      value: bat_low
+      value: Bat_Interactable
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5802b81d1903cd34eb17f7cf71efdc52, type: 3}
       propertyPath: m_Layer
@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 733d371d3d8526f4eb23cc929f08ae7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickableWeapon
+  interactionText: Bat
   weaponData: {fileID: 11400000, guid: 2f2c06c8f0a6bee49921404e3bfdce8d, type: 2}
 --- !u!65 &-3178017109874438550
 BoxCollider:

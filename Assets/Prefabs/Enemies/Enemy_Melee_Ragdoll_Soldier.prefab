@@ -987,7 +987,8 @@ MonoBehaviour:
   agent: {fileID: 6835914498416716427}
   target: {fileID: 0}
   animator: {fileID: 4309789486393455819}
-  weaponObject: {fileID: 0}
+  weaponMesh: {fileID: 396599917472509144}
+  weaponObject: {fileID: 8058177771300182279, guid: a68a2a849f4f5334aa1df98a076d8017, type: 3}
   ragdollController: {fileID: 1287951081640648410}
   patrolPoints: []
   waitingTime: 5
@@ -2922,6 +2923,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de2762bc055e0b24f8fa5d29419ee159, type: 3}
+--- !u!1 &396599917472509144 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2013290783607153299, guid: de2762bc055e0b24f8fa5d29419ee159, type: 3}
+  m_PrefabInstance: {fileID: 2193715685503077963}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1065894242634020450 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1205686937043122217, guid: de2762bc055e0b24f8fa5d29419ee159, type: 3}

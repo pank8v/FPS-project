@@ -7,6 +7,7 @@ public abstract class Enemy : MonoBehaviour
    [SerializeField] protected NavMeshAgent agent;
    [SerializeField] protected Transform target;
    [SerializeField] protected Animator animator;
+   [SerializeField] protected GameObject weaponMesh;
    [SerializeField] private GameObject weaponObject;
    [SerializeField] private RagdollController ragdollController;
    
@@ -140,6 +141,7 @@ public abstract class Enemy : MonoBehaviour
 
    
    private void SpawnWeapon() {
+      Destroy(weaponMesh);
       if (weaponObject != null) {
          Instantiate(weaponObject, transform.position, Quaternion.identity);
       }
