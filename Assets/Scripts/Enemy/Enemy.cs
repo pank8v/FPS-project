@@ -10,6 +10,7 @@ public abstract class Enemy : MonoBehaviour
    [SerializeField] protected GameObject weaponMesh;
    [SerializeField] private GameObject weaponObject;
    [SerializeField] private RagdollController ragdollController;
+   [SerializeField] protected EnemySoundManager enemySoundManager;
    
    [Header("Patrol")]
    [SerializeField] protected Transform[] patrolPoints;

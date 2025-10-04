@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 00c47c809da898544b0fe5302caaa27b, type: 3}
       propertyPath: m_Name
-      value: Gun_Rifle
+      value: SMG_Interactable
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 00c47c809da898544b0fe5302caaa27b, type: 3}
       propertyPath: m_Layer
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 733d371d3d8526f4eb23cc929f08ae7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickableWeapon
+  interactionText: SMG
   weaponData: {fileID: 11400000, guid: 689bdc20eb6020d4586a399fdfad8629, type: 2}
 --- !u!65 &145809767547409022
 BoxCollider:

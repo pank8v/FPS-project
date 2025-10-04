@@ -39,4 +39,4 @@ MonoBehaviour:
   reloadTime: 2
   maxAmmo: 30
   bulletSpeed: 80
-  reloadSound: {fileID: 8300000, guid: da7012d847f7d654e832248f60a2a1e5, type: 3}
+  reloadSound: {fileID: 8300000, guid: 0ece1bfdb02f92f4d8e261d7ed40a872, type: 3}

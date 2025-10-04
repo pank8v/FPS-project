@@ -20660,20 +20660,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponVisual
   weaponInventory: {fileID: 8599241445532810189}
-  weaponSlots:
-  - {fileID: 473043093821151817}
-  - {fileID: 4292363248512713562}
-  - {fileID: 5404613089936909315}
-  aimSmooth: 5
-  recoilY: 0.002
-  recoilZ: 0.015
-  recoilSmooth: 1.8
   rotationSwayX: 0.02
   rotationSwayY: 0.3
   rotationSwaySmooth: 5
   maxSwayAmount: 0.2
   swayAmount: 0.1
   positionSwaySmooth: 5
+  aimSmooth: 5
 --- !u!4 &4292363248512713562
 Transform:
   m_ObjectHideFlags: 0
@@ -21151,6 +21144,7 @@ MonoBehaviour:
   playerInputHandler: {fileID: 211044268}
   weaponInventory: {fileID: 8599241445532810189}
   weaponVisual: {fileID: 4059170968810404256}
+  scrollCooldown: 0.2
 --- !u!1 &7732573227456470926
 GameObject:
   m_ObjectHideFlags: 0
@@ -21255,6 +21249,8 @@ GameObject:
   - component: {fileID: 8599241445532810189}
   - component: {fileID: 4850533032679403169}
   - component: {fileID: 630686848446714508}
+  - component: {fileID: 8599241445532810191}
+  - component: {fileID: 8599241445532810190}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -21286,6 +21282,122 @@ MonoBehaviour:
   PistolAmmo: 20
   SmgAmmo: 300
   healAmount: 1
+--- !u!82 &8599241445532810190
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8480962862490722093}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 2736f7b351da8e24585a531d5b74afe8, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.225
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 199
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &8599241445532810191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8480962862490722093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 022a6a7435544a44a800f4d163f5273f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSoundManager
+  characterController: {fileID: 1908047423350230635}
+  audioSource: {fileID: 8599241445532810190}
+  footStepClips:
+  - {fileID: 8300000, guid: b122e9d1af44d6a40b65da2c20362df3, type: 3}
+  - {fileID: 8300000, guid: 2736f7b351da8e24585a531d5b74afe8, type: 3}
+  - {fileID: 8300000, guid: 49d0a1ba24218994c8292fccb67a2a0a, type: 3}
+  stepInterval: 0.3
 --- !u!114 &8754726796081939092
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,17 +17,20 @@ MonoBehaviour:
   fireRate: 5
   damage: 40
   range: 3
-  shotSound: {fileID: 8300000, guid: da7012d847f7d654e832248f60a2a1e5, type: 3}
+  shotSound: {fileID: 8300000, guid: a8e5dcfcc33ca7944a0d92f06311b7f3, type: 3}
   weaponPosition: {x: 0.03, y: -0.08, z: -0.18}
   hipPosition: {x: 0, y: 0, z: 0}
   aimPosition: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 0}
-  minimumRecoilX: 0
-  maximumRecoilX: 0
-  minimumRecoilY: 0
-  maximumRecoilY: 0
-  snappiness: 1
-  returnSpeed: 1
+  recoilY: 0
+  recoilZ: 0
+  recoilSmooth: 0
+  cameraMinimumRecoilX: 0
+  cameraMaximumRecoilX: 0
+  cameraMinimumRecoilY: 0
+  cameraMaximumRecoilY: 0
+  cameraSnappiness: 0
+  cameraReturnSpeed: 0
   bobbingSpeedX: 0
   bobbingAmountX: 0
   bobbingSpeedY: 0

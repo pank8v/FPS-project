@@ -17,7 +17,7 @@ MonoBehaviour:
   fireRate: 7
   damage: 25
   range: 30
-  shotSound: {fileID: 8300000, guid: 1ffc6b973ff96e14eac357df7222b7a1, type: 3}
+  shotSound: {fileID: 8300000, guid: 4056116010ae9024fbf4ebd8d1b14b3e, type: 3}
   weaponPosition: {x: 0.24, y: -0.22, z: 0.68}
   hipPosition: {x: -0.23, y: 0, z: 0.06}
   aimPosition: {x: -0.24, y: 0.07, z: -0.15}
@@ -39,4 +39,4 @@ MonoBehaviour:
   reloadTime: 2
   maxAmmo: 11
   bulletSpeed: 80
-  reloadSound: {fileID: 8300000, guid: da7012d847f7d654e832248f60a2a1e5, type: 3}
+  reloadSound: {fileID: 8300000, guid: bffb37f28720cd1429ce3b752afe98bb, type: 3}

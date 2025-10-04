@@ -20,6 +20,7 @@ public class RangeEnemy : Enemy
        // agent.isStopped = true;
         if (nextTimeToFire <= Time.time && Vector3.Distance(transform.position, target.position) <= attackDistance) {
             animator.SetTrigger("Shoot");
+            enemySoundManager.PlayAttackCliP();
             GameObject bullet = Instantiate(bulletPrefab, enemyMuzzle.position, Quaternion.LookRotation(direction));
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             Bullet bulletScript = bullet.GetComponent<Bullet>();
