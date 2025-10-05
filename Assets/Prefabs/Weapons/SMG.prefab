@@ -340,6 +340,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun_Rifle
       objectReference: {fileID: 0}
+    - target: {fileID: 3566347261712635835, guid: 2caee91f7d937434c8f1351d3145e6fc, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4194510815201709313, guid: 2caee91f7d937434c8f1351d3145e6fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -566,6 +566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: challenger
       objectReference: {fileID: 0}
+    - target: {fileID: 3096819070752646420, guid: 8f99ef14fbe554b49b1776dc355b852c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

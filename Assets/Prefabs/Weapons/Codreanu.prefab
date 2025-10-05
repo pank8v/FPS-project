@@ -558,6 +558,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: codreanu
       objectReference: {fileID: 0}
+    - target: {fileID: 8408343962161368004, guid: 27c94885110fd6145ba2ab28c2f83c60, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9222141564684177790, guid: 27c94885110fd6145ba2ab28c2f83c60, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

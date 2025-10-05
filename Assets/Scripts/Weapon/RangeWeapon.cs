@@ -24,14 +24,14 @@ public class RangeWeapon : Weapon
 
     public int currentAmmo { get; private set; }
     public bool isReloading = false;
-
-
+    
     public event Action OnReload;
     public event Action OnReloadEnd;
     
     protected override bool CanFire() {
         return currentAmmo > 0 && !isReloading;
     }
+    
     
     
     private void Awake() {
@@ -62,10 +62,15 @@ public class RangeWeapon : Weapon
             targetPoint = ray.GetPoint(100f);
         }
         Vector3 direction = (targetPoint - muzzle.position).normalized;
-        GameObject bullet = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
+      //  GameObject bullet = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
+        Bullet bullet = BulletPool.Instance.GetBullet();
+        bullet.transform.position = muzzle.position;
+        bullet.transform.rotation = muzzle.rotation;
+        TrailRenderer trail = bullet.GetComponent<TrailRenderer>();
+        if (trail != null) trail.Clear();
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bulletScript.SetDamage(weaponData.Damage, Bullet.DamageSource.Enemy);
+     //   Bullet bulletScript = bullet.GetComponent<Bullet>();
+        bullet.SetDamage(weaponData.Damage, Bullet.DamageSource.Enemy);
         if (rb != null) {
             rb.linearVelocity = direction * bulletSpeed;
         }

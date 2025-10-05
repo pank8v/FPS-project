@@ -9872,6 +9872,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6954531691785998512, guid: cf8443763fc34314490f8a3e2f94dd37, type: 3}
   m_PrefabInstance: {fileID: 1506947732}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &819270460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 819270462}
+  - component: {fileID: 819270461}
+  m_Layer: 0
+  m_Name: BulletPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &819270461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819270460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7560c21d6032c964d8b4b4bb44a534d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletPool
+  bulletPrefab: {fileID: -9098833852555881009, guid: 111b6d6788296aa48b19bd3c43fcff14, type: 3}
+  poolSize: 20
+--- !u!4 &819270462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819270460}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.19316, y: -0.64478, z: 27.4209}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &822686650 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 439239393980121046, guid: 1e3974e3db8c48c41b2604d2478e7e9e, type: 3}
@@ -21988,8 +22034,6 @@ MonoBehaviour:
   enemies:
   - {fileID: 3652895106103209459, guid: 3e52119af72ae4642a9a297ba4d7641c, type: 3}
   - {fileID: 2736414617762926394, guid: c364b19892c5bb2468a8c03700bf9c89, type: 3}
-  meleeEnemy: {fileID: 3652895106103209459, guid: 3e52119af72ae4642a9a297ba4d7641c, type: 3}
-  rangeEnemy: {fileID: 2736414617762926394, guid: c364b19892c5bb2468a8c03700bf9c89, type: 3}
   target: {fileID: 5646741241521859620}
   patrolPoints:
   - {fileID: 2039424285}
@@ -27283,3 +27327,4 @@ SceneRoots:
   - {fileID: 2033629849}
   - {fileID: 886235288}
   - {fileID: 2062687202}
+  - {fileID: 819270462}

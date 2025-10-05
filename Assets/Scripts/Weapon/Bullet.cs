@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+
+    private BulletPool bulletPool;
     public enum DamageSource
     {
         Player,
@@ -11,9 +13,15 @@ public class Bullet : MonoBehaviour
     private DamageSource damageSource;
     private int lifeTime = 4;
     private int damage;
+    private float timer;
 
-    private void Start() {
-        Destroy(gameObject, lifeTime);
+
+
+    private void Update() {
+      timer += Time.deltaTime;
+        if (timer >= lifeTime) {
+            ReturnToPool();
+        }
     }
     
     public void SetDamage(int weaponDamage, DamageSource source) {
@@ -27,16 +35,22 @@ public class Bullet : MonoBehaviour
         if (health != null) {
             if (damageSource == DamageSource.Enemy && health is EnemyHealth) {
                 health.ApplyDamage(damage);
-                Destroy(gameObject);
+                ReturnToPool();
             }else if (damageSource == DamageSource.Player && health is PlayerHealth) {
                 health.ApplyDamage(damage);
-                Destroy(gameObject);
+               ReturnToPool();
             }
         }
         else {
-            Destroy(gameObject);
+            ReturnToPool();
         }
-        
-       
+    }
+
+    public void SetPool(BulletPool pool) {
+        bulletPool = pool;
+    }
+
+    private void ReturnToPool() {
+        bulletPool.ReturnBullet(this);
     }
 }
