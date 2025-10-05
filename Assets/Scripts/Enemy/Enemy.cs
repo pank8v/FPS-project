@@ -13,8 +13,8 @@ public abstract class Enemy : MonoBehaviour
    [SerializeField] protected EnemySoundManager enemySoundManager;
    
    [Header("Patrol")]
-   [SerializeField] protected Transform[] patrolPoints;
    [SerializeField] protected float waitingTime = 5f;
+   protected Transform[] patrolPoints;
    protected int currentPatrolPoint = 0;
    protected float waitingTimer = 0;
    protected bool isWaiting = false;    

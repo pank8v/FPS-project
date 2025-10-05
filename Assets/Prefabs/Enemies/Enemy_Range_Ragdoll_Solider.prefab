@@ -534,16 +534,10 @@ MonoBehaviour:
   weaponObject: {fileID: 3165194713376292392, guid: 25b0a0bb9c0eb054b9e740ff5549ae66, type: 3}
   ragdollController: {fileID: 1741379202886136900}
   enemySoundManager: {fileID: -3145502020624532230}
-  patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  waitingTime: 5
+  waitingTime: 3
   bulletPrefab: {fileID: 4223330584917379867, guid: 111b6d6788296aa48b19bd3c43fcff14, type: 3}
   enemyMuzzle: {fileID: 3729459521701582901}
-  bulletSpeed: 7
+  bulletSpeed: 50
 --- !u!114 &2196150727838497068
 MonoBehaviour:
   m_ObjectHideFlags: 0

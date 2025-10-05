@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046f085cdf3c11d4088b9788e64eb2df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
+  interactionText: E to Open
   door: {fileID: 475228324591095951}
   openHeight: 4
   speed: 10
