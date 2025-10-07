@@ -49,7 +49,7 @@ public class PlayerShooting : MonoBehaviour
     }
     
     private void Update() {
-        if (!PauseManager.isPaused) {
+        if (!GameManager.isPaused) {
             if (currentWeapon) {
                 HandleShooting();
                 HandleAiming(); 
@@ -78,9 +78,9 @@ public class PlayerShooting : MonoBehaviour
     }
 
     private void HandleReload() {
-        if (!PauseManager.isPaused) {
+        if (!GameManager.isPaused) {
             rangeWeapon = currentWeapon as RangeWeapon;
-            if (rangeWeapon && !PauseManager.isPaused) {
+            if (rangeWeapon && !GameManager.isPaused) {
                 rangeWeapon.TryReload();
             }
         }

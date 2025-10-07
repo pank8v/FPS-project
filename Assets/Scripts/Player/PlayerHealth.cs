@@ -5,6 +5,7 @@ public class PlayerHealth : Health
 {
     [SerializeField] protected float maxHealth = 100;
     public event Action<float> OnPlayerHealthChanged;
+    public event Action OnPlayerDeath;
     
     protected void Awake() {
         health = maxHealth;
@@ -35,6 +36,7 @@ public class PlayerHealth : Health
     
     
     protected override void Die() {
-        Destroy(gameObject);
+      // Destroy(gameObject);
+        OnPlayerDeath?.Invoke();
     }
 }

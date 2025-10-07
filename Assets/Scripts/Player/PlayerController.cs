@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     }
     
     private void Update() {
-        if (!PauseManager.isPaused) {
+        if (!GameManager.isPaused) {
             HandleMovement();
             HanldeCrouch();
             HandleSlide();

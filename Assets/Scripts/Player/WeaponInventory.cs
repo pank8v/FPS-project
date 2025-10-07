@@ -105,7 +105,7 @@ public class WeaponInventory : MonoBehaviour, IAmmoProvider
     }
     
     public void UseHeal() {
-        if (!PauseManager.isPaused) {
+        if (!GameManager.isPaused) {
             if (healAmount < 1) return;
             if (healItem.Use(interactor)) {
                 healAmount -= 1;

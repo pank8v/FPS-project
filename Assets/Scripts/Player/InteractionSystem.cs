@@ -59,7 +59,7 @@ public class InteractionSystem : MonoBehaviour
    
    
    private void Interact() {
-      if (!PauseManager.isPaused) {
+      if (!GameManager.isPaused) {
          if (currentInteractable != null) {
             currentInteractable.Interact(interactor);
          }
